@@ -13,6 +13,8 @@
     "ruleset_id": {"type": "string", "minLength": 1},
     "dimensions": {
       "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
       "prefixItems": [
         {"const": "burst_damage"},
         {"const": "sustained_damage"},

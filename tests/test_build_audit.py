@@ -93,7 +93,7 @@ def dataset():
             )
     skills = [
         _entity(13027, "skill", {"slot": "Heal", "type": "Heal"}),
-        _entity(13038, "skill", {"slot": "Utility", "type": "Utility"}),
+        _entity(13002, "skill", {"slot": "Utility", "type": "Utility"}),
         _entity(13062, "skill", {"slot": "Utility", "type": "Utility"}),
         _entity(13035, "skill", {"slot": "Utility", "type": "Utility"}),
         _entity(13082, "skill", {"slot": "Elite", "type": "Elite"}),
@@ -186,7 +186,7 @@ def dataset():
                 },
                 "skills": [
                     {"id": 13027, "slot": "Heal"},
-                    {"id": 13038, "slot": "Utility"},
+                    {"id": 13002, "slot": "Utility"},
                     {"id": 13062, "slot": "Utility"},
                     {"id": 13035, "slot": "Utility"},
                     {"id": 13082, "slot": "Elite"},
@@ -194,7 +194,7 @@ def dataset():
                 ],
                 "skills_by_palette": [
                     [1, 13027],
-                    [2, 13038],
+                    [2, 13002],
                     [3, 13062],
                     [4, 13035],
                     [5, 13082],
@@ -248,7 +248,7 @@ def _complete_value():
         "traits": [_ref(value) for value in trait_ids],
         "skills": {
             "heal": _ref(13027),
-            "utilities": [_ref(13038), _ref(13062), _ref(13035)],
+            "utilities": [_ref(13002), _ref(13062), _ref(13035)],
             "elite": _ref(13082),
         },
         "weapons": [
@@ -351,7 +351,7 @@ def _audit(build, dataset_index, patch_events=()):
 
 
 def test_dataset_index_indexes_legality_and_version_metadata_once(dataset_index):
-    assert dataset_index.entity("skill", 13038)["names"]["en"] == "skill-13038"
+    assert dataset_index.entity("skill", 13002)["names"]["en"] == "skill-13002"
     assert dataset_index.specialization_trait_tiers[7][1] == frozenset(
         {701, 702, 703}
     )
@@ -359,8 +359,8 @@ def test_dataset_index_indexes_legality_and_version_metadata_once(dataset_index)
         "Mainhand",
         "Offhand",
     )
-    assert dataset_index.skill_palette[2] == 13038
-    assert dataset_index.entity_metadata[("skill", 13038)].effective_patch == (
+    assert dataset_index.skill_palette[2] == 13002
+    assert dataset_index.entity_metadata[("skill", 13002)].effective_patch == (
         "2026-07-01"
     )
 
@@ -386,7 +386,7 @@ def test_patch_after_source_marks_affected_components(
 ):
     audit = _audit(complete_build, dataset_index, patch_events)
     assert audit.status == "possibly_affected"
-    assert audit.affected_components[0].component_id == 13038
+    assert audit.affected_components[0].component_id == 13002
 
 
 def test_unknown_component_is_unverifiable(unknown_component_build, dataset_index):
@@ -684,7 +684,7 @@ def test_complete_current_build_passes_all_current_verified_gates(
 def test_breaking_post_source_patch_is_stale(complete_build, dataset_index):
     event = PatchEvent(
         component_kind="skill",
-        component_id=13038,
+        component_id=13002,
         effective_at="2026-07-29",
         change="Skill was replaced.",
         impact="stale",
@@ -696,7 +696,7 @@ def test_breaking_post_source_patch_is_stale(complete_build, dataset_index):
 def test_patch_after_checked_at_is_ignored(complete_build, dataset_index):
     event = PatchEvent(
         component_kind="skill",
-        component_id=13038,
+        component_id=13002,
         effective_at="2026-07-30",
         change="Future change.",
     )
@@ -722,13 +722,13 @@ def test_patch_uses_matching_component_source_not_unrelated_newer_source(
     ]
     event = PatchEvent(
         component_kind="skill",
-        component_id=13038,
+        component_id=13002,
         effective_at="2026-07-25",
         change="Changed after the matching source.",
     )
     audit = _audit(BuildRecord.from_dict(value), dataset_index, [event])
     assert audit.status == "possibly_affected"
-    assert audit.affected_components[0].component_id == 13038
+    assert audit.affected_components[0].component_id == 13002
 
 
 def test_newer_fetched_at_cannot_hide_patch_after_old_published_content(
@@ -744,13 +744,13 @@ def test_newer_fetched_at_cannot_hide_patch_after_old_published_content(
     ]
     event = PatchEvent(
         component_kind="skill",
-        component_id=13038,
+        component_id=13002,
         effective_at="2026-07-25",
         change="Changed after the content was published.",
     )
     audit = _audit(BuildRecord.from_dict(value), dataset_index, [event])
     assert audit.status == "possibly_affected"
-    assert audit.affected_components[0].component_id == 13038
+    assert audit.affected_components[0].component_id == 13002
 
 
 def test_conflicting_duplicate_source_dates_are_unverifiable(
@@ -763,7 +763,7 @@ def test_conflicting_duplicate_source_dates_are_unverifiable(
     ]
     event = PatchEvent(
         component_kind="skill",
-        component_id=13038,
+        component_id=13002,
         effective_at="2026-07-25",
         change="Falls between conflicting source dates.",
     )
@@ -880,13 +880,13 @@ def test_effective_patch_only_source_date_detects_newer_patch(
     ]
     event = PatchEvent(
         component_kind="skill",
-        component_id=13038,
+        component_id=13002,
         effective_at="2026-07-29",
         change="Changed after the effective content patch.",
     )
     audit = _audit(BuildRecord.from_dict(value), dataset_index, [event])
     assert audit.status == "possibly_affected"
-    assert audit.affected_components[0].component_id == 13038
+    assert audit.affected_components[0].component_id == 13002
 
 
 def test_source_content_date_after_checked_at_is_unverifiable(

@@ -1,5 +1,6 @@
 import json
 from copy import deepcopy
+from pathlib import Path
 
 import pytest
 
@@ -9,6 +10,7 @@ from gw2_wvw_data.builds.model import BuildRecord
 from gw2_wvw_data.contracts import schema_errors
 
 
+ROOT = Path(__file__).parents[1]
 DIMENSIONS = [
     "burst_damage",
     "sustained_damage",
@@ -30,7 +32,7 @@ def _ref(identifier):
     }
 
 
-def _build(*, utility_ids=(13038, 13062, 13035)):
+def _build(*, utility_ids=(13002, 13062, 13035)):
     return BuildRecord.from_dict(
         {
             "schema_version": 1,
@@ -107,7 +109,10 @@ def index():
             "profession": profession,
             "specializations": [],
             "traits": [],
-            "skills": [_entity(value) for value in (13035, 13038, 13062)],
+            "skills": [
+                _entity(value)
+                for value in (13002, 13027, 13035, 13062)
+            ],
             "equipment": [],
             "upgrades": [],
             "consumables": [],
@@ -124,12 +129,12 @@ def _rules_value():
         "rules": [
             {
                 "rule_id": "z-shadowstep-reset",
-                "when": {"component_kind": "skill", "component_id": 13038},
+                "when": {"component_kind": "skill", "component_id": 13002},
                 "effects": [{"dimension": "stealth_reset", "delta": 1}],
                 "evidence": [
                     {
                         "component_kind": "skill",
-                        "component_id": 13038,
+                        "component_id": 13002,
                         "field": "payload",
                     }
                 ],
@@ -137,14 +142,14 @@ def _rules_value():
             },
             {
                 "rule_id": "a-shadowstep-mobility",
-                "when": {"component_kind": "skill", "component_id": 13038},
+                "when": {"component_kind": "skill", "component_id": 13002},
                 "effects": [
                     {"dimension": "mobility_disengage", "delta": 2}
                 ],
                 "evidence": [
                     {
                         "component_kind": "skill",
-                        "component_id": 13038,
+                        "component_id": 13002,
                         "field": "payload",
                     }
                 ],
@@ -204,6 +209,23 @@ def test_load_rules_accepts_the_brief_rule_shape_without_improvements(
 
     assert rules.ruleset_id == "test-thief-wvw-v1"
     assert rules.improvements == ()
+
+
+@pytest.mark.parametrize("count", (0, 1, 7))
+def test_load_rules_rejects_dimension_lists_shorter_than_exactly_eight(
+    tmp_path, count
+):
+    value = _rules_value()
+    value["dimensions"] = DIMENSIONS[:count]
+
+    with pytest.raises(ValueError, match="analysis rules schema invalid"):
+        load_rules(_write_rules(tmp_path, value))
+
+
+def test_load_rules_accepts_exactly_eight_dimensions(tmp_path):
+    rules = load_rules(_write_rules(tmp_path, _rules_value()))
+
+    assert rules.dimensions == tuple(DIMENSIONS)
 
 
 @pytest.mark.parametrize(
@@ -353,7 +375,7 @@ def test_missing_rule_evidence_skips_delta_and_records_confidence_reason(
 def test_improvement_creates_derived_build_without_mutating_original(
     tmp_path, index
 ):
-    build = _build()
+    build = _build(utility_ids=(13002, 13062, 13027))
     original = deepcopy(build.to_dict())
     audit = BuildAudit(
         schema_version=1,
@@ -385,11 +407,79 @@ def test_improvement_creates_derived_build_without_mutating_original(
     assert [
         item.id
         for item in improvement.derived_build.skills["utilities"]
-    ] == [13038, 13035, 13035]
+    ] == [13002, 13035, 13027]
     assert improvement.benefit == (
         "Adds the project-authored alternative utility."
     )
     assert improvement.cost == "Removes the selected signet utility."
+
+
+def test_improvement_is_skipped_with_reason_when_replacement_is_selected(
+    tmp_path, index
+):
+    build = _build()
+    audit = BuildAudit(
+        schema_version=1,
+        build_id=build.build_id,
+        status="current_verified",
+        legality="legal",
+        game_build_id=101,
+        checked_at="2026-07-29T00:00:00Z",
+        missing_fields=(),
+        unknown_components=(),
+        removed_components=(),
+        affected_components=(),
+        warnings=(),
+    )
+
+    analysis = analyze_build(
+        build,
+        audit,
+        index=index,
+        rules=load_rules(_write_rules(tmp_path, _rules_value())),
+    )
+
+    assert analysis.improvements == ()
+    assert [
+        (item.improvement_id, item.reason)
+        for item in analysis.improvement_reasons
+    ] == [
+        (
+            "swap-signet-for-roll",
+            "with component skill:13035 is already selected",
+        )
+    ]
+
+
+def test_improvement_is_skipped_when_replacement_does_not_match_exactly_once(
+    tmp_path, index
+):
+    build = _build(utility_ids=(13002, 13062, 13062))
+    audit = BuildAudit(
+        schema_version=1,
+        build_id=build.build_id,
+        status="current_verified",
+        legality="legal",
+        game_build_id=101,
+        checked_at="2026-07-29T00:00:00Z",
+        missing_fields=(),
+        unknown_components=(),
+        removed_components=(),
+        affected_components=(),
+        warnings=(),
+    )
+
+    analysis = analyze_build(
+        build,
+        audit,
+        index=index,
+        rules=load_rules(_write_rules(tmp_path, _rules_value())),
+    )
+
+    assert analysis.improvements == ()
+    assert analysis.improvement_reasons[0].reason == (
+        "replace component skill:13062 matched 2 selected fields; expected 1"
+    )
 
 
 def test_source_prose_never_matches_a_component_rule(tmp_path, index):
@@ -434,7 +524,7 @@ def test_rule_evidence_must_identify_a_component_selected_in_the_build(
             "field": "payload",
         }
     ]
-    build = _build(utility_ids=(13038, 13062, 13062))
+    build = _build(utility_ids=(13002, 13062, 13062))
     audit = BuildAudit(
         schema_version=1,
         build_id=build.build_id,
@@ -537,3 +627,71 @@ def test_dimension_deltas_are_summed_before_the_final_band_clamp(
     )
 
     assert analysis.dimensions["mobility_disengage"].band == 5
+
+
+def test_checked_in_shadowstep_rule_resolves_against_current_dataset():
+    current = ROOT / "data" / "normalized" / "current"
+    dataset = {
+        "manifest": json.loads(
+            (current / "dataset-manifest.json").read_text(encoding="utf-8")
+        ),
+        "profession": json.loads(
+            (current / "profession.json").read_text(encoding="utf-8")
+        ),
+        "specializations": [],
+        "traits": [],
+        "skills": json.loads(
+            (current / "skills.json").read_text(encoding="utf-8")
+        ),
+        "equipment": [],
+        "upgrades": [],
+        "consumables": [],
+        "itemstats": [],
+    }
+    index = DatasetIndex.from_dataset(dataset)
+    rules = load_rules(
+        ROOT / "data" / "analysis-rules" / "thief-wvw-v1.json"
+    )
+    shadowstep = next(
+        rule for rule in rules.rules if rule.rule_id == "shadowstep-mobility"
+    )
+    evidence = shadowstep.evidence[0]
+    entity = index.entity("skill", evidence.component_id)
+
+    assert shadowstep.when.component_id == 13002
+    assert evidence.component_id == 13002
+    assert entity is not None
+    assert entity["names"]["en"] == "Shadowstep"
+
+
+def test_derived_build_schema_rejects_empty_object_and_accepts_real_variant(
+    tmp_path, index
+):
+    build = _build(utility_ids=(13002, 13062, 13027))
+    audit = BuildAudit(
+        schema_version=1,
+        build_id=build.build_id,
+        status="current_verified",
+        legality="legal",
+        game_build_id=101,
+        checked_at="2026-07-29T00:00:00Z",
+        missing_fields=(),
+        unknown_components=(),
+        removed_components=(),
+        affected_components=(),
+        warnings=(),
+    )
+    analysis = analyze_build(
+        build,
+        audit,
+        index=index,
+        rules=load_rules(_write_rules(tmp_path, _rules_value())),
+    )
+    value = analysis.to_dict()
+
+    assert schema_errors(value, "build-analysis.schema.json") == []
+    value["improvements"][0]["derived_build"] = {}
+    assert any(
+        "derived_build" in error
+        for error in schema_errors(value, "build-analysis.schema.json")
+    )

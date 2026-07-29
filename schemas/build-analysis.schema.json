@@ -9,7 +9,8 @@
     "dimensions",
     "strengths",
     "weaknesses",
-    "improvements"
+    "improvements",
+    "improvement_reasons"
   ],
   "properties": {
     "schema_version": {"const": 1},
@@ -50,6 +51,10 @@
     "improvements": {
       "type": "array",
       "items": {"$ref": "#/$defs/improvement"}
+    },
+    "improvement_reasons": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/improvement_reason"}
     }
   },
   "additionalProperties": false,
@@ -143,7 +148,18 @@
           "minItems": 1,
           "items": {"$ref": "#/$defs/evidence"}
         },
-        "derived_build": {"type": "object"}
+        "derived_build": {
+          "$ref": "urn:gw2-wvw-data:schema:build.schema.json"
+        }
+      },
+      "additionalProperties": false
+    },
+    "improvement_reason": {
+      "type": "object",
+      "required": ["improvement_id", "reason"],
+      "properties": {
+        "improvement_id": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1}
       },
       "additionalProperties": false
     }

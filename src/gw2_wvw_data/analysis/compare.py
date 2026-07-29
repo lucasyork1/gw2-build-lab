@@ -29,7 +29,6 @@ _TRINKET_SLOTS = (
     "ring1",
     "ring2",
 )
-_WEAPON_SLOTS = ("w11", "w12", "w21", "w22")
 
 
 @dataclass(frozen=True)
@@ -153,22 +152,7 @@ def _comparison_fields(build: BuildRecord) -> Iterable[tuple[str, Any]]:
             yield f"skills.utilities[{position}]", item
     yield "skills.elite", build.skills.get("elite")
 
-    weapons = {
-        item.get("slot"): item
-        for item in build.weapons
-        if isinstance(item.get("slot"), str)
-    }
-    for slot in (*_WEAPON_SLOTS, *sorted(set(weapons) - set(_WEAPON_SLOTS))):
-        weapon = weapons.get(slot)
-        if weapon is None:
-            continue
-        yield f"weapons.{slot}.type", weapon.get("type")
-        yield f"weapons.{slot}.item", weapon.get("item")
-        for group in ("upgrades", "infusions"):
-            values = weapon.get(group, ())
-            if isinstance(values, tuple):
-                for position, item in enumerate(values):
-                    yield f"weapons.{slot}.{group}[{position}]", item
+    yield from _weapon_fields(build.weapons)
 
     yield from _slot_fields("armor", build.armor, _ARMOR_SLOTS)
     yield from _slot_fields("trinkets", build.trinkets, _TRINKET_SLOTS)
@@ -192,6 +176,34 @@ def _slot_fields(
     ):
         if slot in values:
             yield f"{category}.{slot}", values[slot]
+
+
+def _weapon_fields(
+    weapons: tuple[Mapping[str, Any], ...],
+) -> Iterable[tuple[str, Any]]:
+    occurrences: dict[str, int] = {}
+    unkeyed = 0
+    for weapon in weapons:
+        slot = weapon.get("slot")
+        if isinstance(slot, str):
+            occurrence = occurrences.get(slot, 0)
+            occurrences[slot] = occurrence + 1
+            suffix = "" if occurrence == 0 else f"[{occurrence}]"
+            prefix = f"weapons.{slot}{suffix}"
+            slot_value = slot
+        else:
+            prefix = f"weapons.unkeyed[{unkeyed}]"
+            unkeyed += 1
+            slot_value = "<missing>"
+        yield f"{prefix}.slot", slot_value
+        for field in ("quality", "type", "item"):
+            if field in weapon:
+                yield f"{prefix}.{field}", weapon[field]
+        for group in ("upgrades", "infusions"):
+            values = weapon.get(group, ())
+            if isinstance(values, tuple):
+                for position, item in enumerate(values):
+                    yield f"{prefix}.{group}[{position}]", item
 
 
 def _category(path: str) -> str:

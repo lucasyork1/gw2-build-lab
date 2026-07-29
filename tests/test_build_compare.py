@@ -24,7 +24,7 @@ def _build_value():
         "traits": [_ref(701), _ref(2801)],
         "skills": {
             "heal": _ref(13027),
-            "utilities": [_ref(13038), _ref(13062), _ref(13035)],
+            "utilities": [_ref(13002), _ref(13062), _ref(13035)],
             "elite": _ref(13082),
         },
         "weapons": [
@@ -133,3 +133,65 @@ def test_compare_builds_treats_null_and_omitted_slots_as_the_same_absence():
     assert comparison.additions == ()
     assert comparison.removals == ()
     assert comparison.replacements == ()
+
+
+def test_compare_builds_reports_weapon_quality_change():
+    left_value = _build_value()
+    right_value = deepcopy(left_value)
+    right_value["build_id"] = "right"
+    left_value["weapons"][0]["quality"] = "ascended"
+    right_value["weapons"][0]["quality"] = "exotic"
+
+    comparison = compare_builds(
+        BuildRecord.from_dict(left_value),
+        BuildRecord.from_dict(right_value),
+    )
+
+    assert [item.path for item in comparison.replacements] == [
+        "weapons.w11.quality"
+    ]
+
+
+def test_compare_builds_preserves_duplicate_weapon_slot_removal():
+    left_value = _build_value()
+    duplicate = deepcopy(left_value["weapons"][0])
+    duplicate["item"] = _ref(2299)
+    left_value["weapons"].append(duplicate)
+    right_value = deepcopy(left_value)
+    right_value["build_id"] = "right"
+    right_value["weapons"].pop()
+
+    comparison = compare_builds(
+        BuildRecord.from_dict(left_value),
+        BuildRecord.from_dict(right_value),
+    )
+
+    removal_paths = [item.path for item in comparison.removals]
+    assert "weapons.w11[1].slot" in removal_paths
+    assert "weapons.w11[1].item" in removal_paths
+
+
+def test_compare_builds_preserves_unkeyed_weapon_entry_removal():
+    left_value = _build_value()
+    left_value["weapons"].append(
+        {
+            "type": _ref(2),
+            "item": _ref(2298),
+            "quality": "ascended",
+            "upgrades": [],
+            "infusions": [],
+        }
+    )
+    right_value = deepcopy(left_value)
+    right_value["build_id"] = "right"
+    right_value["weapons"].pop()
+
+    comparison = compare_builds(
+        BuildRecord.from_dict(left_value),
+        BuildRecord.from_dict(right_value),
+    )
+
+    removal_paths = [item.path for item in comparison.removals]
+    assert "weapons.unkeyed[0].slot" in removal_paths
+    assert "weapons.unkeyed[0].quality" in removal_paths
+    assert "weapons.unkeyed[0].item" in removal_paths

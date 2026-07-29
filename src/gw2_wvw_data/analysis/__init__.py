@@ -5,6 +5,7 @@ from gw2_wvw_data.analysis.build import (
     BuildAnalysis,
     DimensionAnalysis,
     EvidenceReference,
+    ImprovementApplicabilityReason,
     ImprovementAnalysis,
     analyze_build,
 )
@@ -33,6 +34,7 @@ __all__ = [
     "DimensionAnalysis",
     "EvidenceReference",
     "EvidenceSpec",
+    "ImprovementApplicabilityReason",
     "ImprovementAnalysis",
     "ImprovementRule",
     "RuleEffect",

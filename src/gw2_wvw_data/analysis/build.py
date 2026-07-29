@@ -149,6 +149,18 @@ class ImprovementAnalysis:
 
 
 @dataclass(frozen=True)
+class ImprovementApplicabilityReason:
+    improvement_id: str
+    reason: str
+
+    def to_dict(self) -> dict[str, str]:
+        return {
+            "improvement_id": self.improvement_id,
+            "reason": self.reason,
+        }
+
+
+@dataclass(frozen=True)
 class BuildAnalysis:
     schema_version: int
     build_id: str
@@ -157,6 +169,7 @@ class BuildAnalysis:
     strengths: tuple[AnalysisConclusion, ...]
     weaknesses: tuple[AnalysisConclusion, ...]
     improvements: tuple[ImprovementAnalysis, ...]
+    improvement_reasons: tuple[ImprovementApplicabilityReason, ...]
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -171,6 +184,9 @@ class BuildAnalysis:
             "weaknesses": [item.to_dict() for item in self.weaknesses],
             "improvements": [
                 item.to_dict() for item in self.improvements
+            ],
+            "improvement_reasons": [
+                item.to_dict() for item in self.improvement_reasons
             ],
         }
 
@@ -251,7 +267,7 @@ def analyze_build(
             ),
         )
 
-    improvements = _applicable_improvements(
+    improvements, improvement_reasons = _applicable_improvements(
         build,
         rules=rules,
         index=index,
@@ -265,6 +281,7 @@ def analyze_build(
         strengths=tuple(strengths),
         weaknesses=tuple(weaknesses),
         improvements=improvements,
+        improvement_reasons=improvement_reasons,
     )
 
 
@@ -285,8 +302,12 @@ def _applicable_improvements(
     rules: RuleSet,
     index: DatasetIndex,
     components: tuple[_BuildComponent, ...],
-) -> tuple[ImprovementAnalysis, ...]:
+) -> tuple[
+    tuple[ImprovementAnalysis, ...],
+    tuple[ImprovementApplicabilityReason, ...],
+]:
     results: list[ImprovementAnalysis] = []
+    reasons: list[ImprovementApplicabilityReason] = []
     for rule in sorted(
         rules.improvements, key=lambda item: item.improvement_id
     ):
@@ -296,7 +317,43 @@ def _applicable_improvements(
         ):
             continue
         matching = _matching_components(rule.replace, components)
-        if not matching:
+        replace_kind = (
+            rule.replace.component_kind
+            or (matching[0].component_kind if matching else None)
+        )
+        replace_label = (
+            f"{replace_kind or 'unknown'}:{rule.replace.component_id}"
+        )
+        if len(matching) != 1:
+            reasons.append(
+                ImprovementApplicabilityReason(
+                    improvement_id=rule.improvement_id,
+                    reason=(
+                        f"replace component {replace_label} matched "
+                        f"{len(matching)} selected fields; expected 1"
+                    ),
+                )
+            )
+            continue
+        replace_kind = replace_kind or matching[0].component_kind
+        with_kind = rule.with_.component_kind or replace_kind
+        selected_with = _matching_components(
+            ComponentSelector(
+                component_kind=with_kind,
+                component_id=rule.with_.component_id,
+            ),
+            components,
+        )
+        if selected_with:
+            reasons.append(
+                ImprovementApplicabilityReason(
+                    improvement_id=rule.improvement_id,
+                    reason=(
+                        f"with component {with_kind}:"
+                        f"{rule.with_.component_id} is already selected"
+                    ),
+                )
+            )
             continue
         evidence, missing_reason = _resolve_evidence(
             rule.evidence,
@@ -305,13 +362,24 @@ def _applicable_improvements(
             fallback_kind=rule.replace.component_kind,
         )
         if missing_reason is not None:
+            reasons.append(
+                ImprovementApplicabilityReason(
+                    improvement_id=rule.improvement_id,
+                    reason=f"evidence unavailable: {missing_reason}",
+                )
+            )
             continue
-        replace_kind = (
-            rule.replace.component_kind or matching[0].component_kind
-        )
-        with_kind = rule.with_.component_kind or replace_kind
         entity = index.entity(with_kind, rule.with_.component_id)
         if entity is None:
+            reasons.append(
+                ImprovementApplicabilityReason(
+                    improvement_id=rule.improvement_id,
+                    reason=(
+                        f"with component {with_kind}:"
+                        f"{rule.with_.component_id} is unavailable"
+                    ),
+                )
+            )
             continue
         field = rule.replace.field or matching[0].field
         value = build.to_dict()
@@ -322,6 +390,12 @@ def _applicable_improvements(
             "confidence": "mapped",
         }
         if not _set_path(value, field, replacement):
+            reasons.append(
+                ImprovementApplicabilityReason(
+                    improvement_id=rule.improvement_id,
+                    reason=f"replace field {field} is unavailable",
+                )
+            )
             continue
         value["build_id"] = (
             f"{build.build_id}--{rule.improvement_id}"
@@ -359,7 +433,7 @@ def _applicable_improvements(
                 derived_build=derived,
             )
         )
-    return tuple(results)
+    return tuple(results), tuple(reasons)
 
 
 def _resolve_evidence(

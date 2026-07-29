@@ -124,7 +124,7 @@ Every component reference uses:
 
 ```json
 {
-  "id": 13038,
+  "id": 13002,
   "name": "Shadowstep",
   "source": "build-code",
   "confidence": "exact"
@@ -558,7 +558,7 @@ def test_patch_after_source_marks_affected_components(
         checked_at="2026-07-28T23:00:00Z",
     )
     assert audit.status == "possibly_affected"
-    assert audit.affected_components[0].component_id == 13038
+    assert audit.affected_components[0].component_id == 13002
 
 
 def test_unknown_component_is_unverifiable(unknown_component_build, dataset_index):
@@ -672,9 +672,9 @@ Rules have this exact shape:
   "rules": [
     {
       "rule_id": "shadowstep-mobility",
-      "when": {"component_id": 13038},
+      "when": {"component_id": 13002},
       "effects": [{"dimension": "mobility_disengage", "delta": 1}],
-      "evidence": [{"component_id": 13038, "field": "payload"}],
+      "evidence": [{"component_id": 13002, "field": "payload"}],
       "claim": "Shadowstep contributes a mobility and disengage option."
     }
   ]
