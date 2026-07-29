@@ -14,6 +14,9 @@ COMMAND_MODULES = {
     "validate": "validate",
     "diff": "diff",
     "release": "release",
+    "analyze": "builds.service",
+    "import-source": "builds.service",
+    "compare": "builds.service",
 }
 
 
@@ -33,6 +36,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     arguments, remaining = build_parser().parse_known_args(argv)
     module_name = COMMAND_MODULES[arguments.command]
     module = importlib.import_module(f"gw2_wvw_data.{module_name}")
+    if module_name == "builds.service":
+        remaining = [arguments.command, *remaining]
     return int(module.main(remaining))
 
 
