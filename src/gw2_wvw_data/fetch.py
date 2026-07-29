@@ -50,6 +50,7 @@ def _fetch_language_files(
     client: ArenaNetClient,
     staging: Path,
     language: str,
+    expected_ids: dict[str, set[int]],
 ) -> dict[str, set[int | str]]:
     profession = client.get_json(
         "/v2/professions/Thief",
@@ -65,6 +66,10 @@ def _fetch_language_files(
             params={"ids": "all", "lang": language},
         )
         identifiers[filename] = _record_ids(payload, endpoint)
+        if identifiers[filename] != expected_ids[filename]:
+            raise ValueError(
+                f"{endpoint} collection IDs do not match index"
+            )
         write_json(staging / f"{filename}.{language}.json", payload)
     return identifiers
 
@@ -132,8 +137,28 @@ def fetch_snapshot(
 
     try:
         write_json(staging / "build.json", build_payload)
-        english_ids = _fetch_language_files(client, staging, "en")
-        chinese_ids = _fetch_language_files(client, staging, "zh")
+        expected_ids: dict[str, set[int]] = {}
+        for filename, endpoint in COLLECTION_ENDPOINTS.items():
+            index = client.get_json(endpoint)
+            if (
+                not isinstance(index, list)
+                or any(not isinstance(identifier, int) for identifier in index)
+                or len(index) != len(set(index))
+            ):
+                raise ValueError(f"{endpoint} did not return a unique integer ID index")
+            expected_ids[filename] = set(index)
+        english_ids = _fetch_language_files(
+            client,
+            staging,
+            "en",
+            expected_ids,
+        )
+        chinese_ids = _fetch_language_files(
+            client,
+            staging,
+            "zh",
+            expected_ids,
+        )
         if english_ids != chinese_ids:
             raise ValueError("localized collection ID sets do not match")
         _fetch_items(client, staging)

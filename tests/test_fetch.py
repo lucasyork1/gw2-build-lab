@@ -26,6 +26,13 @@ class FakeClient:
             return [{"id": item_id} for item_id in map(int, params["ids"].split(","))]
         if path == "/v2/professions/Thief":
             return {"id": "Thief", "name": "Thief"}
+        if path in {
+            "/v2/specializations",
+            "/v2/traits",
+            "/v2/skills",
+            "/v2/itemstats",
+        } and "ids" not in params:
+            return [1]
         return [{"id": 1, "name": path.rsplit("/", 1)[-1]}]
 
 
@@ -167,6 +174,24 @@ def test_fetch_rejects_corrupt_existing_snapshot(tmp_path):
         )
 
 
+def test_fetch_rejects_same_truncated_subset_in_both_languages(tmp_path):
+    client = FakeClient()
+    original_get_json = client.get_json
+
+    def truncated_collection(path, params=None):
+        params = params or {}
+        if path == "/v2/skills" and "ids" not in params:
+            return [1, 2]
+        if path == "/v2/skills" and params.get("ids") == "all":
+            return [{"id": 1}]
+        return original_get_json(path, params)
+
+    client.get_json = truncated_collection
+
+    with pytest.raises(ValueError, match="collection IDs do not match index"):
+        fetch_snapshot(client, tmp_path, fetched_at="2026-07-28T20:00:00Z")
+
+
 def _many_item_ids_client(client):
     def get_json(path, params=None):
         params = params or {}
@@ -179,6 +204,13 @@ def _many_item_ids_client(client):
             return [{"id": int(value)} for value in params["ids"].split(",")]
         if path == "/v2/professions/Thief":
             return {"id": "Thief", "name": "Thief"}
+        if path in {
+            "/v2/specializations",
+            "/v2/traits",
+            "/v2/skills",
+            "/v2/itemstats",
+        } and "ids" not in params:
+            return [1]
         return [{"id": 1}]
 
     return get_json

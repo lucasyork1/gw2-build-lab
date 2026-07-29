@@ -82,3 +82,10 @@ def test_override_requires_https_source(valid_dataset, valid_override):
 
     with pytest.raises(ValueError, match="HTTPS"):
         apply_overrides(valid_dataset, [invalid])
+
+
+def test_override_rejects_schema_forbidden_extra_field(valid_dataset, valid_override):
+    invalid = {**valid_override, "trust_me": True}
+
+    with pytest.raises(ValueError, match="override schema invalid"):
+        apply_overrides(valid_dataset, [invalid])

@@ -144,6 +144,19 @@ def validate_dataset(
         )
 
     for override in dataset.get("applied_overrides", []):
+        override_schema_errors = schema_errors(
+            override,
+            "override.schema.json",
+        )
+        if override_schema_errors:
+            issues.append(
+                ValidationIssue(
+                    "schema_invalid",
+                    str(override.get("entity_kind", "unknown")),
+                    str(override.get("entity_id", "")),
+                    override_schema_errors[0],
+                )
+            )
         if override.get("verification_status") != "human_verified":
             issues.append(
                 ValidationIssue(

@@ -18,6 +18,8 @@ def _write_snapshot(root: Path) -> Path:
     payload = json.loads(FIXTURE.read_text(encoding="utf-8"))
     for language in ("en", "zh"):
         payload["profession"][language]["weapons"] = {"Dagger": {}}
+        for record in payload["items"][language]:
+            record["game_types"] = ["Wvw"]
         item = next(
             item for item in payload["items"][language] if item["id"] == 1000
         )

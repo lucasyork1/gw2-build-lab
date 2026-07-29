@@ -7,6 +7,7 @@ RUNTIME_SCHEMAS = (
     "manifest.schema.json",
     "dataset.schema.json",
     "entity.schema.json",
+    "override.schema.json",
     "release-manifest.schema.json",
 )
 

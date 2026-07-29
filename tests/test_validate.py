@@ -71,6 +71,7 @@ def test_validation_reports_stable_issue_codes():
         "missing_itemstat",
         "missing_source",
         "schema_invalid",
+        "schema_invalid",
         "unresolved_reference",
         "unreviewed_override",
     ]

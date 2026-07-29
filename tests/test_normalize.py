@@ -15,6 +15,8 @@ def _write_snapshot(tmp_path, *, missing_trait=False):
     payload = json.loads(FIXTURE.read_text("utf-8"))
     for language in ("en", "zh"):
         payload["profession"][language]["weapons"] = {"Dagger": {}}
+        for item in payload["items"][language]:
+            item["game_types"] = ["Wvw"]
         by_id = {item["id"]: item for item in payload["items"][language]}
         by_id[1000]["rarity"] = "Exotic"
         by_id[1000]["details"]["weight_class"] = "Medium"
@@ -64,8 +66,19 @@ def _write_snapshot(tmp_path, *, missing_trait=False):
                         "infix_upgrade": {"id": 999},
                     },
                 },
+                {
+                    "id": 1009,
+                    "name": "PvP-only Medium Coat",
+                    "type": "Armor",
+                    "level": 80,
+                    "rarity": "Exotic",
+                    "game_types": ["Pvp", "PvpLobby"],
+                    "details": {"type": "Coat", "weight_class": "Medium"},
+                },
             ]
         )
+        for item in payload["items"][language]:
+            item.setdefault("game_types", ["Wvw"])
     snapshot = tmp_path / "raw" / "204132"
     snapshot.mkdir(parents=True)
     for category, localized in payload.items():

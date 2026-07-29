@@ -91,6 +91,8 @@ def _normalize_items(
     }
     equipment_rarities = {"Exotic", "Ascended", "Legendary"}
     for record in english:
+        if "Wvw" not in record.get("game_types", []):
+            continue
         item_type = record.get("type")
         details = record.get("details", {})
         level = int(record.get("level", 0))

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reviewed WvW field override",
+  "type": "object",
+  "required": [
+    "entity_kind",
+    "entity_id",
+    "json_pointer",
+    "mode",
+    "value",
+    "previous_value",
+    "effective_patch",
+    "source_url",
+    "verification_status",
+    "notes"
+  ],
+  "properties": {
+    "entity_kind": {"type": "string", "minLength": 1},
+    "entity_id": {"type": ["integer", "string"]},
+    "json_pointer": {"type": "string", "pattern": "^/"},
+    "mode": {"const": "wvw"},
+    "value": {},
+    "previous_value": {},
+    "effective_patch": {"type": "string", "format": "date"},
+    "source_url": {"type": "string", "pattern": "^https://"},
+    "verification_status": {"const": "human_verified"},
+    "notes": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false
+}

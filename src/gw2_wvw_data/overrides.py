@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+from gw2_wvw_data.contracts import schema_errors
 from gw2_wvw_data.io import write_json
 from gw2_wvw_data.normalize import ENTITY_FILES
 
@@ -49,6 +50,9 @@ def _validate_override(override: dict[str, Any]) -> None:
         raise ValueError("override effective_patch must be YYYY-MM-DD") from error
     if not str(override["json_pointer"]).startswith("/"):
         raise ValueError("override json_pointer must start with /")
+    errors = schema_errors(override, "override.schema.json")
+    if errors:
+        raise ValueError(f"override schema invalid: {errors[0]}")
 
 
 def _iter_entities(dataset: dict[str, Any]):
