@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lucasyork1.github.io/gw2-build-lab/schemas/entity.schema.json",
+  "title": "GW2 WvW normalized entity",
+  "type": "object",
+  "required": [
+    "id",
+    "kind",
+    "names",
+    "mode",
+    "game_build_id",
+    "effective_patch",
+    "fetched_at",
+    "source_refs",
+    "verification_status",
+    "payload"
+  ],
+  "properties": {
+    "id": {"type": ["integer", "string"]},
+    "kind": {"type": "string", "minLength": 1},
+    "names": {
+      "type": "object",
+      "required": ["en", "zh"],
+      "properties": {
+        "en": {"type": "string"},
+        "zh": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "mode": {"const": "wvw"},
+    "game_build_id": {"type": "integer", "minimum": 1},
+    "effective_patch": {"type": ["string", "null"], "format": "date"},
+    "fetched_at": {"type": "string", "format": "date-time"},
+    "source_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "verification_status": {
+      "enum": ["unverified", "automated", "human_verified", "conflict"]
+    },
+    "payload": {"type": "object"}
+  },
+  "additionalProperties": false
+}
