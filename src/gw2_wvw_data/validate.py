@@ -155,7 +155,10 @@ def validate_dataset(
 
 def _load_source_ids(path: Path) -> set[str]:
     payload = json.loads(path.read_text("utf-8"))
-    return {source["source_id"] for source in payload["sources"]}
+    return {
+        "wvw-override",
+        *(source["source_id"] for source in payload["sources"]),
+    }
 
 
 def main(argv: list[str] | None = None) -> int:
