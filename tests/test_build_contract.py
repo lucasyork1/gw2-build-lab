@@ -45,3 +45,36 @@ def test_build_updates_return_a_new_immutable_record():
     assert build.build_id == "fixture-minimal-thief"
     with pytest.raises(AttributeError):
         build.build_id = "mutated-thief"
+
+
+def test_build_allows_nullable_component_identifiers():
+    value = json.loads(FIXTURE.read_text(encoding="utf-8"))
+    value["skills"]["heal"] = {
+        "id": None,
+        "name": "Unknown Heal",
+        "source": "build-code",
+        "confidence": "unknown",
+    }
+
+    assert schema_errors(value, "build.schema.json") == []
+    assert BuildRecord.from_dict(value).skills["heal"].id is None
+
+
+def test_build_updates_are_validated_and_deeply_frozen():
+    build = BuildRecord.from_dict(json.loads(FIXTURE.read_text(encoding="utf-8")))
+    armor = {
+        "helm": {
+            "id": 1,
+            "name": "Mutable Helm",
+            "source": "manual",
+            "confidence": "exact",
+        }
+    }
+
+    with pytest.raises(ValueError, match="profession must be Thief"):
+        build.with_updates(profession="Mesmer")
+
+    updated = build.with_updates(armor=armor)
+    armor["helm"]["name"] = "Changed Helm"
+
+    assert updated.armor["helm"].name == "Mutable Helm"

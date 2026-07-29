@@ -9,12 +9,9 @@ from typing import Any, Mapping
 from gw2_wvw_data.contracts import schema_errors
 
 
-CONFIDENCE_VALUES = frozenset({"exact", "mapped", "publisher_claimed", "unknown"})
-
-
 @dataclass(frozen=True)
 class ComponentRef:
-    id: int | str
+    id: int | str | None
     name: str | None
     source: str
     confidence: str
@@ -130,4 +127,10 @@ class BuildRecord:
         })
 
     def with_updates(self, **changes: Any) -> BuildRecord:
-        return replace(self, **changes)
+        value = self.to_dict()
+        value.update({name: _thaw(change) for name, change in changes.items()})
+        normalized = BuildRecord.from_dict(value)
+        return replace(
+            self,
+            **{name: getattr(normalized, name) for name in changes},
+        )

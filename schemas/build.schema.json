@@ -59,7 +59,7 @@
     "component_ref": {
       "type": "object", "required": ["id", "name", "source", "confidence"], "additionalProperties": false,
       "properties": {
-        "id": {"type": ["integer", "string"]},
+        "id": {"type": ["integer", "string", "null"]},
         "name": {"type": ["string", "null"]},
         "source": {"type": "string", "minLength": 1},
         "confidence": {"enum": ["exact", "mapped", "publisher_claimed", "unknown"]}
