@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
+from importlib.resources import files
 from typing import Any
 
 from jsonschema import Draft202012Validator, FormatChecker
@@ -11,13 +11,15 @@ from jsonschema import Draft202012Validator, FormatChecker
 from gw2_wvw_data.io import sha256_file
 
 
-SCHEMA_ROOT = Path(__file__).resolve().parents[2] / "schemas"
-
-
 def schema_errors(instance: Any, schema_name: str) -> list[str]:
     """Return stable human-readable errors for one public schema."""
 
-    schema = json.loads((SCHEMA_ROOT / schema_name).read_text(encoding="utf-8"))
+    schema_text = (
+        files("gw2_wvw_data")
+        .joinpath("schemas", schema_name)
+        .read_text(encoding="utf-8")
+    )
+    schema = json.loads(schema_text)
     validator = Draft202012Validator(schema, format_checker=FormatChecker())
     return [
         f"{'/'.join(str(part) for part in error.absolute_path) or '/'}: {error.message}"
