@@ -156,14 +156,26 @@ def audit_build(
     if not index.dataset_build_matches:
         warnings.add("dataset game build is inconsistent")
 
-    content_dates = _source_content_dates_by_name(build)
+    (
+        content_dates,
+        incomplete_sources,
+        invalid_sources,
+    ) = _source_content_dates_by_name(build)
     source_dates: dict[str, date] = {}
     source_date_missing = False
     source_date_ambiguous = False
     source_date_after_check = False
     for _, _, component in components:
         dates = content_dates.get(component.source)
-        if not dates:
+        if (
+            component.source in invalid_sources
+            or (
+                component.source in incomplete_sources
+                and dates
+            )
+        ):
+            source_date_ambiguous = True
+        elif not dates:
             source_date_missing = True
         elif len(dates) != 1:
             source_date_ambiguous = True
@@ -866,11 +878,17 @@ def _is_removed(entity: Mapping[str, Any]) -> bool:
 
 def _source_content_dates_by_name(
     build: BuildRecord,
-) -> dict[str, frozenset[date]]:
+) -> tuple[
+    dict[str, frozenset[date]],
+    frozenset[str],
+    frozenset[str],
+]:
     found: dict[str, set[date]] = {}
+    incomplete_sources: set[str] = set()
+    invalid_sources: set[str] = set()
     sources = build.provenance.get("sources", ())
     if not isinstance(sources, tuple):
-        return {}
+        return {}, frozenset(), frozenset()
     for source in sources:
         if not isinstance(source, Mapping):
             continue
@@ -878,14 +896,30 @@ def _source_content_dates_by_name(
         if not isinstance(source_name, str):
             continue
         dates = found.setdefault(source_name, set())
+        record_dates: set[date] = set()
+        accepted_field_seen = False
         for field in ("effective_patch", "updated_at", "published_at"):
-            parsed = _optional_date(source.get(field))
-            if parsed is not None:
-                dates.add(parsed)
-    return {
-        source_name: frozenset(dates)
-        for source_name, dates in found.items()
-    }
+            if field not in source:
+                continue
+            accepted_field_seen = True
+            parsed = _optional_date(source[field])
+            if parsed is None:
+                invalid_sources.add(source_name)
+            else:
+                record_dates.add(parsed)
+        if not accepted_field_seen:
+            incomplete_sources.add(source_name)
+        elif len(record_dates) != 1:
+            invalid_sources.add(source_name)
+        dates.update(record_dates)
+    return (
+        {
+            source_name: frozenset(dates)
+            for source_name, dates in found.items()
+        },
+        frozenset(incomplete_sources),
+        frozenset(invalid_sources),
+    )
 
 
 def _optional_date(value: Any) -> date | None:

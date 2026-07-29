@@ -784,6 +784,48 @@ def test_duplicate_source_records_with_same_content_date_resolve(
     assert audit.status == "current_verified"
 
 
+def test_dated_source_record_cannot_mask_matching_record_without_date(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["provenance"]["sources"] = [
+        {"source": "fixture", "published_at": "2026-07-27"},
+        {"source": "fixture"},
+    ]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "unverifiable"
+    assert "component source date is ambiguous" in audit.warnings
+
+
+def test_dated_source_record_cannot_mask_matching_malformed_record(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["provenance"]["sources"] = [
+        {"source": "fixture", "published_at": "2026-07-27"},
+        {"source": "fixture", "updated_at": "not-a-date"},
+    ]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "unverifiable"
+    assert "component source date is ambiguous" in audit.warnings
+
+
+def test_valid_field_cannot_mask_malformed_field_in_same_source_record(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["provenance"]["sources"] = [
+        {
+            "source": "fixture",
+            "published_at": "2026-07-27",
+            "updated_at": "not-a-date",
+        }
+    ]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "unverifiable"
+    assert "component source date is ambiguous" in audit.warnings
+
+
 def test_effective_patch_only_source_date_detects_newer_patch(
     complete_build, dataset_index
 ):
