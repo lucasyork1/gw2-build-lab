@@ -11,6 +11,9 @@ from gw2_wvw_data.importers.metabattle import MetaBattleAdapter
 
 
 FIXTURE = Path(__file__).parent / "fixtures" / "importers" / "metabattle-thief.html"
+GW2SKILLS_FIXTURE = (
+    Path(__file__).parent / "fixtures" / "importers" / "gw2skills-thief.html"
+)
 CURRENT = Path(__file__).parents[1] / "data" / "normalized" / "current"
 URL = "https://metabattle.com/wiki/Build:Thief_-_Deadeye_Roamer"
 
@@ -38,6 +41,23 @@ def _client(html: str) -> SafeHttpClient:
             )
         )
     )
+
+
+def _source_client(metabattle_html: str, gw2skills_html: str) -> SafeHttpClient:
+    def respond(request: httpx.Request) -> httpx.Response:
+        content = (
+            metabattle_html
+            if request.url.host in {"metabattle.com", "www.metabattle.com"}
+            else gw2skills_html
+        )
+        return httpx.Response(
+            200,
+            headers={"content-type": "text/html; charset=utf-8"},
+            content=content.encode("utf-8"),
+            request=request,
+        )
+
+    return SafeHttpClient(transport=httpx.MockTransport(respond))
 
 
 def test_extracts_only_allowed_metabattle_metadata():
@@ -116,6 +136,105 @@ def test_records_conflicting_labeled_metadata_without_selecting_a_value():
     assert candidate.conflicts["mode"] == ("wvw", "pve")
 
 
+def test_ignores_attribute_labeled_guide_prose_and_keeps_nested_metadata_text():
+    html = (
+        FIXTURE.read_text("utf-8")
+        .replace(
+            "<dt>Context</dt><dd>Roaming</dd>",
+            (
+                '<dt>Context</dt><dd><div data-field="context">'
+                "<span>Roaming</span> and dueling</div></dd>"
+            ),
+        )
+        .replace(
+            "</main>",
+            '<p data-label="Profession">Mesmer guide prose</p></main>',
+        )
+        .replace(
+            "</dl>",
+            '<p data-label="Profession">More Mesmer guide prose</p></dl>',
+        )
+    )
+
+    candidate = MetaBattleAdapter().extract(_document(html))
+
+    assert candidate.profession == "Thief"
+    assert candidate.context == ("roaming and dueling",)
+
+
+@pytest.mark.parametrize(
+    ("old", "new", "field", "attribute"),
+    [
+        (
+            "<title>WvW Deadeye Roamer - MetaBattle</title>",
+            (
+                "<title>WvW Deadeye Roamer - MetaBattle</title>"
+                "<title>Other title</title>"
+            ),
+            "title",
+            "title",
+        ),
+        (
+            "</dl>",
+            "<dt>Updated</dt><dd>2026-07-19</dd></dl>",
+            "updated",
+            "updated_at",
+        ),
+        (
+            "</dl>",
+            (
+                "<dt>Build Code</dt>"
+                "<dd>[&DQU2KywnBzkKAQAAGQEAAFgAAABXAQAAnwEAAAAAAAAAAAAAAAAAAAAAAAAEBQA2AFoALwAA]</dd></dl>"
+            ),
+            "Build Code",
+            "build_code",
+        ),
+    ],
+)
+def test_preserves_conflicting_required_metadata_without_selecting_a_value(
+    old, new, field, attribute
+):
+    html = FIXTURE.read_text("utf-8").replace(old, new)
+
+    candidate = MetaBattleAdapter().extract(_document(html))
+
+    assert getattr(candidate, attribute) is None
+    assert candidate.conflicts[field]
+
+
+def test_dispatcher_uses_editor_configuration_when_dual_sources_agree(dataset):
+    candidate = import_source(
+        URL,
+        dataset=dataset,
+        client=_source_client(
+            FIXTURE.read_text("utf-8"), GW2SKILLS_FIXTURE.read_text("utf-8")
+        ),
+    )
+
+    assert candidate.build is not None
+    assert candidate.build.armor["helm"].id == "gw2skills:300"
+    assert [source["source"] for source in candidate.build.provenance["sources"]] == [
+        "build-code",
+        "gw2skills",
+    ]
+
+
+def test_dispatcher_records_dual_source_configuration_disagreement(dataset):
+    conflicting_editor = GW2SKILLS_FIXTURE.read_text("utf-8").replace(
+        "DQU2OywnByoKAQAAGQEAAFcBAABYAAAAnwEAAAAAAAAAAAAAAAAAAAAAAAA=",
+        "DQU2KywnBzkKAQAAGQEAAFgAAABXAQAAnwEAAAAAAAAAAAAAAAAAAAAAAAAEBQA2AFoALwAA",
+    )
+
+    candidate = import_source(
+        URL,
+        dataset=dataset,
+        client=_source_client(FIXTURE.read_text("utf-8"), conflicting_editor),
+    )
+
+    assert candidate.build is None
+    assert candidate.conflicts["configuration"] == ("traits", "skills")
+
+
 def test_rejects_malformed_html():
     with pytest.raises(ImportError, match="malformed"):
         MetaBattleAdapter().extract(_document("<main><dt>Mode</dt><dd>WvW"))
@@ -142,7 +261,9 @@ def test_dispatcher_fetches_and_extracts_supported_source(dataset):
     candidate = import_source(
         URL,
         dataset=dataset,
-        client=_client(FIXTURE.read_text("utf-8")),
+        client=_source_client(
+            FIXTURE.read_text("utf-8"), GW2SKILLS_FIXTURE.read_text("utf-8")
+        ),
     )
 
     assert candidate.source_url == URL

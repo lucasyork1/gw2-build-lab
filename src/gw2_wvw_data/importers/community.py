@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
-from types import MappingProxyType
 from typing import Any, Mapping
 from urllib.parse import urlsplit
 
@@ -20,7 +19,7 @@ class CommunityCandidate:
 
     source_name: str
     source_url: str
-    title: str
+    title: str | None
     mode: str | None
     context: tuple[str, ...]
     profession: str | None
@@ -39,6 +38,13 @@ class CommunityCandidate:
         """Return this candidate with an independently decoded configuration."""
 
         return replace(self, build=build)
+
+    def with_conflict(
+        self, field: str, values: tuple[str, ...]
+    ) -> CommunityCandidate:
+        """Return this candidate with an unresolved source disagreement."""
+
+        return replace(self, conflicts={**self.conflicts, field: values})
 
 
 _METABATTLE_HOSTS = frozenset({"metabattle.com", "www.metabattle.com"})
@@ -63,16 +69,55 @@ def import_source(
 
     document = client.get_text(url, allowed_hosts=_METABATTLE_HOSTS)
     candidate = MetaBattleAdapter().extract(document)
+    decoded_build: BuildRecord | None = None
+    editor_build: BuildRecord | None = None
     if candidate.build_code is not None:
         try:
-            return candidate.with_build(
-                decode_build_code(candidate.build_code, dataset=dataset)
-            )
+            decoded_build = decode_build_code(candidate.build_code, dataset=dataset)
         except (BuildCodeError, ValueError) as error:
             raise ImportError("MetaBattle Build Code is invalid") from error
     if candidate.editor_urls:
-        return candidate.with_build(
+        editor_build = (
             import_gw2skills(candidate.editor_urls[0], dataset=dataset, client=client)
         )
-    raise ImportError("MetaBattle page has no editor or Build Code")
+    if decoded_build is not None and editor_build is not None:
+        differences = _overlapping_configuration_differences(
+            decoded_build, editor_build
+        )
+        if differences:
+            return candidate.with_conflict("configuration", differences)
+        return candidate.with_build(editor_build)
+    if editor_build is not None:
+        return candidate.with_build(editor_build)
+    if decoded_build is not None:
+        return candidate.with_build(decoded_build)
+    return candidate
 
+
+def _overlapping_configuration_differences(
+    build_code: BuildRecord, editor: BuildRecord
+) -> tuple[str, ...]:
+    differences = []
+    if tuple(item.id for item in build_code.specializations) != tuple(
+        item.id for item in editor.specializations
+    ):
+        differences.append("specializations")
+    if tuple(item.id for item in build_code.traits) != tuple(
+        item.id for item in editor.traits
+    ):
+        differences.append("traits")
+    if _skill_ids(build_code) != _skill_ids(editor):
+        differences.append("skills")
+    return tuple(differences)
+
+
+def _skill_ids(build: BuildRecord) -> tuple[int | str | None, ...]:
+    skills = build.skills
+    heal = skills["heal"]
+    utilities = skills["utilities"]
+    elite = skills["elite"]
+    return (
+        heal.id if heal is not None else None,
+        *(item.id if item is not None else None for item in utilities),
+        elite.id if elite is not None else None,
+    )
