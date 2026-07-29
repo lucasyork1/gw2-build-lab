@@ -1,0 +1,83 @@
+name: Check for ArenaNet data updates
+
+on:
+  schedule:
+    - cron: "17 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: check-gw2-data-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
+      - name: Fetch, normalize, validate, and compare
+        id: data
+        shell: bash
+        run: |
+          set -euo pipefail
+          snapshot="$(gw2-wvw-data fetch --output data/raw | tail -n 1)"
+          rm -rf .generated
+          mkdir -p .generated/normalized .generated/current data/history
+          gw2-wvw-data normalize --snapshot "$snapshot" --output .generated/normalized
+          gw2-wvw-data apply-overrides \
+            --dataset .generated/normalized \
+            --overrides data/wvw-overrides/overrides.json \
+            --output .generated/current
+          gw2-wvw-data validate --dataset .generated/current
+          build_id="$(python -c 'import json; print(json.load(open(".generated/current/dataset-manifest.json"))["game_build_id"])')"
+          if test -f data/normalized/current/dataset-manifest.json; then
+            old_build="$(python -c 'import json; print(json.load(open("data/normalized/current/dataset-manifest.json"))["game_build_id"])')"
+            if test "$old_build" = "$build_id"; then
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            gw2-wvw-data diff \
+              --old data/normalized/current \
+              --new .generated/current \
+              --output "data/history/${old_build}-to-${build_id}.json"
+          fi
+          rm -rf data/normalized/current
+          mkdir -p data/normalized
+          mv .generated/current data/normalized/current
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "build_id=$build_id" >> "$GITHUB_OUTPUT"
+      - name: Test updated repository
+        if: steps.data.outputs.changed == 'true'
+        run: pytest -q
+      - name: Open update pull request
+        if: steps.data.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUILD_ID: ${{ steps.data.outputs.build_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch="data/game-build-${BUILD_ID}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add data/normalized/current data/history
+          git commit -m "data: update to game build ${BUILD_ID}"
+          git push --force-with-lease origin "$branch"
+          existing="$(gh pr list --head "$branch" --state open --json number --jq '.[0].number // empty')"
+          if test -z "$existing"; then
+            gh pr create \
+              --base main \
+              --head "$branch" \
+              --title "data: update to game build ${BUILD_ID}" \
+              --body "Automated ArenaNet API refresh. Tests and dataset validation passed in this workflow."
+          fi
