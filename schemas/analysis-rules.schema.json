@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Project-authored WvW Thief analysis rules",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "ruleset_id",
+    "dimensions",
+    "rules"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "ruleset_id": {"type": "string", "minLength": 1},
+    "dimensions": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "burst_damage"},
+        {"const": "sustained_damage"},
+        {"const": "survival_recovery"},
+        {"const": "condition_cleanse"},
+        {"const": "control_interrupt"},
+        {"const": "mobility_disengage"},
+        {"const": "stealth_reset"},
+        {"const": "operation_difficulty"}
+      ],
+      "items": false
+    },
+    "rules": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/rule"}
+    },
+    "improvements": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/improvement"}
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "dimension": {
+      "enum": [
+        "burst_damage",
+        "sustained_damage",
+        "survival_recovery",
+        "condition_cleanse",
+        "control_interrupt",
+        "mobility_disengage",
+        "stealth_reset",
+        "operation_difficulty"
+      ]
+    },
+    "selector": {
+      "type": "object",
+      "required": ["component_id"],
+      "properties": {
+        "component_kind": {"type": "string", "minLength": 1},
+        "component_id": {"type": ["integer", "string"]},
+        "field": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["component_id", "field"],
+      "properties": {
+        "component_kind": {"type": "string", "minLength": 1},
+        "component_id": {"type": ["integer", "string"]},
+        "field": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "effect": {
+      "type": "object",
+      "required": ["dimension", "delta"],
+      "properties": {
+        "dimension": {"$ref": "#/$defs/dimension"},
+        "delta": {"type": "integer", "minimum": -2, "maximum": 2}
+      },
+      "additionalProperties": false
+    },
+    "rule": {
+      "type": "object",
+      "required": ["rule_id", "when", "effects", "evidence", "claim"],
+      "properties": {
+        "rule_id": {"type": "string", "minLength": 1},
+        "when": {"$ref": "#/$defs/selector"},
+        "effects": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/effect"}
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "claim": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "applies_when": {
+      "oneOf": [
+        {"$ref": "#/$defs/selector"},
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/selector"}
+        }
+      ]
+    },
+    "improvement": {
+      "type": "object",
+      "required": [
+        "improvement_id",
+        "replace",
+        "with",
+        "benefit",
+        "cost",
+        "applies_when",
+        "evidence"
+      ],
+      "properties": {
+        "improvement_id": {"type": "string", "minLength": 1},
+        "replace": {"$ref": "#/$defs/selector"},
+        "with": {"$ref": "#/$defs/selector"},
+        "benefit": {"type": "string", "minLength": 1},
+        "cost": {"type": "string", "minLength": 1},
+        "applies_when": {"$ref": "#/$defs/applies_when"},
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/evidence"}
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

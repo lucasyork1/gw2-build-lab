@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "ruleset_id": "thief-wvw-v1",
+  "dimensions": [
+    "burst_damage",
+    "sustained_damage",
+    "survival_recovery",
+    "condition_cleanse",
+    "control_interrupt",
+    "mobility_disengage",
+    "stealth_reset",
+    "operation_difficulty"
+  ],
+  "rules": [
+    {
+      "rule_id": "shadowstep-mobility",
+      "when": {
+        "component_id": 13038
+      },
+      "effects": [
+        {
+          "dimension": "mobility_disengage",
+          "delta": 1
+        }
+      ],
+      "evidence": [
+        {
+          "component_id": 13038,
+          "field": "payload"
+        }
+      ],
+      "claim": "Shadowstep contributes a mobility and disengage option."
+    }
+  ],
+  "improvements": [
+    {
+      "improvement_id": "signet-of-agility-to-roll-for-initiative",
+      "replace": {
+        "component_kind": "skill",
+        "component_id": 13062
+      },
+      "with": {
+        "component_kind": "skill",
+        "component_id": 13035
+      },
+      "benefit": "Roll for Initiative adds an evade, initiative recovery, and recovery from crippled, chilled, and immobilized.",
+      "cost": "Replacing Signet of Agility gives up its passive precision and active endurance refill and nearby condition cleanse.",
+      "applies_when": {
+        "component_kind": "skill",
+        "component_id": 13062
+      },
+      "evidence": [
+        {
+          "component_kind": "skill",
+          "component_id": 13035,
+          "field": "payload"
+        },
+        {
+          "component_kind": "skill",
+          "component_id": 13062,
+          "field": "payload"
+        }
+      ]
+    }
+  ]
+}

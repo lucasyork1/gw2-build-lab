@@ -11,6 +11,8 @@ RUNTIME_SCHEMAS = (
     "release-manifest.schema.json",
     "build.schema.json",
     "build-audit.schema.json",
+    "analysis-rules.schema.json",
+    "build-analysis.schema.json",
 )
 
 
