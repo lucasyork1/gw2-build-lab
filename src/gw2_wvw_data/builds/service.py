@@ -186,6 +186,9 @@ def main(
         )
         return 0
     if arguments.operation == "import-source":
+        candidate_dir = _candidate_import_directory(
+            arguments.candidate_dir
+        )
         dataset = load_dataset(arguments.dataset)
         candidate = import_source(
             arguments.url,
@@ -196,7 +199,7 @@ def main(
             candidate.source_url.encode("utf-8")
         ).hexdigest()
         write_json(
-            arguments.candidate_dir / f"candidate-{identifier}.json",
+            candidate_dir / f"candidate-{identifier}.json",
             _candidate_dict(candidate),
         )
         return 0
@@ -290,6 +293,33 @@ def _candidate_dict(candidate: CommunityCandidate) -> dict[str, Any]:
             else None
         ),
     }
+
+
+def _candidate_import_directory(path: Path) -> Path:
+    """Resolve an import target without crossing the review boundary."""
+
+    candidate = path.resolve(strict=False)
+    candidate_key = os.path.normcase(os.fspath(candidate))
+    for root in (candidate, *candidate.parents):
+        protected = root / "data" / "community-builds" / "verified"
+        if not (root / "pyproject.toml").is_file():
+            continue
+        protected_key = os.path.normcase(
+            os.fspath(protected.resolve(strict=True))
+        )
+        try:
+            within_verified = (
+                os.path.commonpath((candidate_key, protected_key))
+                == protected_key
+            )
+        except ValueError:
+            within_verified = False
+        if within_verified:
+            raise ValueError(
+                "candidate directory cannot be verified data or its "
+                "descendants"
+            )
+    return candidate
 
 
 def _write_output_pair(

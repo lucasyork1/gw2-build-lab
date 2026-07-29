@@ -1,4 +1,5 @@
 import json
+import os
 from dataclasses import replace
 from importlib.resources import files
 from pathlib import Path
@@ -26,6 +27,7 @@ METABATTLE_FIXTURE = (
 )
 GW2SKILLS_URL = "https://en.gw2skills.net/editor/?fixture"
 METABATTLE_URL = "https://metabattle.com/wiki/Build:Thief_-_Deadeye_Roamer"
+VERIFIED = ROOT / "data" / "community-builds" / "verified"
 
 
 def _client() -> SafeHttpClient:
@@ -43,6 +45,36 @@ def _client() -> SafeHttpClient:
         )
 
     return SafeHttpClient(transport=httpx.MockTransport(respond))
+
+
+def _unexpected_network_client() -> SafeHttpClient:
+    def fail(request: httpx.Request) -> httpx.Response:
+        raise AssertionError(
+            f"verified destination must be rejected before HTTP: {request.url}"
+        )
+
+    return SafeHttpClient(transport=httpx.MockTransport(fail))
+
+
+def _verified_aliases() -> list[Path]:
+    aliases = [
+        VERIFIED,
+        VERIFIED / "review-pending",
+        VERIFIED / ".." / "verified",
+    ]
+    if os.name == "nt":
+        aliases.append(
+            Path(str(VERIFIED).swapcase()) / "windows-case-alias"
+        )
+    return aliases
+
+
+def _files_under(path: Path) -> dict[Path, bytes]:
+    return {
+        item.relative_to(path): item.read_bytes()
+        for item in path.rglob("*")
+        if item.is_file()
+    }
 
 
 def _analyze_arguments(tmp_path: Path) -> list[str]:
@@ -485,6 +517,48 @@ def test_import_source_writes_only_to_selected_candidate_directory(
     assert value["source_name"] == "MetaBattle"
     assert value["build"] is not None
     assert not (tmp_path / "data" / "community-builds").exists()
+
+
+@pytest.mark.parametrize("candidate_dir", _verified_aliases())
+def test_import_source_rejects_repository_verified_directory_and_aliases(
+    candidate_dir,
+):
+    before = _files_under(VERIFIED)
+
+    try:
+        with pytest.raises(ValueError, match="verified"):
+            service.main(
+                [
+                    "import-source",
+                    METABATTLE_URL,
+                    "--dataset",
+                    str(CURRENT),
+                    "--candidate-dir",
+                    str(candidate_dir),
+                ],
+                client=_unexpected_network_client(),
+            )
+    finally:
+        assert _files_under(VERIFIED) == before
+        assert not list(VERIFIED.rglob("candidate-*.json"))
+
+
+def test_import_source_allows_unrelated_same_named_directory(tmp_path):
+    candidate_dir = tmp_path / "data" / "community-builds" / "verified"
+
+    assert service.main(
+        [
+            "import-source",
+            METABATTLE_URL,
+            "--dataset",
+            str(CURRENT),
+            "--candidate-dir",
+            str(candidate_dir),
+        ],
+        client=_client(),
+    ) == 0
+
+    assert len(list(candidate_dir.glob("candidate-*.json"))) == 1
 
 
 def test_compare_writes_byte_identical_json_and_markdown(tmp_path):
