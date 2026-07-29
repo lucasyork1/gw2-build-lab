@@ -1,3 +1,4 @@
+import json
 from copy import deepcopy
 
 from gw2_wvw_data.analysis import compare_builds
@@ -219,3 +220,55 @@ def test_compare_builds_uses_indices_when_slot_text_collides_with_old_paths():
     assert "weapons[2].slot" in [
         item.path for item in first.removals
     ]
+
+
+def test_compare_builds_distinguishes_absent_slot_from_literal_missing():
+    missing_value = _build_value()
+    missing_value["weapons"][0].pop("slot")
+    literal_value = deepcopy(missing_value)
+    literal_value["build_id"] = "literal"
+    literal_value["weapons"][0]["slot"] = "<missing>"
+    missing = BuildRecord.from_dict(missing_value)
+    literal = BuildRecord.from_dict(literal_value)
+
+    first = compare_builds(missing, literal)
+    second = compare_builds(missing, literal)
+
+    assert first.to_dict() == second.to_dict()
+    assert first.additions == ()
+    assert first.removals == ()
+    assert first.to_dict()["replacements"] == [
+        {
+            "category": "weapons",
+            "path": "weapons[0].slot",
+            "before": {"missing": True},
+            "after": "<missing>",
+        }
+    ]
+    json.dumps(first.to_dict(), sort_keys=True)
+
+
+def test_compare_builds_distinguishes_literal_missing_from_absent_slot():
+    literal_value = _build_value()
+    literal_value["weapons"][0]["slot"] = "<missing>"
+    missing_value = deepcopy(literal_value)
+    missing_value["build_id"] = "missing"
+    missing_value["weapons"][0].pop("slot")
+    literal = BuildRecord.from_dict(literal_value)
+    missing = BuildRecord.from_dict(missing_value)
+
+    first = compare_builds(literal, missing)
+    second = compare_builds(literal, missing)
+
+    assert first.to_dict() == second.to_dict()
+    assert first.additions == ()
+    assert first.removals == ()
+    assert first.to_dict()["replacements"] == [
+        {
+            "category": "weapons",
+            "path": "weapons[0].slot",
+            "before": "<missing>",
+            "after": {"missing": True},
+        }
+    ]
+    json.dumps(first.to_dict(), sort_keys=True)

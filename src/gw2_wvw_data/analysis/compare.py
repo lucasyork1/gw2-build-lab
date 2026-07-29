@@ -29,6 +29,8 @@ _TRINKET_SLOTS = (
     "ring1",
     "ring2",
 )
+_MISSING_PATH = object()
+_MISSING_SLOT = object()
 
 
 @dataclass(frozen=True)
@@ -102,19 +104,40 @@ def compare_builds(
     removals: list[StructuralChange] = []
     replacements: list[StructuralReplacement] = []
     for path in ordered_paths:
-        left_value = left_fields.get(path)
-        right_value = right_fields.get(path)
-        if left_value is None and right_value is None:
-            continue
-        if path not in left_fields or (
-            left_value is None and right_value is not None
-        ):
+        left_value = left_fields.get(path, _MISSING_PATH)
+        right_value = right_fields.get(path, _MISSING_PATH)
+        if left_value is _MISSING_PATH:
+            if right_value is None and not _presence_is_structural(path):
+                continue
             additions.append(
                 StructuralChange(_category(path), path, right_value)
             )
-        elif path not in right_fields or (
-            left_value is not None and right_value is None
-        ):
+            continue
+        if right_value is _MISSING_PATH:
+            if left_value is None and not _presence_is_structural(path):
+                continue
+            removals.append(
+                StructuralChange(_category(path), path, left_value)
+            )
+            continue
+        if _presence_is_structural(path):
+            if _identity(left_value) != _identity(right_value):
+                replacements.append(
+                    StructuralReplacement(
+                        _category(path),
+                        path,
+                        left_value,
+                        right_value,
+                    )
+                )
+            continue
+        if left_value is None and right_value is None:
+            continue
+        if left_value is None and right_value is not None:
+            additions.append(
+                StructuralChange(_category(path), path, right_value)
+            )
+        elif left_value is not None and right_value is None:
             removals.append(
                 StructuralChange(_category(path), path, left_value)
             )
@@ -183,10 +206,7 @@ def _weapon_fields(
 ) -> Iterable[tuple[str, Any]]:
     for position, weapon in enumerate(weapons):
         prefix = f"weapons[{position}]"
-        slot = weapon.get("slot")
-        yield f"{prefix}.slot", (
-            slot if isinstance(slot, str) else "<missing>"
-        )
+        yield f"{prefix}.slot", weapon.get("slot", _MISSING_SLOT)
         for field in ("quality", "type", "item"):
             if field in weapon:
                 yield f"{prefix}.{field}", weapon[field]
@@ -201,7 +221,13 @@ def _category(path: str) -> str:
     return path.split(".", 1)[0].split("[", 1)[0]
 
 
+def _presence_is_structural(path: str) -> bool:
+    return path.startswith("weapons[") and path.endswith("].slot")
+
+
 def _identity(value: Any) -> Any:
+    if value is _MISSING_SLOT:
+        return ("missing_weapon_slot",)
     if isinstance(value, ComponentRef):
         return ("component", value.id)
     if isinstance(value, Mapping):
@@ -215,6 +241,8 @@ def _identity(value: Any) -> Any:
 
 
 def _public_value(value: Any) -> Any:
+    if value is _MISSING_SLOT:
+        return {"missing": True}
     if isinstance(value, ComponentRef):
         return value.to_dict()
     if isinstance(value, Mapping):
