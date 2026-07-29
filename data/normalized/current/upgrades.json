@@ -23709,6 +23709,2686 @@
     "effective_patch": null,
     "fetched_at": "2026-07-29T02:05:07Z",
     "game_build_id": 204489,
+    "id": 99965,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Flock",
+      "zh": "群聚古物"
+    },
+    "payload": {
+      "chat_link": "[&AgF9hgEA]",
+      "description": "Heal yourself and nearby allies after you use a healing skill. Excess healing is converted to barrier.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/2F7AE267BA29B35DEC7F2C0FCE5C30D806E31E0D/3122350.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:99965"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 99997,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Isgarren",
+      "zh": "伊斯加然古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGdhgEA]",
+      "description": "After evading an enemy's attack, place the Eye of Isgarren on them for a duration. You deal increased strike and condition duration against enemies with the Eye of Isgarren.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/5FB808F04E427650A84031E46B632DC292A3583F/3122354.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:99997"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100031,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Monk",
+      "zh": "僧侣古物"
+    },
+    "payload": {
+      "chat_link": "[&AgG/hgEA]",
+      "description": "Increase healing effectiveness to allies after granting a boon to an ally.",
+      "flags": [
+        "HideSuffix",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/6C340014C525FEF8089AC6DAD03662637A5B07CA/3122361.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100031"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100048,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Ice",
+      "zh": "寒冰古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHQhgEA]",
+      "description": "After using an elite skill, launch icicles that inflict chilled at nearby enemies.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/5E0E012F921D3D5D364BFEFC04D7BEF1DC5B52F7/3122353.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100048"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100063,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Surging",
+      "zh": "激荡古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHfhgEA]",
+      "description": "Gain shocking aura for 4 seconds after using an elite skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/755D9F3BA1C2C42CDAEBF59BBF4564B77ADC105D/3592840.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100063"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100074,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Cerus",
+      "zh": "塞鲁斯古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHqhgEA]",
+      "description": "Upon using an elite skill, summon an Eye of Cerus that emits a rotating line attack, dealing damage and converting boons into conditions.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/656FCA9408A0FFDB35A3CE20311E0F66423F026B/3122337.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100074"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100090,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Dragonhunter",
+      "zh": "猎龙者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgH6hgEA]",
+      "description": "Enemies hit by your trap skills become hunted by you, increasing your strike damage and condition duration against them.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/F61EEC535059F1FA027049AB4DEFCD5465405DB7/3122344.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100090"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100115,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Mabon",
+      "zh": "玛邦古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEThwEA]",
+      "description": "Upon applying might while in combat, gain Mabon's Strength. At 10 stacks, your might stacks become more effective for a duration, after which you lose all might and Mabon's Strength.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/49481C31650D384B68A1BFB53DC1A39F2AE4AD56/3122358.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100115"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100144,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Warrior",
+      "zh": "战士古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEwhwEA]",
+      "description": "Weapon swap recharge time is reduced.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/1D3CF82C05450A605921F6EB9D0AC23421C9CFA5/3122375.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100144"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100148,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Speed",
+      "zh": "速度古物"
+    },
+    "payload": {
+      "chat_link": "[&AgE0hwEA]",
+      "description": "Increase movement speed when under the effect of swiftness.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/15B07C1813B63DFD27A6A8A5E36CF1BC50DB0562/3122369.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100148"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100153,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Fractal",
+      "zh": "碎层古物"
+    },
+    "payload": {
+      "chat_link": "[&AgE5hwEA]",
+      "description": "When you inflict bleeding on an enemy with 6 or more stacks of bleeding, also inflict burning and torment.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/B2D409644147BF18935A95A52505ABCB9EECE142/3122351.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100153"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100158,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Mirage",
+      "zh": "幻象术士古物"
+    },
+    "payload": {
+      "chat_link": "[&AgE+hwEA]",
+      "description": "Inflict torment upon successfully evading an attack.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/5FCA620E77D3D5022ADC70C1191F0B154AB13827/3122360.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100158"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100165,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Necromancer",
+      "zh": "唤灵师古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFFhwEA]",
+      "description": "Fear you inflict causes foes to move slower.",
+      "flags": [
+        "NoMysticForge",
+        "NoSalvage",
+        "NoSell",
+        "SoulbindOnAcquire",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/B20C589B0915915F5AB55BDA6EC52670B29706F2/3122362.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 65
+    },
+    "source_refs": [
+      "arenanet-api:items:100165"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100177,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Peitha",
+      "zh": "佩萨古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFRhwEA]",
+      "description": "After shadowstepping or using a deception skill, fire a blade at a nearby enemy after a short delay, applying torment and increasing your strike damage against that target.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/949A6A4179F514FCDEF3AC3D9C292B38D5E0047D/3122365.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100177"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100194,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Weaver",
+      "zh": "编织者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFihwEA]",
+      "description": "Upon using a <c=@abilitytype>stance</c> skill, deal increased strike damage for a duration.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/12997110B0509463DD9F1364A92493B2C4309BE1/3122377.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100194"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100219,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Herald",
+      "zh": "预告者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgF7hwEA]",
+      "description": "Gain concentration after granting a boon to an ally.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/DE62250A48F802DD09A1FAFF0D2BA804EA29A3B9/3122352.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100219"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100230,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Krait",
+      "zh": "蛇妖古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGGhwEA]",
+      "description": "After using an elite skill, emit a wave of corruption that inflicts damaging conditions.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/645EFCBFFBB7B1C6630CBB7C0FB268CA27B703AC/3122355.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100230"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100238,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Lich",
+      "zh": "巫妖古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGOhwEA]",
+      "description": "Summon a jagged horror while in combat.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/045D16259918EFA90A76B4D1B1400AA8D9CC0D4B/3592837.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100238"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100248,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Citadel",
+      "zh": "黑烟壁垒古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGYhwEA]",
+      "description": "After using an elite skill, call down an artillery strike that inflicts stun on the skill target or nearest enemy.",
+      "flags": [
+        "NoMysticForge",
+        "NoSalvage",
+        "NoSell",
+        "SoulbindOnAcquire",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/B21C5A6DFCDB0A729358A22CA76547150E7C541E/3122339.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100248"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100262,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Fireworks",
+      "zh": "烟花古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGmhwEA]",
+      "description": "Upon dealing strike damage using a weapon skill with a recharge time of 20 seconds or more, deal increased strike damage for a duration. Refreshes duration on stack.",
+      "flags": [
+        "NoMysticForge",
+        "NoSalvage",
+        "NoSell",
+        "SoulbindOnAcquire",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/2999CCF7C94267B2EE3DDA7459050864622927C9/3122349.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100262"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100299,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Warrior",
+      "zh": "战士古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHLhwEA]",
+      "description": "Weapon swap recharge time is reduced.",
+      "flags": [
+        "NoMysticForge",
+        "NoSalvage",
+        "NoSell",
+        "SoulbindOnAcquire",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/1D3CF82C05450A605921F6EB9D0AC23421C9CFA5/3122375.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 65
+    },
+    "source_refs": [
+      "arenanet-api:items:100299"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100311,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Ogre",
+      "zh": "食人魔古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHXhwEA]",
+      "description": "Summon a rock dog while in combat.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/633231B05DC3D1D44003DAA891400C4624180D17/3592838.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100311"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100345,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Daredevil",
+      "zh": "独行侠古物"
+    },
+    "payload": {
+      "chat_link": "[&AgH5hwEA]",
+      "description": "After dodge rolling in combat or evading an attack, your next attack is guaranteed to be a critical hit. <c=@reminder>(Cooldown: 1 Second)</c>",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/29FE690460A037C7FAC3C71903BA1EBECB204012/3122341.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100345"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100368,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Scourge",
+      "zh": "灾厄师古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEQiAEA]",
+      "description": "Upon applying barrier to an ally, gain increased condition duration. <c=@reminder>When this triggers, refresh the duration of all stacks.</c>",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/0802B36898A6EB0C77D20FD4F3DFD0A2270A3ECD/3122368.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100368"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100385,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Centaur",
+      "zh": "半人马古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEhiAEA]",
+      "description": "Gain stability when you use a healing skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/59551CFA6F4AB3D678370651ABF20D5F69B949D5/3122336.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100385"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100388,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Astral Ward",
+      "zh": "星界圣盾古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEkiAEA]",
+      "description": "Gain a Signet of the Astral Ward after using a signet skill. Using a signet skill while this signet is active consumes it to remove conditions from nearby allies and grant them resistance.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/57A961A8ADFE279BC4F124A40CC4B5646BC8035F/3161446.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100388"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100390,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Antitoxin",
+      "zh": "解毒古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEmiAEA]",
+      "description": "Outgoing condition cleanses remove an additional condition. <c=@reminder>This can only affect an ally once every interval.</c>",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/61C74AAFED48CF9AD4BBCAD89F902654EA02B2AE/3122331.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100390"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100400,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Sunless",
+      "zh": "阴鬼古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEwiAEA]",
+      "description": "Using an elite skill summons a pool on the target enemy that inflicts poison and cripple. Pool duration scales with the recharge of the elite skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/CEF1E6DA2DBF143661DF26E668034A621812B61A/3122370.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100400"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100403,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Golemancer",
+      "zh": "魔像师古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEziAEA]",
+      "description": "Summon a golem while in combat.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/13412697BB6AD89F2E6ED97A750873C0BB35AA9A/3592835.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100403"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100411,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Trooper",
+      "zh": "骁骑兵古物"
+    },
+    "payload": {
+      "chat_link": "[&AgE7iAEA]",
+      "description": "Remove a condition from affected allies after using a <c=@abilitytype>shout</c> skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/500CB9B12FED6948EB74FAF299726007002BDFBA/3122372.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100411"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100429,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Mercy",
+      "zh": "怜悯古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFNiAEA]",
+      "description": "Revive allies faster and with more health. Only affects players in WvW.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/1AA33B5654D3E7F91B9065BA6D0F1EB6AA755AFF/3122359.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 216
+    },
+    "source_refs": [
+      "arenanet-api:items:100429"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100432,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Akeem",
+      "zh": "阿奇姆古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFQiAEA]",
+      "description": "When you disable an enemy that is afflicted by 5 or more stacks of confusion or torment, inflict confusion and torment on enemies around the target.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/594C437E9606A167F4F372BCEB0C2B7C7828037B/3122330.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100432"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100435,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Earth",
+      "zh": "大地古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFTiAEA]",
+      "description": "Grant protection and magnetic aura to allies after using an elite skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/EBB3060FF2E9A10CECC3F1B2CAC0213AE9D93337/3592833.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100435"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100442,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Dwayna",
+      "zh": "德薇娜古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFaiAEA]",
+      "description": "Regeneration you apply is more effective.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/CBBD4FAFCC3568ACA04F9901162FE7C0747C1E9B/3122346.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100442"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100448,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Citadel",
+      "zh": "黑烟壁垒古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFgiAEA]",
+      "description": "After using an elite skill, call down an artillery strike that inflicts stun on the skill target or nearest enemy.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/B21C5A6DFCDB0A729358A22CA76547150E7C541E/3122339.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100448"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100450,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Chronomancer",
+      "zh": "时空术士古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFiiAEA]",
+      "description": "Gain quickness when you use a <c=@abilitytype>well</c> skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/C209ABF01D7429EC09354E2E0BBF9DB14EBDD613/3122338.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100450"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100453,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Firebrand",
+      "zh": "燃火者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFliAEA]",
+      "description": "Upon using the final charge of a mantra skill, gain increased boon duration.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/4E4F4AA81DB63D9D9BB4BF3757D0750E935701F7/3122348.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100453"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100455,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Durability",
+      "zh": "耐久古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFniAEA]",
+      "description": "Gain protection, regeneration, and resolution after using a healing skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/A8F61493030863CAB537780398D64D80554D959D/3122345.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100455"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100461,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Lyhr",
+      "zh": "莱尔古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFtiAEA]",
+      "description": "Upon healing an ally, shield up to four allies, redirecting a percentage of any strike damage they take to yourself. Allies may only be protected by one shield at a time.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/FE580A90C9E4513D062A148045F933C7F3C557E3/3122357.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100461"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100479,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Privateer",
+      "zh": "私掠者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgF/iAEA]",
+      "description": "Summon a parrot while in combat.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/9CE01CF33B943BCC3FABD8491073DE0AD63F340C/3592839.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100479"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100527,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Brawler",
+      "zh": "争斗者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGviAEA]",
+      "description": "Deal increased strike damage for a duration when granting protection or resolution to yourself.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/2B5297A932F55DA3BDDD0A39C9CB0D9CF70244A1/3122334.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100527"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100531,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Water",
+      "zh": "流水古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGziAEA]",
+      "description": "Cleanse conditions from yourself and nearby allies after using a healing skill.",
+      "flags": [
+        "NoMysticForge",
+        "NoSalvage",
+        "NoSell",
+        "SoulbindOnAcquire",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/A202CF0CF4314C049B16A89A595CCC9534B0A90E/3122376.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 65
+    },
+    "source_refs": [
+      "arenanet-api:items:100531"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100542,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Cavalier",
+      "zh": "骑兵古物"
+    },
+    "payload": {
+      "chat_link": "[&AgG+iAEA]",
+      "description": "Grant yourself aegis, quickness, swiftness, resistance, and might when striking an enemy with your mount's <c=@abilitytype>engage</c> skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/C3AFC50F654E2749ADD9033CE007033F6F9B0D7A/3122335.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100542"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100557,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Wizard's Tower",
+      "zh": "巫师塔古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHNiAEA]",
+      "description": "After using an elite skill, shield yourself with a projectile-reflecting barrier while summoning a wave that pulls enemies toward you.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/0C0EE407B9DAA44438ED6C2DCDA4EEB30953DF1B/3122378.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100557"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100561,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Adventurer",
+      "zh": "冒险者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHRiAEA]",
+      "description": "Gain endurance after using a healing skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/9A76D8C27FCAB8F66D0DC531906808B134D80EAD/3122328.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100561"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100562,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Durability",
+      "zh": "耐久古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHSiAEA]",
+      "description": "Gain protection, regeneration, and resolution after using a healing skill.",
+      "flags": [
+        "NoMysticForge",
+        "NoSalvage",
+        "NoSell",
+        "SoulbindOnAcquire",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/A8F61493030863CAB537780398D64D80554D959D/3122345.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100562"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100579,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Nightmare",
+      "zh": "噩梦古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHjiAEA]",
+      "description": "After using an elite skill, send forth a nightmare pulse that inflicts fear and poison on nearby enemies.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/74940C36779745CBA9DDD56CDF6CBAC1CEA8179F/3122363.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100579"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100580,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Necromancer",
+      "zh": "唤灵师古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHkiAEA]",
+      "description": "Fear you inflict causes foes to move slower.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/B20C589B0915915F5AB55BDA6EC52670B29706F2/3122362.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100580"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100614,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Evasion",
+      "zh": "闪避古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEGiQEA]",
+      "description": "Gain vigor after evading an attack.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/19296379D120EF9FF10EE0B0CDD7711DA5E7A9AF/3122347.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100614"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100625,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Leadership",
+      "zh": "领导古物"
+    },
+    "payload": {
+      "chat_link": "[&AgERiQEA]",
+      "description": "Convert conditions into boons on nearby allies after using an elite skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/077C30D957D30B0D282BB21199A193A2D74971DF/3122356.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100625"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100633,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Flock",
+      "zh": "群聚古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEZiQEA]",
+      "description": "Heal yourself and nearby allies after you use a healing skill. Excess healing is converted to barrier.",
+      "flags": [
+        "NoMysticForge",
+        "NoSalvage",
+        "NoSell",
+        "SoulbindOnAcquire",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/2F7AE267BA29B35DEC7F2C0FCE5C30D806E31E0D/3122350.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100633"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100659,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Water",
+      "zh": "流水古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEziQEA]",
+      "description": "Cleanse conditions from yourself and nearby allies after using a healing skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/A202CF0CF4314C049B16A89A595CCC9534B0A90E/3122376.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100659"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100676,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Vampirism",
+      "zh": "吸血古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFEiQEA]",
+      "description": "Siphon life from nearby foes when you use a healing skill. Restore a portion of your maximum health upon killing a foe.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/349D3B9098A1EB445E00C45E70B892E8CFE3762C/3592842.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100676"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100693,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Afflicted",
+      "zh": "苦痛古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFViQEA]",
+      "description": "Create a Death Nova at a foe's location upon their defeat that inflicts poison and bleeding.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/3B1DA625E3DF0591087E62F12E5301C1D8D6EDC0/3122329.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100693"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100694,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Unseen Invasion",
+      "zh": "无形入侵古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFWiQEA]",
+      "description": "Grant yourself and nearby allies superspeed when you enter or exit stealth.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/0CAF5ACE9D4ABEFF3EF2DE0DB47D57A8AB3CABB3/3122373.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100694"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100739,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Reaper",
+      "zh": "夺魂者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGDiQEA]",
+      "description": "Chill nearby enemies after executing a <c=@abilitytype>shout</c> skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/AFDAA23D3C61F202225DDFA7C17F420C5368BBB8/3122366.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100739"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100752,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Pack",
+      "zh": "兽群古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGQiQEA]",
+      "description": "Grant superspeed, might, and fury to nearby allies after using an elite skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/26503D1FF7BA354058789E371992A7500B3AA89B/3122364.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100752"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100775,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Vass",
+      "zh": "瓦思古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGniQEA]",
+      "description": "After using a healing or elixir skill, your next few attacks inflict poison. <c=@reminder>Healing skills can only trigger this effect once every interval.</c>",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/21D7FDF1DD4EAD33DBC01F11D80E48AD3370FDE6/3122374.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100775"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100794,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Resistance",
+      "zh": "抗性古物"
+    },
+    "payload": {
+      "chat_link": "[&AgG6iQEA]",
+      "description": "Gain resistance after using a healing skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/C3A39C916063067E190EE5D42D6CAC2018385F44/3122367.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100794"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100849,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Aristocracy",
+      "zh": "望族古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHxiQEA]",
+      "description": "Gain increased condition duration when inflicting weakness or vulnerability on a foe.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/BCC01F0B6616FE26ED4BE159532A6A6FBD0EA2D8/3122332.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100849"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100886,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Evasion",
+      "zh": "闪避古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEWigEA]",
+      "description": "Gain vigor after evading an attack.",
+      "flags": [
+        "NoMysticForge",
+        "NoSalvage",
+        "NoSell",
+        "SoulbindOnAcquire",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/19296379D120EF9FF10EE0B0CDD7711DA5E7A9AF/3122347.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100886"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100893,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Zephyrite",
+      "zh": "风裔古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEdigEA]",
+      "description": "Summon crystals that apply protection and resolution to allies after using an elite skill. Crystal duration scales with the recharge of the used skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/070E32046C250E32DA76F2CBDFC504D6C0AB0344/3122379.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100893"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100908,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Holosmith",
+      "zh": "全息师古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEsigEA]",
+      "description": "Create a laser disk after you use an elite skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/0976F60805023D2F14DA6CC72F55F3D64407C7AF/3592836.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100908"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100916,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Thief",
+      "zh": "潜行者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgE0igEA]",
+      "description": "Upon striking an enemy with a weapon skill that has a recharge or resource cost, gain increased strike damage. <c=@reminder>When this triggers, refresh the duration of all stacks.</c>",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/3523AC08EB04347CF371E9A91F4B985D12FB4ED3/3122371.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100916"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100924,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Deadeye",
+      "zh": "神枪手古物"
+    },
+    "payload": {
+      "chat_link": "[&AgE8igEA]",
+      "description": "Deal increased strike damage for a duration when you use a <c=@abilitytype>cantrip</c> skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/060151B961CE56CB9546E7B6AF33B0A318426372/3122342.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100924"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100934,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Defender",
+      "zh": "防御者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFGigEA]",
+      "description": "Heal a percentage of your maximum health after blocking an attack. If you block again within 5 seconds, you heal less each time down to a minimum of 1%.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/E854AFDE03F40ED335C0A30DE90BD9973612BD75/3122343.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100934"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100942,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Dagda",
+      "zh": "德格达古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFOigEA]",
+      "description": "After using an elite skill, fire a projectile at the target or nearest enemy that damages and inflicts conditions. Damage scales with the recharge of the elite skill.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/CA28F7BFEA1B695DD19204E455BA270D334EE307/3122340.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100942"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100947,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Fireworks",
+      "zh": "烟花古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFTigEA]",
+      "description": "Upon dealing strike damage using a weapon skill with a recharge time of 20 seconds or more, deal increased strike damage for a duration. Refreshes duration on stack.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/2999CCF7C94267B2EE3DDA7459050864622927C9/3122349.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:100947"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 100976,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Thief",
+      "zh": "潜行者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFwigEA]",
+      "description": "Upon striking an enemy with a weapon skill that has a recharge or resource cost, gain increased strike damage. <c=@reminder>When this triggers, refresh the duration of all stacks.</c>",
+      "flags": [
+        "NoMysticForge",
+        "NoSalvage",
+        "NoSell",
+        "SoulbindOnAcquire",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/3523AC08EB04347CF371E9A91F4B985D12FB4ED3/3122371.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 65
+    },
+    "source_refs": [
+      "arenanet-api:items:100976"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 101116,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Febe",
+      "zh": "菲勃古物"
+    },
+    "payload": {
+      "chat_link": "[&AgH8igEA]",
+      "description": "When you use a healing skill, grant nearby allies swiftness and remove movement-impairing conditions from them.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/3B063D0B0BA20A0530086595F367F0149D9679F2/3187628.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:101116"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 101139,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Midnight King",
+      "zh": "午夜国王古物"
+    },
+    "payload": {
+      "chat_link": "[&AgETiwEA]",
+      "description": "Grant might and fury to nearby allies when you disable an enemy. <br><c=@reminder>Disables include stun, taunt, daze, knockback, pull, knockdown, sink, float, fear, and launch.</c>",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/C0602C3D27B10AC815D4B9F0DF0E4C3D23D12E9F/3187630.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:101139"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 101166,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Demon Queen",
+      "zh": "恶魔女王古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEuiwEA]",
+      "description": "Poison that you apply reduces healing by an additional amount. Disabling a foe applies poison. <br><c=@reminder>Disables include stun, taunt, daze, knockback, pull, knockdown, sink, float, fear, and launch.</c>",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/D0C6F322473F2A0F6C65FBD3B21733777BB14015/3187627.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:101166"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 101191,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Nourys",
+      "zh": "努里斯古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFHiwEA]",
+      "description": "Gain stacks of Nourys's Hunger every interval when you remove boons from enemies. Consume 10 stacks to grow larger, dealing increased damage, taking reduced damage, and converting a percentage of outgoing damage into healing.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/9B47CEBB551B7C5E7A961AB45361E292074E0823/3187632.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:101191"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 101198,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Nayos",
+      "zh": "纳约斯古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFOiwEA]",
+      "description": "Removing a condition from yourself heals you.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/EA382BAFD541080F71D5530893CC7E069165EA0C/3187631.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:101198"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 101268,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Karakosa",
+      "zh": "卡拉科萨古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGUiwEA]",
+      "description": "Heal other nearby allies when you successfully combo a field with a blast finisher.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/DD034A0B53355503350F07CCFFE5CC06A90F41D9/3187629.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:101268"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
     "id": 101439,
     "kind": "upgrade",
     "mode": "wvw",
@@ -23780,6 +26460,45 @@
     },
     "source_refs": [
       "arenanet-api:items:101441"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 101442,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Speed",
+      "zh": "速度古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFCjAEA]",
+      "description": "Increase movement speed when under the effect of swiftness.",
+      "flags": [
+        "AccountBound",
+        "NoSalvage",
+        "NoSell",
+        "AccountBindOnUse",
+        "DeleteWarning"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/08DED07BF6DF37E69A08D1C49D9C45D81BD8A5CA/3255567.png",
+      "level": 60,
+      "rarity": "Legendary",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 640
+    },
+    "source_refs": [
+      "arenanet-api:items:101442"
     ],
     "verification_status": "automated"
   },
@@ -25093,6 +27812,45 @@
     "effective_patch": null,
     "fetched_at": "2026-07-29T02:05:07Z",
     "game_build_id": 204489,
+    "id": 101580,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Thief",
+      "zh": "潜行者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHMjAEA]",
+      "description": "Upon striking an enemy with a weapon skill that has a recharge or resource cost, gain increased strike damage. <c=@reminder>When this triggers, refresh the duration of all stacks.</c>",
+      "flags": [
+        "AccountBound",
+        "NoSalvage",
+        "NoSell",
+        "AccountBindOnUse",
+        "DeleteWarning"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/08DED07BF6DF37E69A08D1C49D9C45D81BD8A5CA/3255567.png",
+      "level": 60,
+      "rarity": "Legendary",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 640
+    },
+    "source_refs": [
+      "arenanet-api:items:101580"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
     "id": 101581,
     "kind": "upgrade",
     "mode": "wvw",
@@ -25934,6 +28692,78 @@
     "effective_patch": null,
     "fetched_at": "2026-07-29T02:05:07Z",
     "game_build_id": 204489,
+    "id": 101737,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Founding",
+      "zh": "开国古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFpjQEA]",
+      "description": "Gain barrier when you successfully combo a field with a leap finisher.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/FD9FE6B8CBBD44132D6DBCA7C2E92CF4C69D6EDC/3302016.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:101737"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 101767,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Twin Generals",
+      "zh": "孪生将军古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGHjQEA]",
+      "description": "Gain might and weaken nearby enemies when you use a healing skill. Gain additional might for each enemy struck.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/CCEC5A2802D7B7D6C891EA730B5733ADD912B902/3302019.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:101767"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
     "id": 101776,
     "kind": "upgrade",
     "mode": "wvw",
@@ -25971,6 +28801,42 @@
     "effective_patch": null,
     "fetched_at": "2026-07-29T02:05:07Z",
     "game_build_id": 204489,
+    "id": 101801,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Mosyn",
+      "zh": "莫辛古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGpjQEA]",
+      "description": "Remove a nondamaging condition whenever you evade an attack.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/CAB064E2F11609D2309E356062BA93107F9F605E/3302017.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:101801"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
     "id": 101860,
     "kind": "upgrade",
     "mode": "wvw",
@@ -26001,6 +28867,42 @@
     },
     "source_refs": [
       "arenanet-api:items:101860"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 101863,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Sorcerer",
+      "zh": "术士古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHnjQEA]",
+      "description": "When you inflict crippled, chilled, or immobile, you also inflict vulnerability.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/AC943ADC1ABD046294600DDBEFE8636FF90C4EEF/3302018.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:101863"
     ],
     "verification_status": "automated"
   },
@@ -26082,6 +28984,42 @@
     "effective_patch": null,
     "fetched_at": "2026-07-29T02:05:07Z",
     "game_build_id": 204489,
+    "id": 101943,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Wayfinder",
+      "zh": "寻路者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgE3jgEA]",
+      "description": "Gain increased movement speed, which is further increased while out of combat. When you enter combat, gain a burst of speed.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/7D28503433AD96CEA902BBCD0411C9BE1D2505F4/3302020.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:101943"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
     "id": 101944,
     "kind": "upgrade",
     "mode": "wvw",
@@ -26119,6 +29057,114 @@
     "effective_patch": null,
     "fetched_at": "2026-07-29T02:05:07Z",
     "game_build_id": 204489,
+    "id": 101955,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Zakiros",
+      "zh": "萨奇洛斯古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFDjgEA]",
+      "description": "While you are under the effects of fury, convert a percentage of your outgoing critical-strike damage into healing.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/5A5B5D3A4D9DD01F0A115030270A0A6EA353CC65/3302021.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:101955"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 102199,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Blightbringer",
+      "zh": "瘟疫使者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgE3jwEA]",
+      "description": "Gain stacks of Greer's Virulence when you inflict poison on a foe. After reaching the maximum number of stacks, the next time you inflict poison also inflicts additional conditions on nearby enemies.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/286C60AC6FA239B0070293039091A44476A35E90/3375219.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:102199"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 102245,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Atrocity",
+      "zh": "残暴古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFljwEA]",
+      "description": "Your lifesteal damage and healing is increased.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/F1F3033EA7780C093A651253ACB92E415C0525F6/3375218.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:102245"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
     "id": 102442,
     "kind": "upgrade",
     "mode": "wvw",
@@ -26149,6 +29195,42 @@
     },
     "source_refs": [
       "arenanet-api:items:102442"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 102595,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Stormsinger",
+      "zh": "风暴咏者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHDkAEA]",
+      "description": "After using a movement skill, your next attack creates an arc of chain lightning that strikes nearby enemies.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/53B8A123D07CC679364EF4CF4BD7537624320919/3375223.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:102595"
     ],
     "verification_status": "automated"
   },
@@ -26267,6 +29349,42 @@
     "effective_patch": null,
     "fetched_at": "2026-07-29T02:05:07Z",
     "game_build_id": 204489,
+    "id": 103015,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Rivers",
+      "zh": "河流古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFnkgEA]",
+      "description": "Gain alacrity and regeneration at the end of your dodge roll.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/4C054AF70F0CE14E46B159686F1AA70A320A1E07/3375221.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:103015"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
     "id": 103262,
     "kind": "upgrade",
     "mode": "wvw",
@@ -26304,6 +29422,42 @@
     "effective_patch": null,
     "fetched_at": "2026-07-29T02:05:07Z",
     "game_build_id": 204489,
+    "id": 103424,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Sorrow",
+      "zh": "悲伤古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEAlAEA]",
+      "description": "After using an elite skill, create an area that protects allies and destroys enemy projectiles.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/F943C04CD27C463AB167FDF49F9CCC3E27F0AD18/3375222.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:103424"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
     "id": 103507,
     "kind": "upgrade",
     "mode": "wvw",
@@ -26334,6 +29488,78 @@
     },
     "source_refs": [
       "arenanet-api:items:103507"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 103574,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Claw",
+      "zh": "克达之爪古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGWlAEA]",
+      "description": "Deal increased strike damage for a duration after you disable a foe.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/19B5DB56E495C70754A8BE3621CADC0FD7402845/3375220.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:103574"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 103763,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Geysers",
+      "zh": "喷泉古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFTlQEA]",
+      "description": "Restore endurance to allies when you grant them vigor.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/CEDCA7097F41AD0715322E440ABDCE1E6FF49178/3441971.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:103763"
     ],
     "verification_status": "automated"
   },
@@ -26408,6 +29634,78 @@
     },
     "source_refs": [
       "arenanet-api:items:103829"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 103872,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Mount Balrior",
+      "zh": "巴里尔山古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHAlQEA]",
+      "description": "After using an elite skill, create an area underneath yourself. Standing in this area increases your outgoing strike damage.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/49A8520BDB6C5A7BA90832DB9406677473A6932F/3441973.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:103872"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 103901,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Mists Tide",
+      "zh": "雾潮古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHdlQEA]",
+      "description": "Cleanse a condition from yourself when you successfully combo a field with a leap or blast finisher.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/2ADA1A4509057D7B3854EEE9149A0F45CCD0EAA2/3441972.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:103901"
     ],
     "verification_status": "automated"
   },
@@ -26526,6 +29824,114 @@
     "effective_patch": null,
     "fetched_at": "2026-07-29T02:05:07Z",
     "game_build_id": 204489,
+    "id": 103977,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Beehive",
+      "zh": "蜂巢古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEplgEA]",
+      "description": "After using an elite skill, release a wave of pheromones that causes bees to swarm enemies struck.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/0D45B8A4A1D8D7FF4BAE196091C76A961D3F9621/3441970.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:103977"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 103984,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Reunification",
+      "zh": "重聚古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEwlgEA]",
+      "description": "Gain frost aura and light aura after using a healing skill.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/DDC5C072A8E0566CFFF1200404E529DADCD27CF3/3441974.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:103984"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 104022,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Steamshrieker",
+      "zh": "蒸汽尖啸者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFWlgEA]",
+      "description": "Burn nearby enemies when you successfully combo a water field with a blast or leap finisher.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/23B0F0A5BF05E05C9F527BF7EB4962C9F49C6F42/3441975.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:104022"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
     "id": 104035,
     "kind": "upgrade",
     "mode": "wvw",
@@ -26556,6 +29962,41 @@
     },
     "source_refs": [
       "arenanet-api:items:104035"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 104241,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Eagle",
+      "zh": "雄鹰古物"
+    },
+    "payload": {
+      "chat_link": "[&AgExlwEA]",
+      "description": "Deal increased strike damage to low-health enemies.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/DFF4EB43AD0803F60D105658052321A0BE1AF02C/3592832.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:104241"
     ],
     "verification_status": "automated"
   },
@@ -26595,6 +30036,41 @@
     },
     "source_refs": [
       "arenanet-api:items:104249"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 104256,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Altruism",
+      "zh": "奉献古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFAlwEA]",
+      "description": "Grant might and fury to nearby allies after using a healing skill.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/DA14C9FCAB15E43203F1FEEBE432C3B3FBAB00DD/3592831.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:104256"
     ],
     "verification_status": "automated"
   },
@@ -26992,6 +30468,41 @@
     "effective_patch": null,
     "fetched_at": "2026-07-29T02:05:07Z",
     "game_build_id": 204489,
+    "id": 104424,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Thorns",
+      "zh": "荆棘古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHolwEA]",
+      "description": "Gain stacking condition damage when you are hit by a poisoned foe. <c=@reminder>When this triggers, it refreshes the duration of all stacks.</c>",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/B6166933459C27FE500FCC23B572A7AE2A0F4DDA/3592841.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:104424"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
     "id": 104491,
     "kind": "upgrade",
     "mode": "wvw",
@@ -27024,6 +30535,942 @@
     },
     "source_refs": [
       "arenanet-api:items:104491"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 104501,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Fire",
+      "zh": "火焰古物"
+    },
+    "payload": {
+      "chat_link": "[&AgE1mAEA]",
+      "description": "Gain fire aura after using a healing skill. Fire aura now increases your outgoing strike damage.",
+      "flags": [
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/00E5051DCC0EDD58395DF9CEA3456466EA4FD347/3592834.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:104501"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 104733,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Phenom",
+      "zh": "俊杰古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEdmQEA]",
+      "description": "Upon using a <c=@abilitytype>cantrip</c> or <c=@abilitytype>meditation</c> skill, gain protection.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/AD0AE5035A197220507642E1169ED55E0C58A29D/3629400.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:104733"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 104800,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Bloodstone",
+      "zh": "血石古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFgmQEA]",
+      "description": "Gain Bloodstone Volatility when you successfully combo a field with a blast finisher. Blasting at the stack threshold triggers an explosion, granting increased damage.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/A7327A7EDB4705EA05261110526D72AFEAF7DAB4/3629397.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:104800"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 104848,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Bava Nisos",
+      "zh": "巴瓦·尼索斯古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGQmQEA]",
+      "description": "Upon using a <c=@abilitytype>stance</c> skill, cleanse conditions from yourself.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/213C437140552326BD633D1AFF150B48DF2EB544/3629396.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:104848"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 104849,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Agony",
+      "zh": "痛苦古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGRmQEA]",
+      "description": "Enemies you interrupt are inflicted with Agony of the Choir.<br><c=@reminder>This trait can only affect enemies with defiance bars once per interval.</c>",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/7060CF69EFEB7A99150F2F1A7E0E1F1D2D9ED0D2/3629395.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:104849"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 104928,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Living City",
+      "zh": "活体城市古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHgmQEA]",
+      "description": "Complete each trigger once to gain stacks of Titanic Potential:\n• Use a healing skill\n• Use an elite skill\n• Finish a combo field\n• Disable an enemy\n• Evade an attack\nAt 5 stacks, gain Soul of the Titan, providing increased attributes and all boons for its duration.",
+      "flags": [
+        "NoSalvage",
+        "NoSell",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/6CAF0358FBD9DDD84AB3302E2D67329A3AA83DEC/3629398.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:104928"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 104938,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Living City",
+      "zh": "活体城市古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHqmQEA]",
+      "description": "Complete each trigger once to gain stacks of Titanic Potential:\n• Use a healing skill\n• Use an elite skill\n• Finish a combo field\n• Disable an enemy\n• Evade an attack\nAt 5 stacks, gain Soul of the Titan, providing increased attributes and all boons for its duration.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/6CAF0358FBD9DDD84AB3302E2D67329A3AA83DEC/3629398.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:104938"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 104994,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Mistburn",
+      "zh": "雾灼古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEimgEA]",
+      "description": "When you grant might to yourself, grant yourself additional might. Gain increased critical-strike chance while at or above the might threshold.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/FFCB62CF19806066D21C0EA1BA43986C0DA2B6F3/3629399.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:104994"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 105585,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the First Revenant",
+      "zh": "原初魂武者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFxnAEA]",
+      "description": "Gain incoming condition damage reduction while you have resistance.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/7DA30BCFB0E0A04A5D3DFE3D25DAF142D90E1596/3709380.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:105585"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 105652,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Castora",
+      "zh": "卡斯特拉古物"
+    },
+    "payload": {
+      "chat_link": "[&AgG0nAEA]",
+      "description": "Healing to other allies is increased while they are below the health threshold.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/349EA123E7D870C4199AB268250973FAEC0ADC94/3709379.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:105652"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 106206,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Mist Stranger",
+      "zh": "迷雾异客古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHengEA]",
+      "description": "Siphon health whenever you hit a foe.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/2DA75566B948AADFAB0CCF2198F205AF9AE82031/3709381.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:106206"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 106221,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Pirate Queen",
+      "zh": "海盗女王古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHtngEA]",
+      "description": "Gain quickness when you disable a foe.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/6C7D53936BFC0DFD52BACDD9A2C7F0909E424F0D/3709382.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:106221"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 106355,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Scoundrel",
+      "zh": "恶棍古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFznwEA]",
+      "description": "Gain increased critical-hit chance for a duration after inflicting blindness or weakness.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/0B58A2B6F00D9657EE141001A8AA240DDBDE300D/3709383.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:106355"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 106364,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Biomancer",
+      "zh": "生物能量技师古物"
+    },
+    "payload": {
+      "chat_link": "[&AgF8nwEA]",
+      "description": "Heal yourself when you inflict bleeding or poison on a foe.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/5CF5F504B24F210BE209053D2134B89072FC4F29/3709378.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:106364"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 106916,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Shackles",
+      "zh": "桎梏古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGkoQEA]",
+      "description": "Tether yourself to enemies when you immobilize them. Deal damage to enemies that are still in range of the tether when it expires. <c=@reminder>Each enemy can only be tethered once per interval.</c>",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/7946A50DBDC2E45E004AAA801904015C50CC22B3/3745069.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:106916"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 106920,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Nautical Beast",
+      "zh": "海兽古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGooQEA]",
+      "description": "Create a tidal wave that damages enemies and heals allies when you successfully combo a water field with a leap finisher.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/0EE97FA7FB5DC098447AAF6401DF5A09C47B33AD/3745068.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:106920"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 107030,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Fog",
+      "zh": "雾气古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEWogEA]",
+      "description": "After dodge rolling in combat, the next incoming strike will always be a glancing blow.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/F31809ABA515534B10E7D8B90DDC513DD311A5D6/3745066.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:107030"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 107061,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Coral Heart",
+      "zh": "珊瑚之心古物"
+    },
+    "payload": {
+      "chat_link": "[&AgE1ogEA]",
+      "description": "After using a healing skill, temporarily deal damage to nearby enemies when struck.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/5DD9D2052B2C3EF921EBE6E243580CE3A1011B2F/3745065.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:107061"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 107124,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Forest Dweller",
+      "zh": "林居古物"
+    },
+    "payload": {
+      "chat_link": "[&AgF0ogEA]",
+      "description": "After using an elite skill, launch bubbles at nearby enemies. Enemies struck by the bubbles become trapped and float for a short period of time.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/DC19DA3EC27F49593B93F9042264F5DD36FED4ED/3745067.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:107124"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 107192,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Alliance",
+      "zh": "联盟古物"
+    },
+    "payload": {
+      "chat_link": "[&AgG4ogEA]",
+      "description": "Using a signet skill reduces the recharge of all signet skills.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/406F52FEEF9CC64AF45CA27C4A240A6E0E5443A2/3745064.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:107192"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 109264,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Galdra",
+      "zh": "加尔达古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHQqgEA]",
+      "description": "When you use an elite skill, launch projectiles that inflict burning at nearby foes.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/CE07976D4420779EC0082AFE06B73F3AA6AE2348/3770713.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:109264"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 109267,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Sacred Grounds",
+      "zh": "圣地古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHTqgEA]",
+      "description": "Gain protection when you use a <c=@abilitytype>well</c> or <c=@abilitytype>consecration</c> skill.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/A3C6C20BE0A1299F05EB5C713558A86D9AA7C176/3770714.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:109267"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 109351,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Director",
+      "zh": "主管古物"
+    },
+    "payload": {
+      "chat_link": "[&AgEnqwEA]",
+      "description": "Inflict vulnerability on nearby enemies when you use a healing skill. For a short period of time, you deal increased damage to vulnerable foes.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/6FD76BA11105EC67451D9E7E1DE938C91DB3AD68/3770711.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:109351"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 109522,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Doyen",
+      "zh": "长老古物"
+    },
+    "payload": {
+      "chat_link": "[&AgHSqwEA]",
+      "description": "Take reduced incoming strike damage while you have resolution. <c=@reminder>This does not stack with other sources of the same effect.</c>",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/EF797D16D0D211064031129135C864311856CDB1/3770712.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:109522"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 109664,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of the Cruel Overseer",
+      "zh": "残酷监察者古物"
+    },
+    "payload": {
+      "chat_link": "[&AgFgrAEA]",
+      "description": "Gain stacks of Kuda's Cruelty when you inflict damaging conditions. After reaching the maximum number of stacks, convert outgoing condition damage into healing for a short period of time.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/AECE9B16DE04F756C501743BA863B00A377CE70B/3770710.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:109664"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 109709,
+    "kind": "upgrade",
+    "mode": "wvw",
+    "names": {
+      "en": "Relic of Watch",
+      "zh": "守望古物"
+    },
+    "payload": {
+      "chat_link": "[&AgGNrAEA]",
+      "description": "Immobilization you inflict lasts longer. Weaken foes when you immobilize them.",
+      "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+      ],
+      "game_types": [
+        "Activity",
+        "Wvw",
+        "Dungeon",
+        "Pve"
+      ],
+      "icon": "https://render.guildwars2.com/file/33D70B101ECFFD0C42205877E5BFE20EC461C19C/3770715.png",
+      "level": 60,
+      "rarity": "Exotic",
+      "restrictions": [],
+      "type": "Relic",
+      "vendor_value": 200
+    },
+    "source_refs": [
+      "arenanet-api:items:109709"
     ],
     "verification_status": "automated"
   }

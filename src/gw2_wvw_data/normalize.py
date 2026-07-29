@@ -122,7 +122,7 @@ def _normalize_items(
             and details.get("type") in {"Rune", "Sigil"}
         ):
             category = "upgrades"
-        elif item_type == "Relic" and level == 80:
+        elif item_type == "Relic" and level >= 60:
             category = "upgrades"
         elif (
             item_type == "Consumable"

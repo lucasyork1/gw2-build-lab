@@ -32,7 +32,7 @@ def _write_snapshot(tmp_path, *, missing_trait=False):
                     "id": 1005,
                     "name": "Relic",
                     "type": "Relic",
-                    "level": 80,
+                    "level": 60,
                     "rarity": "Exotic",
                     "details": {},
                 },
