@@ -21,6 +21,11 @@ ENTITY_FILES = (
     "consumables",
 )
 
+_API_WEAPON_TYPE_TO_PROFESSION = {
+    "LongBow": "Longbow",
+    "ShortBow": "Shortbow",
+}
+
 
 def _read_json(path: Path) -> Any:
     with path.open("r", encoding="utf-8") as handle:
@@ -106,10 +111,19 @@ def _normalize_items(
         ):
             category = "equipment"
         elif (
+            item_type == "Back"
+            and level == 80
+            and rarity in equipment_rarities
+        ):
+            category = "equipment"
+        elif (
             item_type == "Weapon"
             and level == 80
             and rarity in equipment_rarities
-            and details.get("type") in allowed_weapon_types
+            and _API_WEAPON_TYPE_TO_PROFESSION.get(
+                details.get("type"), details.get("type")
+            )
+            in allowed_weapon_types
         ):
             category = "equipment"
         elif (

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import date, datetime
-from typing import Any, Iterable, Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
 from gw2_wvw_data.audit.index import DatasetIndex
 from gw2_wvw_data.audit.version import AffectedComponent, PatchEvent
@@ -21,6 +21,26 @@ _TRINKET_SLOTS = (
     "ring2",
 )
 _WEAPON_SLOTS = ("w11", "w12", "w21", "w22")
+_ARMOR_TYPES = {
+    "helm": "Helm",
+    "shoulders": "Shoulders",
+    "coat": "Coat",
+    "gloves": "Gloves",
+    "leggings": "Leggings",
+    "boots": "Boots",
+}
+_TRINKET_TYPES = {
+    "amulet": "Amulet",
+    "earring1": "Accessory",
+    "earring2": "Accessory",
+    "ring1": "Ring",
+    "ring2": "Ring",
+}
+_WEAPON_TYPE_NORMALIZATION = {
+    "LongBow": "Longbow",
+    "ShortBow": "Shortbow",
+}
+_TWO_HANDED_WEAPONS = frozenset({"Rifle", "Shortbow", "Staff", "Spear"})
 
 
 @dataclass(frozen=True)
@@ -86,7 +106,7 @@ def audit_build(
 ) -> BuildAudit:
     """Audit one immutable canonical build against one indexed dataset."""
 
-    _parse_datetime(checked_at, "checked_at")
+    checked_datetime = _parse_datetime(checked_at, "checked_at")
     missing: set[str] = set()
     warnings: set[str] = set()
     illegal: set[str] = set()
@@ -94,15 +114,14 @@ def audit_build(
 
     _collect_core_components(build, components, missing)
     weapon_entries = _collect_equipment_components(
-        build, components, missing, illegal
+        build, index, components, missing, illegal
     )
-    _check_specializations_and_traits(build, index, illegal)
+    _check_specializations_and_traits(build, index, missing, illegal)
     _check_skills(build, index, illegal)
-    _check_weapons(build, weapon_entries, index, illegal)
 
     unknown: list[ComponentFinding] = []
     removed: list[ComponentFinding] = []
-    referenced_keys: set[tuple[str, int | str]] = set()
+    resolved: dict[str, Mapping[str, Any]] = {}
     for field, kind, component in components:
         identifier = component.id
         if not isinstance(identifier, int) or isinstance(identifier, bool):
@@ -112,9 +131,11 @@ def audit_build(
         if entity is None:
             unknown.append(ComponentFinding(field, kind, identifier))
             continue
-        referenced_keys.add((kind, identifier))
+        resolved[field] = entity
         if _is_removed(entity):
             removed.append(ComponentFinding(field, kind, identifier))
+    _check_equipment_semantics(resolved, illegal)
+    _check_weapons(build, weapon_entries, resolved, index, illegal)
 
     for path in sorted(missing):
         warnings.add(f"missing required field: {path}")
@@ -133,35 +154,51 @@ def audit_build(
     if not index.dataset_build_matches:
         warnings.add("dataset game build is inconsistent")
 
-    source_date = _latest_source_date(build)
+    source_dates = _source_dates_by_name(build)
+    source_date_missing = False
+    for _, _, component in components:
+        if component.source not in source_dates:
+            source_date_missing = True
+    if source_date_missing:
+        warnings.add("component source date is missing")
+
     affected: list[AffectedComponent] = []
-    if source_date is not None:
-        normalized_events = [
-            event
-            if isinstance(event, PatchEvent)
-            else PatchEvent.from_dict(event)
-            for event in patch_events
+    normalized_events = [
+        event
+        if isinstance(event, PatchEvent)
+        else PatchEvent.from_dict(event)
+        for event in patch_events
+    ]
+    for event in normalized_events:
+        event_date = date.fromisoformat(event.effective_at)
+        if event_date > checked_datetime.date():
+            continue
+        matching_components = [
+            component
+            for _, kind, component in components
+            if kind == event.component_kind
+            and component.id == event.component_id
         ]
-        for event in normalized_events:
-            if (
-                (event.component_kind, event.component_id) in referenced_keys
-                and date.fromisoformat(event.effective_at) > source_date
-            ):
-                affected.append(AffectedComponent.from_event(event))
-        affected.sort(
-            key=lambda item: (
-                item.effective_at,
-                item.component_kind,
-                str(item.component_id),
-                item.impact,
-                item.change,
-            )
+        if any(
+            source_dates.get(component.source) is not None
+            and event_date > source_dates[component.source]
+            for component in matching_components
+        ):
+            affected.append(AffectedComponent.from_event(event))
+    affected.sort(
+        key=lambda item: (
+            item.effective_at,
+            item.component_kind,
+            str(item.component_id),
+            item.impact,
+            item.change,
         )
-        for item in affected:
-            warnings.add(
-                f"post-source patch {item.effective_at} affects "
-                f"{item.component_kind}:{item.component_id}"
-            )
+    )
+    for item in affected:
+        warnings.add(
+            f"post-source patch {item.effective_at} affects "
+            f"{item.component_kind}:{item.component_id}"
+        )
 
     unknown.sort(key=_finding_key)
     removed.sort(key=_finding_key)
@@ -176,7 +213,12 @@ def audit_build(
         status = "invalid"
     elif any(item.impact == "stale" for item in affected):
         status = "stale"
-    elif missing or unknown or not index.dataset_build_matches:
+    elif (
+        missing
+        or unknown
+        or source_date_missing
+        or not index.dataset_build_matches
+    ):
         status = "unverifiable"
     elif affected:
         status = "possibly_affected"
@@ -207,28 +249,26 @@ def _collect_core_components(
     components: list[tuple[str, str, ComponentRef]],
     missing: set[str],
 ) -> None:
-    for index in range(3):
-        if index >= len(build.specializations):
-            missing.add(f"specializations[{index}]")
-        else:
-            _add_component(
-                components,
-                missing,
-                f"specializations[{index}]",
-                "specialization",
-                build.specializations[index],
-            )
-    for index in range(9):
-        if index >= len(build.traits):
-            missing.add(f"traits[{index}]")
-        else:
-            _add_component(
-                components,
-                missing,
-                f"traits[{index}]",
-                "trait",
-                build.traits[index],
-            )
+    for index, specialization in enumerate(build.specializations):
+        _add_component(
+            components,
+            missing,
+            f"specializations[{index}]",
+            "specialization",
+            specialization,
+        )
+    for index in range(len(build.specializations), 3):
+        missing.add(f"specializations[{index}]")
+    for index, trait in enumerate(build.traits):
+        _add_component(
+            components,
+            missing,
+            f"traits[{index}]",
+            "trait",
+            trait,
+        )
+    for index in range(len(build.traits), 9):
+        missing.add(f"traits[{index}]")
     _add_component(
         components, missing, "skills.heal", "skill", build.skills.get("heal")
     )
@@ -257,6 +297,7 @@ def _collect_core_components(
 
 def _collect_equipment_components(
     build: BuildRecord,
+    dataset_index: DatasetIndex,
     components: list[tuple[str, str, ComponentRef]],
     missing: set[str],
     illegal: set[str],
@@ -310,8 +351,9 @@ def _collect_equipment_components(
     entries: dict[str, Mapping[str, Any]] = {}
     for position, weapon in enumerate(build.weapons):
         slot = weapon.get("slot")
-        if not isinstance(slot, str) and position < len(_WEAPON_SLOTS):
-            slot = _WEAPON_SLOTS[position]
+        if not isinstance(slot, str):
+            missing.add(f"weapons[{position}].slot")
+            continue
         if slot not in _WEAPON_SLOTS:
             illegal.add(f"unsupported weapon slot: {slot}")
             continue
@@ -319,54 +361,184 @@ def _collect_equipment_components(
             illegal.add(f"duplicate weapon slot: {slot}")
             continue
         entries[slot] = weapon
-    for slot in _WEAPON_SLOTS:
-        weapon = entries.get(slot)
-        if weapon is None:
-            missing.add(f"weapons.{slot}")
+    for main_slot, offhand_slot in (("w11", "w12"), ("w21", "w22")):
+        main = entries.get(main_slot)
+        offhand = entries.get(offhand_slot)
+        if main is None:
+            missing.add(f"weapons.{main_slot}")
+            if offhand is None:
+                missing.add(f"weapons.{offhand_slot}")
+            else:
+                _collect_weapon_entry(
+                    offhand_slot,
+                    offhand,
+                    expected_sigils=1,
+                    index=dataset_index,
+                    components=components,
+                    missing=missing,
+                    illegal=illegal,
+                )
             continue
-        weapon_type = weapon.get("type")
-        if not isinstance(weapon_type, ComponentRef) or weapon_type.id is None:
-            missing.add(f"weapons.{slot}.type")
-        elif weapon_type.name is None:
-            components.append(
-                (f"weapons.{slot}.type", "weapon_type", weapon_type)
-            )
-        _add_component(
-            components,
-            missing,
-            f"weapons.{slot}.item",
-            "equipment",
-            weapon.get("item"),
+        main_entity = _resolved_component(
+            dataset_index, "equipment", main.get("item")
         )
-        upgrades = weapon.get("upgrades", ())
-        if isinstance(upgrades, tuple):
-            for index, component in enumerate(upgrades):
-                _add_component(
-                    components,
-                    missing,
-                    f"weapons.{slot}.upgrades[{index}]",
-                    "upgrade",
-                    component,
+        main_type = _equipment_weapon_type(main_entity)
+        two_handed = main_type in _TWO_HANDED_WEAPONS
+        _collect_weapon_entry(
+            main_slot,
+            main,
+            expected_sigils=2 if two_handed else 1,
+            index=dataset_index,
+            components=components,
+            missing=missing,
+            illegal=illegal,
+        )
+        if two_handed:
+            if offhand is not None:
+                illegal.add(
+                    f"two-handed weapon at {main_slot} cannot use {offhand_slot}"
                 )
-        infusions = weapon.get("infusions", ())
-        if isinstance(infusions, tuple):
-            for index, component in enumerate(infusions):
-                _add_component(
-                    components,
-                    missing,
-                    f"weapons.{slot}.infusions[{index}]",
-                    "upgrade",
-                    component,
+                _collect_weapon_entry(
+                    offhand_slot,
+                    offhand,
+                    expected_sigils=1,
+                    index=dataset_index,
+                    components=components,
+                    missing=missing,
+                    illegal=illegal,
                 )
-    for index, component in enumerate(build.infusions):
+        elif offhand is None:
+            missing.add(f"weapons.{offhand_slot}")
+        else:
+            _collect_weapon_entry(
+                offhand_slot,
+                offhand,
+                expected_sigils=1,
+                index=dataset_index,
+                components=components,
+                missing=missing,
+                illegal=illegal,
+            )
+
+    required_infusions = 0
+    for slot in _ARMOR_SLOTS:
+        required_infusions += _infusion_slot_count(
+            _resolved_component(
+                dataset_index, "equipment", build.armor.get(slot)
+            )
+        )
+    for slot in _TRINKET_SLOTS:
+        required_infusions += _infusion_slot_count(
+            _resolved_component(
+                dataset_index, "equipment", build.trinkets.get(slot)
+            )
+        )
+    for weapon in entries.values():
+        required_infusions += _infusion_slot_count(
+            _resolved_component(
+                dataset_index, "equipment", weapon.get("item")
+            )
+        )
+    if len(build.infusions) > required_infusions:
+        illegal.add("build has more infusions than resolved equipment slots")
+    for position in range(required_infusions):
+        value = (
+            build.infusions[position]
+            if position < len(build.infusions)
+            else None
+        )
         _add_component(
             components,
             missing,
-            f"infusions[{index}]",
+            f"infusions[{position}]",
+            "upgrade",
+            value,
+        )
+    return entries
+
+
+def _collect_weapon_entry(
+    slot: str,
+    weapon: Mapping[str, Any],
+    *,
+    expected_sigils: int,
+    index: DatasetIndex,
+    components: list[tuple[str, str, ComponentRef]],
+    missing: set[str],
+    illegal: set[str],
+) -> None:
+    weapon_type = weapon.get("type")
+    if not isinstance(weapon_type, ComponentRef) or weapon_type.id is None:
+        missing.add(f"weapons.{slot}.type")
+    elif weapon_type.name is None:
+        components.append(
+            (f"weapons.{slot}.type", "weapon_type", weapon_type)
+        )
+    _add_component(
+        components,
+        missing,
+        f"weapons.{slot}.item",
+        "equipment",
+        weapon.get("item"),
+    )
+    upgrades = weapon.get("upgrades", ())
+    if not isinstance(upgrades, tuple):
+        upgrades = ()
+    if len(upgrades) > expected_sigils:
+        illegal.add(f"weapon at {slot} has too many sigils")
+    for position in range(expected_sigils):
+        component = upgrades[position] if position < len(upgrades) else None
+        _add_component(
+            components,
+            missing,
+            f"weapons.{slot}.upgrades[{position}]",
             "upgrade",
             component,
         )
-    return entries
+    item = _resolved_component(index, "equipment", weapon.get("item"))
+    expected_infusions = _infusion_slot_count(item)
+    infusions = weapon.get("infusions", ())
+    if not isinstance(infusions, tuple):
+        infusions = ()
+    if len(infusions) > expected_infusions:
+        illegal.add(f"weapon at {slot} has too many infusions")
+    for position in range(expected_infusions):
+        component = infusions[position] if position < len(infusions) else None
+        _add_component(
+            components,
+            missing,
+            f"weapons.{slot}.infusions[{position}]",
+            "upgrade",
+            component,
+        )
+
+
+def _resolved_component(
+    index: DatasetIndex, kind: str, value: Any
+) -> Mapping[str, Any] | None:
+    if not isinstance(value, ComponentRef) or type(value.id) is not int:
+        return None
+    return index.entity(kind, value.id)
+
+
+def _infusion_slot_count(entity: Mapping[str, Any] | None) -> int:
+    if entity is None:
+        return 0
+    payload = entity.get("payload", {})
+    details = payload.get("details", {}) if isinstance(payload, Mapping) else {}
+    slots = details.get("infusion_slots", ()) if isinstance(details, Mapping) else ()
+    return len(slots) if isinstance(slots, (list, tuple)) else 0
+
+
+def _equipment_weapon_type(
+    entity: Mapping[str, Any] | None,
+) -> str | None:
+    if entity is None:
+        return None
+    payload = entity.get("payload", {})
+    details = payload.get("details", {}) if isinstance(payload, Mapping) else {}
+    value = details.get("type") if isinstance(details, Mapping) else None
+    return _normalize_weapon_type(value) if isinstance(value, str) else None
 
 
 def _add_component(
@@ -383,8 +555,13 @@ def _add_component(
 
 
 def _check_specializations_and_traits(
-    build: BuildRecord, index: DatasetIndex, illegal: set[str]
+    build: BuildRecord,
+    index: DatasetIndex,
+    missing: set[str],
+    illegal: set[str],
 ) -> None:
+    if len(build.specializations) > 3:
+        illegal.add("build has more than three specialization lines")
     selected = {
         item.id for item in build.specializations if type(item.id) is int
     }
@@ -392,6 +569,16 @@ def _check_specializations_and_traits(
         [item for item in build.specializations if type(item.id) is int]
     ):
         illegal.add("duplicate selected specialization")
+    elite_count = 0
+    for specialization in build.specializations:
+        if type(specialization.id) is not int:
+            continue
+        entity = index.entity("specialization", specialization.id)
+        payload = entity.get("payload", {}) if entity is not None else {}
+        if isinstance(payload, Mapping) and payload.get("elite") is True:
+            elite_count += 1
+    if elite_count > 1:
+        illegal.add("multiple elite specialization lines selected")
     selected_tiers: set[tuple[int, int]] = set()
     for trait in build.traits:
         if type(trait.id) is not int:
@@ -422,6 +609,16 @@ def _check_specializations_and_traits(
                 f"{specialization} tier {tier}"
             )
         selected_tiers.add(key)
+    for position, specialization in enumerate(build.specializations[:3]):
+        if type(specialization.id) is not int:
+            continue
+        if index.entity("specialization", specialization.id) is None:
+            continue
+        for tier in (1, 2, 3):
+            if (specialization.id, tier) not in selected_tiers:
+                missing.add(
+                    f"specializations[{position}].traits.tier{tier}"
+                )
 
 
 def _check_skills(
@@ -449,12 +646,17 @@ def _check_skills(
     ]
     if len(utility_ids) != len(set(utility_ids)):
         illegal.add("duplicate land utility skill")
+    selectable_skill_ids = frozenset(index.skill_palette.values())
     for field, expected_slot, component in expected:
         if not isinstance(component, ComponentRef) or type(component.id) is not int:
             continue
         entity = index.entity("skill", component.id)
         if entity is None:
             continue
+        if component.id not in selectable_skill_ids:
+            illegal.add(
+                f"{field} uses non-selectable skill {component.id}"
+            )
         payload = entity.get("payload", {})
         slot = payload.get("slot") if isinstance(payload, Mapping) else None
         if slot != expected_slot:
@@ -476,9 +678,43 @@ def _check_skills(
             )
 
 
+def _check_equipment_semantics(
+    resolved: Mapping[str, Mapping[str, Any]],
+    illegal: set[str],
+) -> None:
+    for slot, expected_type in _ARMOR_TYPES.items():
+        entity = resolved.get(f"armor.{slot}")
+        if entity is not None and not _matches_armor(entity, expected_type):
+            illegal.add(f"armor.{slot} has an incompatible equipment item")
+    for slot in _TRINKET_SLOTS:
+        entity = resolved.get(f"trinkets.{slot}")
+        if entity is not None and not _matches_trinket(entity, slot):
+            illegal.add(f"trinkets.{slot} has an incompatible equipment item")
+    for position in range(6):
+        entity = resolved.get(f"runes[{position}]")
+        if entity is not None and not _matches_upgrade(entity, "Rune"):
+            illegal.add(f"runes[{position}] is not a rune")
+    relic = resolved.get("relic")
+    if relic is not None and _payload_type(relic) != "Relic":
+        illegal.add("relic does not reference a relic item")
+    for slot, expected in (("food", "Food"), ("utility", "Utility")):
+        entity = resolved.get(f"consumables.{slot}")
+        if entity is not None and not _matches_consumable(entity, expected):
+            illegal.add(f"consumables.{slot} has the wrong consumable type")
+    for field, entity in resolved.items():
+        if ".upgrades[" in field and not _matches_upgrade(entity, "Sigil"):
+            illegal.add(f"{field} is not a sigil")
+        if (
+            (field.startswith("infusions[") or ".infusions[" in field)
+            and not _matches_upgrade(entity, "Infusion")
+        ):
+            illegal.add(f"{field} is not an infusion")
+
+
 def _check_weapons(
     build: BuildRecord,
     entries: Mapping[str, Mapping[str, Any]],
+    resolved: Mapping[str, Mapping[str, Any]],
     index: DatasetIndex,
     illegal: set[str],
 ) -> None:
@@ -488,13 +724,16 @@ def _check_weapons(
     for slot, weapon in entries.items():
         component = weapon.get("type")
         if not isinstance(component, ComponentRef):
-            illegal.add(f"weapon type is missing at {slot}")
             continue
+        item = resolved.get(f"weapons.{slot}.item")
+        if item is not None and _payload_type(item) != "Weapon":
+            illegal.add(f"weapons.{slot}.item is not a weapon")
         name = component.name
         if name is None:
             continue
+        normalized_name = _normalize_weapon_type(name)
         availability = (
-            index.profession_weapons.get(name)
+            index.profession_weapons.get(normalized_name)
             if isinstance(name, str)
             else None
         )
@@ -516,6 +755,71 @@ def _check_weapons(
                 f"weapon type {name} requires unselected specialization "
                 f"{specialization}"
             )
+        item_type = _equipment_weapon_type(item)
+        if item is not None and (
+            item_type != normalized_name
+        ):
+            illegal.add(
+                f"weapons.{slot}.item does not match weapon type {name}"
+            )
+
+
+def _matches_armor(entity: Mapping[str, Any], expected_type: str) -> bool:
+    payload = entity.get("payload", {})
+    details = payload.get("details", {}) if isinstance(payload, Mapping) else {}
+    return (
+        isinstance(payload, Mapping)
+        and isinstance(details, Mapping)
+        and payload.get("type") == "Armor"
+        and details.get("weight_class") == "Medium"
+        and details.get("type") == expected_type
+    )
+
+
+def _matches_trinket(entity: Mapping[str, Any], slot: str) -> bool:
+    payload = entity.get("payload", {})
+    details = payload.get("details", {}) if isinstance(payload, Mapping) else {}
+    if not isinstance(payload, Mapping) or not isinstance(details, Mapping):
+        return False
+    if slot == "back":
+        return payload.get("type") == "Back"
+    return (
+        payload.get("type") == "Trinket"
+        and details.get("type") == _TRINKET_TYPES[slot]
+    )
+
+
+def _matches_upgrade(entity: Mapping[str, Any], expected: str) -> bool:
+    payload = entity.get("payload", {})
+    details = payload.get("details", {}) if isinstance(payload, Mapping) else {}
+    return (
+        isinstance(payload, Mapping)
+        and isinstance(details, Mapping)
+        and payload.get("type") == "UpgradeComponent"
+        and details.get("type") == expected
+    )
+
+
+def _matches_consumable(
+    entity: Mapping[str, Any], expected: str
+) -> bool:
+    payload = entity.get("payload", {})
+    details = payload.get("details", {}) if isinstance(payload, Mapping) else {}
+    return (
+        isinstance(payload, Mapping)
+        and isinstance(details, Mapping)
+        and payload.get("type") == "Consumable"
+        and details.get("type") == expected
+    )
+
+
+def _payload_type(entity: Mapping[str, Any]) -> Any:
+    payload = entity.get("payload", {})
+    return payload.get("type") if isinstance(payload, Mapping) else None
+
+
+def _normalize_weapon_type(value: str) -> str:
+    return _WEAPON_TYPE_NORMALIZATION.get(value, value)
 
 
 def _is_removed(entity: Mapping[str, Any]) -> bool:
@@ -533,19 +837,27 @@ def _is_removed(entity: Mapping[str, Any]) -> bool:
     )
 
 
-def _latest_source_date(build: BuildRecord) -> date | None:
-    found: list[date] = []
+def _source_dates_by_name(build: BuildRecord) -> dict[str, date]:
+    found: dict[str, date] = {}
     sources = build.provenance.get("sources", ())
     if not isinstance(sources, tuple):
-        return None
+        return found
     for source in sources:
         if not isinstance(source, Mapping):
             continue
-        for field in ("updated_at", "published_at", "effective_patch"):
+        source_name = source.get("source")
+        if not isinstance(source_name, str):
+            continue
+        dates = []
+        for field in ("updated_at", "published_at", "fetched_at"):
             parsed = _optional_date(source.get(field))
             if parsed is not None:
-                found.append(parsed)
-    return max(found) if found else None
+                dates.append(parsed)
+        if dates:
+            latest = max(dates)
+            if source_name not in found or latest > found[source_name]:
+                found[source_name] = latest
+    return found
 
 
 def _optional_date(value: Any) -> date | None:

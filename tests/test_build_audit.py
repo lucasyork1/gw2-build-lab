@@ -13,6 +13,7 @@ FIXTURE = Path(__file__).parent / "fixtures" / "builds" / "patch-events.json"
 
 ARMOR_SLOTS = ("helm", "shoulders", "coat", "gloves", "leggings", "boots")
 TRINKET_SLOTS = ("back", "amulet", "earring1", "earring2", "ring1", "ring2")
+ARMOR_TYPES = ("Helm", "Shoulders", "Coat", "Gloves", "Leggings", "Boots")
 
 
 def _entity(identifier, kind, payload, *, build=101, removed=False):
@@ -38,6 +39,7 @@ def dataset():
             "specialization",
             {
                 "profession": "Thief",
+                "elite": True,
                 "major_traits": list(range(701, 710)),
                 "minor_traits": [],
             },
@@ -47,6 +49,7 @@ def dataset():
             "specialization",
             {
                 "profession": "Thief",
+                "elite": False,
                 "major_traits": list(range(2801, 2810)),
                 "minor_traits": [],
             },
@@ -56,7 +59,18 @@ def dataset():
             "specialization",
             {
                 "profession": "Thief",
+                "elite": False,
                 "major_traits": list(range(4401, 4410)),
+                "minor_traits": [],
+            },
+        ),
+        _entity(
+            58,
+            "specialization",
+            {
+                "profession": "Thief",
+                "elite": True,
+                "major_traits": list(range(5801, 5810)),
                 "minor_traits": [],
             },
         ),
@@ -83,6 +97,7 @@ def dataset():
         _entity(13062, "skill", {"slot": "Utility", "type": "Utility"}),
         _entity(13035, "skill", {"slot": "Utility", "type": "Utility"}),
         _entity(13082, "skill", {"slot": "Elite", "type": "Elite"}),
+        _entity(13106, "skill", {"slot": "Utility", "type": "Utility"}),
         _entity(
             13999,
             "skill",
@@ -95,24 +110,36 @@ def dataset():
             _entity(
                 identifier,
                 "equipment",
-                {"type": "Armor", "details": {"type": slot.title()}},
+                {
+                    "type": "Armor",
+                    "details": {
+                        "type": armor_type,
+                        "weight_class": "Medium",
+                        "infusion_slots": [],
+                    },
+                },
             )
-            for identifier, slot in enumerate(ARMOR_SLOTS, 2001)
+            for identifier, armor_type in zip(
+                range(2001, 2007), ARMOR_TYPES, strict=True
+            )
         ],
         *[
             _entity(
                 identifier,
                 "equipment",
                 {
-                    "type": "Trinket",
+                    "type": "Back" if slot == "back" else "Trinket",
                     "details": {
                         "type": (
                             "Accessory"
                             if slot.startswith("earring")
                             else "Ring"
                             if slot.startswith("ring")
-                            else slot.title()
-                        )
+                            else "Amulet"
+                            if slot == "amulet"
+                            else None
+                        ),
+                        "infusion_slots": [],
                     },
                 },
             )
@@ -122,10 +149,16 @@ def dataset():
             _entity(
                 identifier,
                 "equipment",
-                {"type": "Weapon", "details": {"type": weapon_type}},
+                {
+                    "type": "Weapon",
+                    "details": {
+                        "type": weapon_type,
+                        "infusion_slots": [],
+                    },
+                },
             )
             for identifier, weapon_type in enumerate(
-                ("Dagger", "Pistol", "Sword", "Shortbow"), 2201
+                ("Dagger", "Pistol", "Sword", "ShortBow", "Rifle"), 2201
             )
         ],
     ]
@@ -140,6 +173,7 @@ def dataset():
                     "Pistol": {"flags": ["Mainhand", "Offhand"]},
                     "Sword": {"flags": ["Mainhand"]},
                     "Shortbow": {"flags": ["TwoHand"]},
+                    "Rifle": {"flags": ["TwoHand"], "specialization": 7},
                 },
                 "skills": [
                     {"id": 13027, "slot": "Heal"},
@@ -149,7 +183,13 @@ def dataset():
                     {"id": 13082, "slot": "Elite"},
                     {"id": 13999, "slot": "Utility"},
                 ],
-                "skills_by_palette": [[1, 13027], [2, 13038]],
+                "skills_by_palette": [
+                    [1, 13027],
+                    [2, 13038],
+                    [3, 13062],
+                    [4, 13035],
+                    [5, 13082],
+                ],
             },
         ),
         "specializations": specializations,
@@ -159,6 +199,8 @@ def dataset():
         "upgrades": [
             _entity(3001, "upgrade", {"type": "UpgradeComponent", "details": {"type": "Rune"}}),
             _entity(3002, "upgrade", {"type": "Relic", "details": {}}),
+            _entity(3003, "upgrade", {"type": "UpgradeComponent", "details": {"type": "Sigil"}}),
+            _entity(3004, "upgrade", {"type": "UpgradeComponent", "details": {"type": "Infusion"}}),
         ],
         "consumables": [
             _entity(4001, "consumable", {"type": "Consumable", "details": {"type": "Food"}}),
@@ -205,7 +247,7 @@ def _complete_value():
                 "slot": slot,
                 "type": _ref(index + 1, weapon_type),
                 "item": _ref(weapon_item_ids[index]),
-                "upgrades": [],
+                "upgrades": [_ref(3003)],
                 "infusions": [],
             }
             for index, (slot, weapon_type) in enumerate(
@@ -226,7 +268,7 @@ def _complete_value():
         "consumables": {"food": _ref(4001), "utility": _ref(4002)},
         "assumptions": {},
         "provenance": {
-            "sources": [{"source": "fixture", "updated_at": "2026-07-28"}],
+            "sources": [{"source": "fixture", "updated_at": "2026-07-27"}],
             "fields": {},
             "conflicts": [],
         },
@@ -295,7 +337,7 @@ def _audit(build, dataset_index, patch_events=()):
         build,
         index=dataset_index,
         patch_events=patch_events,
-        checked_at="2026-07-28T23:00:00Z",
+        checked_at="2026-07-29T23:00:00Z",
     )
 
 
@@ -376,6 +418,45 @@ def test_duplicate_land_utilities_are_invalid(complete_build, dataset_index):
     assert audit.legality == "illegal"
 
 
+def test_chain_skill_not_selectable_from_palette_is_invalid(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["skills"]["utilities"][0] = _ref(13106, "Shadow Return")
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "invalid"
+    assert audit.legality == "illegal"
+
+
+def test_four_specialization_lines_are_invalid(complete_build, dataset_index):
+    value = complete_build.to_dict()
+    value["specializations"].append(_ref(58))
+    value["traits"].extend([_ref(5801), _ref(5804), _ref(5807)])
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "invalid"
+
+
+def test_multiple_elite_specialization_lines_are_invalid(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["specializations"][1] = _ref(58)
+    value["traits"][3:6] = [_ref(5801), _ref(5804), _ref(5807)]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "invalid"
+
+
+def test_missing_major_trait_tier_is_legal_but_unverifiable(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["traits"].pop()
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "unverifiable"
+    assert audit.legality == "legal"
+    assert "traits[8]" in audit.missing_fields
+
+
 def test_unavailable_weapon_type_is_invalid(complete_build, dataset_index):
     value = complete_build.to_dict()
     value["weapons"][0]["type"] = _ref(999, "Greatsword")
@@ -399,6 +480,158 @@ def test_unresolved_site_local_weapon_type_is_unverifiable(
     assert audit.status == "unverifiable"
     assert audit.legality == "legal"
     assert audit.unknown_components[0].field == "weapons.w11.type"
+
+
+def test_resolved_nonweapon_item_is_invalid_even_when_weapon_type_is_unresolved(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["weapons"][0]["type"] = {
+        "id": "gw2skills:47",
+        "name": None,
+        "source": "gw2skills",
+        "confidence": "publisher_claimed",
+    }
+    value["weapons"][0]["item"] = _ref(2001)
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "invalid"
+    assert audit.legality == "illegal"
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        lambda value: value["armor"].__setitem__("helm", _ref(2006)),
+        lambda value: value["armor"].__setitem__("helm", _ref(2102)),
+        lambda value: value["trinkets"].__setitem__("earring1", _ref(2105)),
+        lambda value: value["weapons"][0].__setitem__("item", _ref(2202)),
+        lambda value: value["runes"].__setitem__(0, _ref(3003)),
+        lambda value: value["weapons"][0]["upgrades"].__setitem__(0, _ref(3001)),
+        lambda value: value.__setitem__("relic", _ref(3001)),
+        lambda value: value["consumables"].__setitem__("food", _ref(4002)),
+        lambda value: value["consumables"].__setitem__("utility", _ref(4001)),
+    ],
+)
+def test_resolved_wrong_equipment_subtypes_are_invalid(
+    complete_build, dataset_index, mutation
+):
+    value = complete_build.to_dict()
+    mutation(value)
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "invalid"
+    assert audit.legality == "illegal"
+
+
+def test_medium_armor_weight_is_required(complete_build, dataset):
+    changed = deepcopy(dataset)
+    changed["equipment"][0]["payload"]["details"]["weight_class"] = "Heavy"
+    audit = _audit(complete_build, DatasetIndex.from_dataset(changed))
+    assert audit.status == "invalid"
+
+
+def test_missing_required_sigil_is_unverifiable(complete_build, dataset_index):
+    value = complete_build.to_dict()
+    value["weapons"][0]["upgrades"] = []
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "unverifiable"
+    assert "weapons.w11.upgrades[0]" in audit.missing_fields
+
+
+@pytest.mark.parametrize(
+    ("weapon_name", "item_id"),
+    [("Shortbow", 2204), ("Rifle", 2205)],
+)
+def test_two_handed_main_weapon_uses_two_sigils_and_no_offhand(
+    complete_build, dataset_index, weapon_name, item_id
+):
+    value = complete_build.to_dict()
+    value["weapons"] = [
+        value["weapons"][0],
+        value["weapons"][1],
+        {
+            "slot": "w21",
+            "type": _ref(107, weapon_name),
+            "item": _ref(item_id),
+            "upgrades": [_ref(3003), _ref(3003)],
+            "infusions": [],
+        },
+    ]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "current_verified"
+    assert "weapons.w22" not in audit.missing_fields
+
+
+def test_two_handed_weapon_with_only_one_sigil_is_unverifiable(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["weapons"] = [
+        value["weapons"][0],
+        value["weapons"][1],
+        {
+            "slot": "w21",
+            "type": _ref(107, "Shortbow"),
+            "item": _ref(2204),
+            "upgrades": [_ref(3003)],
+            "infusions": [],
+        },
+    ]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "unverifiable"
+    assert "weapons.w21.upgrades[1]" in audit.missing_fields
+
+
+def test_weapon_without_explicit_slot_is_not_assigned_by_position(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    del value["weapons"][0]["slot"]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "unverifiable"
+    assert audit.legality == "legal"
+    assert "weapons[0].slot" in audit.missing_fields
+    assert "weapons.w11" in audit.missing_fields
+
+
+def test_missing_weapon_type_is_unverifiable_not_invalid(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["weapons"][0]["type"] = None
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "unverifiable"
+    assert audit.legality == "legal"
+    assert "weapons.w11.type" in audit.missing_fields
+
+
+def test_actual_equipment_infusion_slots_require_explicit_refs(
+    complete_build, dataset
+):
+    changed = deepcopy(dataset)
+    changed["equipment"][0]["payload"]["details"]["infusion_slots"] = [
+        {"flags": ["Infusion"]}
+    ]
+    index = DatasetIndex.from_dataset(changed)
+    missing = _audit(complete_build, index)
+    assert missing.status == "unverifiable"
+    assert "infusions[0]" in missing.missing_fields
+
+    value = complete_build.to_dict()
+    value["infusions"] = [_ref(3004)]
+    assert _audit(BuildRecord.from_dict(value), index).status == "current_verified"
+
+
+def test_wrong_infusion_subtype_is_invalid(complete_build, dataset):
+    changed = deepcopy(dataset)
+    changed["equipment"][0]["payload"]["details"]["infusion_slots"] = [
+        {"flags": ["Infusion"]}
+    ]
+    value = complete_build.to_dict()
+    value["infusions"] = [_ref(3001)]
+    audit = _audit(
+        BuildRecord.from_dict(value), DatasetIndex.from_dataset(changed)
+    )
+    assert audit.status == "invalid"
 
 
 @pytest.mark.parametrize(
@@ -449,6 +682,54 @@ def test_breaking_post_source_patch_is_stale(complete_build, dataset_index):
     )
     audit = _audit(complete_build, dataset_index, [event])
     assert audit.status == "stale"
+
+
+def test_patch_after_checked_at_is_ignored(complete_build, dataset_index):
+    event = PatchEvent(
+        component_kind="skill",
+        component_id=13038,
+        effective_at="2026-07-30",
+        change="Future change.",
+    )
+    audit = audit_build(
+        complete_build,
+        index=dataset_index,
+        patch_events=[event],
+        checked_at="2026-07-29T23:00:00Z",
+    )
+    assert audit.status == "current_verified"
+    assert audit.affected_components == ()
+
+
+def test_patch_uses_matching_component_source_not_unrelated_newer_source(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["skills"]["utilities"][0]["source"] = "older-source"
+    value["provenance"]["sources"] = [
+        {"source": "fixture", "updated_at": "2026-07-27"},
+        {"source": "older-source", "published_at": "2026-07-20"},
+        {"source": "unrelated", "updated_at": "2026-07-28"},
+    ]
+    event = PatchEvent(
+        component_kind="skill",
+        component_id=13038,
+        effective_at="2026-07-25",
+        change="Changed after the matching source.",
+    )
+    audit = _audit(BuildRecord.from_dict(value), dataset_index, [event])
+    assert audit.status == "possibly_affected"
+    assert audit.affected_components[0].component_id == 13038
+
+
+def test_component_without_explicit_source_date_is_unverifiable(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["provenance"]["sources"] = [{"source": "fixture"}]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "unverifiable"
+    assert "component source date is missing" in audit.warnings
 
 
 def test_status_precedence_keeps_invalid_above_patch_and_unknown(
