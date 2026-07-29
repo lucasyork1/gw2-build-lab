@@ -93,7 +93,7 @@ def test_compare_builds_reports_ordered_structural_changes_without_claims():
         "weapons",
         "relic",
     ]
-    assert comparison.replacements[2].path == "weapons.w11.item"
+    assert comparison.replacements[2].path == "weapons[0].item"
     assert "benefit" not in str(value).lower()
     assert "cost" not in str(value).lower()
 
@@ -148,7 +148,7 @@ def test_compare_builds_reports_weapon_quality_change():
     )
 
     assert [item.path for item in comparison.replacements] == [
-        "weapons.w11.quality"
+        "weapons[0].quality"
     ]
 
 
@@ -167,8 +167,8 @@ def test_compare_builds_preserves_duplicate_weapon_slot_removal():
     )
 
     removal_paths = [item.path for item in comparison.removals]
-    assert "weapons.w11[1].slot" in removal_paths
-    assert "weapons.w11[1].item" in removal_paths
+    assert "weapons[1].slot" in removal_paths
+    assert "weapons[1].item" in removal_paths
 
 
 def test_compare_builds_preserves_unkeyed_weapon_entry_removal():
@@ -192,6 +192,30 @@ def test_compare_builds_preserves_unkeyed_weapon_entry_removal():
     )
 
     removal_paths = [item.path for item in comparison.removals]
-    assert "weapons.unkeyed[0].slot" in removal_paths
-    assert "weapons.unkeyed[0].quality" in removal_paths
-    assert "weapons.unkeyed[0].item" in removal_paths
+    assert "weapons[1].slot" in removal_paths
+    assert "weapons[1].quality" in removal_paths
+    assert "weapons[1].item" in removal_paths
+
+
+def test_compare_builds_uses_indices_when_slot_text_collides_with_old_paths():
+    left_value = _build_value()
+    duplicate = deepcopy(left_value["weapons"][0])
+    duplicate["item"] = _ref(2299)
+    literal_collision = deepcopy(left_value["weapons"][0])
+    literal_collision["slot"] = "w11[1]"
+    literal_collision["item"] = _ref(2298)
+    left_value["weapons"].extend([duplicate, literal_collision])
+    right_value = deepcopy(left_value)
+    right_value["build_id"] = "right"
+    right_value["weapons"].pop()
+    left = BuildRecord.from_dict(left_value)
+    right = BuildRecord.from_dict(right_value)
+
+    first = compare_builds(left, right)
+    second = compare_builds(left, right)
+
+    assert first.to_dict() == second.to_dict()
+    assert first.removals
+    assert "weapons[2].slot" in [
+        item.path for item in first.removals
+    ]

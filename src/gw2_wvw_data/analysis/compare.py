@@ -181,21 +181,12 @@ def _slot_fields(
 def _weapon_fields(
     weapons: tuple[Mapping[str, Any], ...],
 ) -> Iterable[tuple[str, Any]]:
-    occurrences: dict[str, int] = {}
-    unkeyed = 0
-    for weapon in weapons:
+    for position, weapon in enumerate(weapons):
+        prefix = f"weapons[{position}]"
         slot = weapon.get("slot")
-        if isinstance(slot, str):
-            occurrence = occurrences.get(slot, 0)
-            occurrences[slot] = occurrence + 1
-            suffix = "" if occurrence == 0 else f"[{occurrence}]"
-            prefix = f"weapons.{slot}{suffix}"
-            slot_value = slot
-        else:
-            prefix = f"weapons.unkeyed[{unkeyed}]"
-            unkeyed += 1
-            slot_value = "<missing>"
-        yield f"{prefix}.slot", slot_value
+        yield f"{prefix}.slot", (
+            slot if isinstance(slot, str) else "<missing>"
+        )
         for field in ("quality", "type", "item"):
             if field in weapon:
                 yield f"{prefix}.{field}", weapon[field]

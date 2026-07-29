@@ -1,5 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lucasyork1.github.io/gw2-build-lab/schemas/build-analysis.schema.json",
   "title": "Evidence-backed WvW Thief build analysis",
   "type": "object",
   "required": [
@@ -149,7 +150,7 @@
           "items": {"$ref": "#/$defs/evidence"}
         },
         "derived_build": {
-          "$ref": "urn:gw2-wvw-data:schema:build.schema.json"
+          "$ref": "build.schema.json"
         }
       },
       "additionalProperties": false

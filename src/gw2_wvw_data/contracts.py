@@ -22,13 +22,15 @@ def schema_errors(instance: Any, schema_name: str) -> list[str]:
     registry = Registry()
     for schema_path in schema_root.iterdir():
         if schema_path.name.endswith(".schema.json"):
+            contents = json.loads(
+                schema_path.read_text(encoding="utf-8")
+            )
             resource = Resource.from_contents(
-                json.loads(schema_path.read_text(encoding="utf-8"))
+                contents
             )
-            registry = registry.with_resource(
-                f"urn:gw2-wvw-data:schema:{schema_path.name}",
-                resource,
-            )
+            declared_id = contents.get("$id")
+            if isinstance(declared_id, str):
+                registry = registry.with_resource(declared_id, resource)
     validator = Draft202012Validator(
         schema,
         format_checker=FormatChecker(),

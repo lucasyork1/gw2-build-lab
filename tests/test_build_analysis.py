@@ -76,7 +76,7 @@ def _build(*, utility_ids=(13002, 13062, 13035)):
     )
 
 
-def _entity(identifier, *, payload=True):
+def _entity(identifier, *, payload=True, slot="Utility"):
     value = {
         "id": identifier,
         "kind": "skill",
@@ -89,7 +89,10 @@ def _entity(identifier, *, payload=True):
         "verification_status": "automated",
     }
     if payload:
-        value["payload"] = {"description": f"facts for {identifier}"}
+        value["payload"] = {
+            "description": f"facts for {identifier}",
+            "slot": slot,
+        }
     return value
 
 
@@ -98,7 +101,16 @@ def index():
     profession = {
         **_entity("Thief"),
         "kind": "profession",
-        "payload": {"weapons": {}, "skills_by_palette": []},
+        "payload": {
+            "weapons": {},
+            "skills_by_palette": [
+                [1, 13002],
+                [2, 13027],
+                [3, 13035],
+                [4, 13062],
+                [5, 13106],
+            ],
+        },
     }
     return DatasetIndex.from_dataset(
         {
@@ -110,8 +122,11 @@ def index():
             "specializations": [],
             "traits": [],
             "skills": [
-                _entity(value)
-                for value in (13002, 13027, 13035, 13062)
+                _entity(13002),
+                _entity(13027, slot="Heal"),
+                _entity(13035),
+                _entity(13062),
+                _entity(13106),
             ],
             "equipment": [],
             "upgrades": [],
@@ -375,7 +390,7 @@ def test_missing_rule_evidence_skips_delta_and_records_confidence_reason(
 def test_improvement_creates_derived_build_without_mutating_original(
     tmp_path, index
 ):
-    build = _build(utility_ids=(13002, 13062, 13027))
+    build = _build(utility_ids=(13002, 13062, 13106))
     original = deepcopy(build.to_dict())
     audit = BuildAudit(
         schema_version=1,
@@ -407,11 +422,54 @@ def test_improvement_creates_derived_build_without_mutating_original(
     assert [
         item.id
         for item in improvement.derived_build.skills["utilities"]
-    ] == [13002, 13035, 13027]
+    ] == [13002, 13035, 13106]
     assert improvement.benefit == (
         "Adds the project-authored alternative utility."
     )
     assert improvement.cost == "Removes the selected signet utility."
+    assert analysis.improvement_reasons == ()
+
+
+def test_improvement_is_skipped_when_derived_build_is_illegal(
+    tmp_path, index
+):
+    value = _rules_value()
+    improvement = value["improvements"][0]
+    improvement["improvement_id"] = "utility-to-heal"
+    improvement["with"]["component_id"] = 13027
+    improvement["evidence"][0]["component_id"] = 13027
+    build = _build(utility_ids=(13002, 13062, 13106))
+    audit = BuildAudit(
+        schema_version=1,
+        build_id=build.build_id,
+        status="unverifiable",
+        legality="legal",
+        game_build_id=101,
+        checked_at="2026-07-29T00:00:00Z",
+        missing_fields=(),
+        unknown_components=(),
+        removed_components=(),
+        affected_components=(),
+        warnings=(),
+    )
+
+    analysis = analyze_build(
+        build,
+        audit,
+        index=index,
+        rules=load_rules(_write_rules(tmp_path, value)),
+    )
+
+    assert analysis.improvements == ()
+    assert [
+        (item.improvement_id, item.reason)
+        for item in analysis.improvement_reasons
+    ] == [
+        (
+            "utility-to-heal",
+            "derived build legality failed: illegal",
+        )
+    ]
 
 
 def test_improvement_is_skipped_with_reason_when_replacement_is_selected(
@@ -667,7 +725,7 @@ def test_checked_in_shadowstep_rule_resolves_against_current_dataset():
 def test_derived_build_schema_rejects_empty_object_and_accepts_real_variant(
     tmp_path, index
 ):
-    build = _build(utility_ids=(13002, 13062, 13027))
+    build = _build(utility_ids=(13002, 13062, 13106))
     audit = BuildAudit(
         schema_version=1,
         build_id=build.build_id,

@@ -14,7 +14,7 @@ from gw2_wvw_data.analysis.rules import (
     ImprovementRule,
     RuleSet,
 )
-from gw2_wvw_data.audit import BuildAudit, DatasetIndex
+from gw2_wvw_data.audit import BuildAudit, DatasetIndex, audit_build
 from gw2_wvw_data.builds.model import BuildRecord, ComponentRef
 
 
@@ -269,6 +269,7 @@ def analyze_build(
 
     improvements, improvement_reasons = _applicable_improvements(
         build,
+        audit=audit,
         rules=rules,
         index=index,
         components=components,
@@ -299,6 +300,7 @@ def _apply_equipment_confidence(
 def _applicable_improvements(
     build: BuildRecord,
     *,
+    audit: BuildAudit,
     rules: RuleSet,
     index: DatasetIndex,
     components: tuple[_BuildComponent, ...],
@@ -401,6 +403,23 @@ def _applicable_improvements(
             f"{build.build_id}--{rule.improvement_id}"
         )
         derived = BuildRecord.from_dict(value)
+        derived_audit = audit_build(
+            derived,
+            index=index,
+            patch_events=(),
+            checked_at=audit.checked_at,
+        )
+        if derived_audit.legality != "legal":
+            reasons.append(
+                ImprovementApplicabilityReason(
+                    improvement_id=rule.improvement_id,
+                    reason=(
+                        "derived build legality failed: "
+                        f"{derived_audit.legality}"
+                    ),
+                )
+            )
+            continue
         results.append(
             ImprovementAnalysis(
                 improvement_id=rule.improvement_id,
