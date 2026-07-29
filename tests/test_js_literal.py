@@ -39,6 +39,7 @@ def test_parses_supported_js_literal_subset():
         "1e3",
         "{a: 1, a: 2}",
         '{"a": 1, a: 2}',
+        r'{"a": 1, "\u0061": 2}',
     ],
 )
 def test_rejects_executable_or_unsupported_js_syntax(text):
@@ -58,4 +59,22 @@ def test_rejects_input_deeper_than_32_containers():
 @pytest.mark.parametrize("text", ["\u0661", "9" * 5_000])
 def test_rejects_non_js_or_unbounded_integer_forms(text):
     with pytest.raises(ImportError):
+        parse_js_literal(text)
+
+
+def test_normalizes_surrogate_pair_before_duplicate_key_check():
+    with pytest.raises(ImportError, match="duplicate"):
+        parse_js_literal('{"𝄞": 1, "\\uD834\\uDD1E": 2}')
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        r'{"\uD834": 1}',
+        r'{"\uDD1E": 1}',
+        r'{"\uD834\u0041": 1}',
+    ],
+)
+def test_rejects_unpaired_unicode_surrogates(text):
+    with pytest.raises(ImportError, match="surrogate"):
         parse_js_literal(text)

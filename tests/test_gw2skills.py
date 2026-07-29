@@ -154,6 +154,13 @@ def test_records_raw_editor_url_and_site_revision(dataset):
 
     assert build.provenance["sources"] == (
         {
+            "source": "build-code",
+            "value": (
+                "[&DQU2OywnByoKAQAAGQEAAFcBAABYAAAAnwE"
+                "AAAAAAAAAAAAAAAAAAAAAAAA=]"
+            ),
+        },
+        {
             "source": "gw2skills",
             "url": URL,
             "version": "9.1.4",
@@ -162,6 +169,16 @@ def test_records_raw_editor_url_and_site_revision(dataset):
     )
     assert build.provenance["fields"]["armor"]["source"] == "gw2skills"
     assert build.provenance["fields"]["traits"]["source"] == "build-code"
+    assert (
+        build.provenance["fields"]["assumptions.profession_specific"][
+            "source"
+        ]
+        == "build-code"
+    )
+    assert build.assumptions["aquatic_skills"] == (None,) * 5
+    assert build.assumptions["profession_specific"] == (0,) * 16
+    assert build.assumptions["skill_overrides"] == ()
+    assert "gw2skills_equipment" in build.assumptions
 
 
 @pytest.mark.parametrize(
@@ -203,3 +220,80 @@ def test_rejects_malformed_equipment_component_tuple(
 
     with pytest.raises(ImportError, match=message):
         import_gw2skills(URL, dataset=dataset, client=_client(html))
+
+
+@pytest.mark.parametrize(
+    ("old", "new", "message"),
+    [
+        ('"food": 544', '"food": [544,6,999]', "buff.food"),
+        ("relic: 323", 'relic: [323,"bad"]', "relic"),
+    ],
+)
+def test_rejects_malformed_buff_or_relic_tuple(old, new, message, dataset):
+    html = FIXTURE.read_text("utf-8").replace(old, new)
+
+    with pytest.raises(ImportError, match=message):
+        import_gw2skills(URL, dataset=dataset, client=_client(html))
+
+
+def test_accepts_exact_buff_and_relic_component_tuples(dataset):
+    html = (
+        FIXTURE.read_text("utf-8")
+        .replace('"food": 544', '"food": [544,6]')
+        .replace("relic: 323", "relic: [323,6]")
+    )
+
+    build = import_gw2skills(URL, dataset=dataset, client=_client(html))
+
+    assert build.consumables["food"].id == "gw2skills:544"
+    assert build.relic.id == "gw2skills:323"
+
+
+@pytest.mark.parametrize(
+    "script",
+    [
+        'const sample = "new BuildEditor({preload: {}})";',
+        "// new BuildEditor({preload: {}})\nconst sample = 1;",
+        "/* new BuildEditor({preload: {}}) */ const sample = 1;",
+    ],
+)
+def test_ignores_build_editor_markers_inside_script_strings_or_comments(
+    script, dataset
+):
+    html = f"<html><script>{script}</script></html>"
+
+    with pytest.raises(ImportError, match="not found"):
+        import_gw2skills(URL, dataset=dataset, client=_client(html))
+
+
+def test_ignores_string_marker_when_real_build_editor_call_exists(dataset):
+    html = FIXTURE.read_text("utf-8").replace(
+        "E = new BuildEditor(",
+        'const sample = "new BuildEditor({preload: {}})";\n'
+        "E = new BuildEditor(",
+    )
+
+    build = import_gw2skills(URL, dataset=dataset, client=_client(html))
+
+    assert build.profession == "Thief"
+
+
+def test_preserves_explicit_missing_equipment_slots(dataset):
+    html = (
+        FIXTURE.read_text("utf-8")
+        .replace(
+            "        w12: {item: [291,6], up: [123,6], inf: [902,6]},\n",
+            "",
+        )
+        .replace(
+            "        helm: {item: [300,6], up: [201,6], inf: [910,6]},\n",
+            "",
+        )
+    )
+
+    build = import_gw2skills(URL, dataset=dataset, client=_client(html))
+
+    assert build.weapons[1]["slot"] == "w12"
+    assert build.weapons[1]["item"] is None
+    assert "helm" not in build.armor
+    assert build.runes[0] is None

@@ -9,6 +9,11 @@ ALLOWED_HOSTS = frozenset({"en.gw2skills.net"})
 EDITOR_URL = "https://en.gw2skills.net/editor/?abc"
 
 
+class _ExplodingStream(httpx.SyncByteStream):
+    def __iter__(self):
+        raise AssertionError("encoded response body must not be iterated")
+
+
 def _html_response(request, *, body=b"<html>ok</html>"):
     return httpx.Response(
         200,
@@ -134,3 +139,68 @@ def test_safe_client_rejects_oversized_urls_before_request():
         )
 
     assert calls == []
+
+
+def test_safe_client_rejects_encoded_body_before_decoding_or_iteration():
+    accept_encoding = []
+
+    def handler(request):
+        accept_encoding.append(request.headers["accept-encoding"])
+        return httpx.Response(
+            200,
+            headers={
+                "content-type": "text/html",
+                "content-encoding": "gzip",
+            },
+            stream=_ExplodingStream(),
+            request=request,
+        )
+
+    client = SafeHttpClient(transport=httpx.MockTransport(handler))
+
+    with pytest.raises(ImportError, match="Content-Encoding"):
+        client.get_text(EDITOR_URL, allowed_hosts=ALLOWED_HOSTS)
+
+    assert accept_encoding == ["identity"]
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://en.gw2skills.net:444/editor/?abc",
+        "https://en.gw2skills.net./editor/?abc",
+    ],
+)
+def test_safe_client_rejects_nondefault_port_or_unallowlisted_trailing_dot(url):
+    client = SafeHttpClient(
+        transport=httpx.MockTransport(lambda request: _html_response(request))
+    )
+
+    with pytest.raises(ImportError):
+        client.get_text(url, allowed_hosts=ALLOWED_HOSTS)
+
+
+def test_safe_client_compares_host_case_insensitively():
+    client = SafeHttpClient(
+        transport=httpx.MockTransport(lambda request: _html_response(request))
+    )
+
+    document = client.get_text(
+        "https://EN.GW2SKILLS.NET/editor/?abc",
+        allowed_hosts=ALLOWED_HOSTS,
+    )
+
+    assert document.text == "<html>ok</html>"
+
+
+def test_safe_client_accepts_trailing_dot_only_when_explicitly_allowlisted():
+    client = SafeHttpClient(
+        transport=httpx.MockTransport(lambda request: _html_response(request))
+    )
+
+    document = client.get_text(
+        "https://en.gw2skills.net./editor/?abc",
+        allowed_hosts=frozenset({"en.gw2skills.net."}),
+    )
+
+    assert document.text == "<html>ok</html>"

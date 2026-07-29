@@ -50,7 +50,10 @@ class SafeHttpClient:
                 with self._client.stream(
                     "GET",
                     current_url,
-                    headers={"accept": "text/html"},
+                    headers={
+                        "accept": "text/html",
+                        "accept-encoding": "identity",
+                    },
                 ) as response:
                     if response.is_redirect:
                         if redirects >= _MAX_REDIRECTS:
@@ -67,7 +70,7 @@ class SafeHttpClient:
                             try:
                                 candidate_host = (
                                     urlsplit(next_url).hostname or ""
-                                ).rstrip(".").lower()
+                                ).lower()
                             except ValueError:
                                 candidate_host = ""
                             if candidate_host != original_host:
@@ -88,15 +91,22 @@ class SafeHttpClient:
                         raise ImportError(
                             f"HTTP request failed with status {response.status_code}"
                         ) from error
+                    content_encoding = response.headers.get(
+                        "content-encoding", ""
+                    ).strip().lower()
+                    if content_encoding not in ("", "identity"):
+                        raise ImportError(
+                            "HTTP response Content-Encoding must be identity"
+                        )
                     content_type = response.headers.get("content-type", "")
                     media_type = content_type.partition(";")[0].strip().lower()
                     if media_type != "text/html":
                         raise ImportError("HTTP response must use text/html")
                     content = bytearray()
                     for chunk in response.iter_bytes():
-                        content.extend(chunk)
-                        if len(content) > _MAX_BODY_BYTES:
+                        if len(chunk) > _MAX_BODY_BYTES - len(content):
                             raise ImportError("HTTP response exceeds 2 MiB")
+                        content.extend(chunk)
                     try:
                         text = bytes(content).decode(response.encoding or "utf-8")
                     except (LookupError, UnicodeError) as error:
@@ -124,8 +134,8 @@ class SafeHttpClient:
             raise ImportError("URL credentials are not allowed")
         if port not in (None, 443):
             raise ImportError("URL must use the default HTTPS port")
-        host = (parsed.hostname or "").rstrip(".").lower()
-        normalized_hosts = {value.rstrip(".").lower() for value in allowed_hosts}
+        host = (parsed.hostname or "").lower()
+        normalized_hosts = {value.lower() for value in allowed_hosts}
         if not host or host not in normalized_hosts:
             raise ImportError("URL host is not allowlisted")
         return host

@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Mapping
+from html.parser import HTMLParser
 from typing import Any
 
 from gw2_wvw_data.builds.model import BuildRecord
@@ -129,6 +130,8 @@ def import_gw2skills(
         sort_keys=True,
     ).encode("utf-8")
     decoded_value = decoded.to_dict()
+    decoded_assumptions = decoded_value["assumptions"]
+    decoded_provenance = decoded_value["provenance"]
     return BuildRecord.from_dict(
         {
             **decoded_value,
@@ -143,6 +146,7 @@ def import_gw2skills(
             ),
             "consumables": {"food": food, "utility": utility},
             "assumptions": {
+                **decoded_assumptions,
                 "gw2skills_equipment": {
                     "weapon": weapon_details,
                     "armor": armor_details,
@@ -150,9 +154,12 @@ def import_gw2skills(
                 }
             },
             "provenance": {
-                "sources": [source],
-                "fields": fields,
-                "conflicts": [],
+                "sources": [*decoded_provenance["sources"], source],
+                "fields": {
+                    **decoded_provenance["fields"],
+                    **fields,
+                },
+                "conflicts": decoded_provenance["conflicts"],
             },
             "version_audit": {
                 "status": "unverifiable",
@@ -168,27 +175,96 @@ def import_gw2skills(
 
 
 def _extract_editor_object(html: str) -> Mapping[str, Any]:
-    marker = html.find(_EDITOR_MARKER)
-    if marker < 0:
+    collector = _ScriptCollector()
+    collector.feed(html)
+    collector.close()
+    calls = [
+        (script, marker)
+        for script in collector.scripts
+        for marker in _script_markers(script)
+    ]
+    if not calls:
         raise ImportError("GW2Skills BuildEditor preload was not found")
-    if html.find(_EDITOR_MARKER, marker + len(_EDITOR_MARKER)) >= 0:
+    if len(calls) > 1:
         raise ImportError("GW2Skills page contains multiple BuildEditor calls")
+    script, marker = calls[0]
     cursor = marker + len(_EDITOR_MARKER)
-    while cursor < len(html) and html[cursor] in " \t\r\n\f\v":
+    while cursor < len(script) and script[cursor] in " \t\r\n\f\v":
         cursor += 1
-    if cursor >= len(html) or html[cursor] != "{":
+    if cursor >= len(script) or script[cursor] != "{":
         raise ImportError("GW2Skills BuildEditor argument is not an object literal")
 
-    end = _balanced_literal_end(html, cursor)
+    end = _balanced_literal_end(script, cursor)
     after = end
-    while after < len(html) and html[after] in " \t\r\n\f\v":
+    while after < len(script) and script[after] in " \t\r\n\f\v":
         after += 1
-    if after >= len(html) or html[after] != ")":
+    if after >= len(script) or script[after] != ")":
         raise ImportError("GW2Skills BuildEditor call is malformed")
-    value = parse_js_literal(html[cursor:end])
+    value = parse_js_literal(script[cursor:end])
     if not isinstance(value, Mapping):
         raise ImportError("GW2Skills BuildEditor argument is malformed")
     return value
+
+
+class _ScriptCollector(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=False)
+        self.scripts: list[str] = []
+        self._parts: list[str] | None = None
+
+    def handle_starttag(
+        self, tag: str, attrs: list[tuple[str, str | None]]
+    ) -> None:
+        if tag.lower() == "script" and self._parts is None:
+            self._parts = []
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() == "script" and self._parts is not None:
+            self.scripts.append("".join(self._parts))
+            self._parts = None
+
+    def handle_data(self, data: str) -> None:
+        if self._parts is not None:
+            self._parts.append(data)
+
+
+def _script_markers(script: str) -> list[int]:
+    markers: list[int] = []
+    cursor = 0
+    while cursor < len(script):
+        char = script[cursor]
+        if char in "\"'`":
+            cursor = _skip_script_string(script, cursor, char)
+            continue
+        if script.startswith("//", cursor):
+            newline = script.find("\n", cursor + 2)
+            cursor = len(script) if newline < 0 else newline + 1
+            continue
+        if script.startswith("/*", cursor):
+            closing = script.find("*/", cursor + 2)
+            cursor = len(script) if closing < 0 else closing + 2
+            continue
+        if script.startswith(_EDITOR_MARKER, cursor):
+            markers.append(cursor)
+            cursor += len(_EDITOR_MARKER)
+            continue
+        cursor += 1
+    return markers
+
+
+def _skip_script_string(script: str, cursor: int, quote: str) -> int:
+    cursor += 1
+    escaped = False
+    while cursor < len(script):
+        char = script[cursor]
+        cursor += 1
+        if escaped:
+            escaped = False
+        elif char == "\\":
+            escaped = True
+        elif char == quote:
+            return cursor
+    return cursor
 
 
 def _balanced_literal_end(text: str, start: int) -> int:
@@ -294,8 +370,8 @@ def _optional_component(value: Any, label: str) -> Any:
     if value is None:
         return None
     if isinstance(value, list):
-        if not value:
-            return None
+        if len(value) != 2 or any(type(item) is not int for item in value):
+            raise ImportError(f"GW2Skills {label} is malformed")
         value = value[0]
     return _site_component(_site_identifier(value, label))
 

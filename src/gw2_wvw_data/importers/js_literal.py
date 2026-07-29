@@ -105,8 +105,31 @@ class _Parser:
                         item not in "0123456789abcdefABCDEF" for item in digits
                     ):
                         self.fail("invalid Unicode escape")
-                    value.append(chr(int(digits, 16)))
+                    codepoint = int(digits, 16)
                     self.cursor += 4
+                    if 0xD800 <= codepoint <= 0xDBFF:
+                        if self.text[self.cursor : self.cursor + 2] != "\\u":
+                            self.fail("unpaired Unicode surrogate")
+                        low_digits = self.text[
+                            self.cursor + 2 : self.cursor + 6
+                        ]
+                        if len(low_digits) != 4 or any(
+                            item not in "0123456789abcdefABCDEF"
+                            for item in low_digits
+                        ):
+                            self.fail("unpaired Unicode surrogate")
+                        low = int(low_digits, 16)
+                        if not 0xDC00 <= low <= 0xDFFF:
+                            self.fail("unpaired Unicode surrogate")
+                        codepoint = (
+                            0x10000
+                            + ((codepoint - 0xD800) << 10)
+                            + (low - 0xDC00)
+                        )
+                        self.cursor += 6
+                    elif 0xDC00 <= codepoint <= 0xDFFF:
+                        self.fail("unpaired Unicode surrogate")
+                    value.append(chr(codepoint))
                     continue
                 if escape not in _ESCAPES:
                     self.fail("unsupported string escape")
