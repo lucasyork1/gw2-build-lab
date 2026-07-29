@@ -681,6 +681,28 @@ def test_complete_current_build_passes_all_current_verified_gates(
     assert audit.removed_components == ()
 
 
+def test_unresolved_provenance_conflict_blocks_current_verification(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["provenance"]["conflicts"] = [
+        {
+            "field": "context",
+            "source": "metabattle",
+            "values": ["roaming", "zerg"],
+        }
+    ]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+
+    assert audit.legality == "legal"
+    assert audit.missing_fields == ()
+    assert audit.unknown_components == ()
+    assert audit.removed_components == ()
+    assert audit.status == "unverifiable"
+    assert "unresolved provenance conflicts require review" in audit.warnings
+    assert schema_errors(audit.to_dict(), "build-audit.schema.json") == []
+
+
 def test_breaking_post_source_patch_is_stale(complete_build, dataset_index):
     event = PatchEvent(
         component_kind="skill",

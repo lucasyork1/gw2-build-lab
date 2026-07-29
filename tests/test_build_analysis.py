@@ -430,6 +430,62 @@ def test_improvement_creates_derived_build_without_mutating_original(
     assert analysis.improvement_reasons == ()
 
 
+def test_improvement_records_derived_provenance_and_recomputed_audit(
+    tmp_path, index
+):
+    value = _build(utility_ids=(13002, 13062, 13106)).to_dict()
+    value["provenance"]["fields"]["skills"] = {"source": "fixture"}
+    value["version_audit"] = {
+        "status": "current_verified",
+        "game_build_id": 101,
+        "checked_at": "2026-07-28T20:00:00Z",
+        "affected_components": [],
+        "warnings": [],
+    }
+    build = BuildRecord.from_dict(value)
+    audit = BuildAudit(
+        schema_version=1,
+        build_id=build.build_id,
+        status="current_verified",
+        legality="legal",
+        game_build_id=101,
+        checked_at="2026-07-29T00:00:00Z",
+        missing_fields=(),
+        unknown_components=(),
+        removed_components=(),
+        affected_components=(),
+        warnings=(),
+    )
+
+    analysis = analyze_build(
+        build,
+        audit,
+        index=index,
+        rules=load_rules(_write_rules(tmp_path, _rules_value())),
+    )
+    derived = analysis.improvements[0].derived_build
+    source_name = "analysis-rules:test-thief-wvw-v1"
+
+    assert derived.provenance["sources"][-1] == {
+        "source": source_name,
+        "ruleset_id": "test-thief-wvw-v1",
+        "improvement_id": "swap-signet-for-roll",
+    }
+    assert derived.provenance["fields"]["skills.utilities[1]"] == {
+        "source": source_name
+    }
+    assert derived.provenance["fields"]["skills"] == {
+        "source": "fixture"
+    }
+    assert derived.version_audit["status"] == "unverifiable"
+    assert derived.version_audit["game_build_id"] == 101
+    assert derived.version_audit["checked_at"] == "2026-07-29T00:00:00Z"
+    assert "component source date is missing" in derived.version_audit[
+        "warnings"
+    ]
+    assert schema_errors(derived.to_dict(), "build.schema.json") == []
+
+
 def test_improvement_is_skipped_when_derived_build_is_illegal(
     tmp_path, index
 ):
@@ -567,6 +623,47 @@ def test_source_prose_never_matches_a_component_rule(tmp_path, index):
 
     assert analysis.dimensions["mobility_disengage"].band == 3
     assert analysis.strengths == ()
+
+
+def test_dimensions_without_evidence_have_low_confidence_and_reason(
+    tmp_path, index
+):
+    value = _rules_value()
+    value["rules"] = []
+    value["improvements"] = []
+    build = _build()
+    audit = BuildAudit(
+        schema_version=1,
+        build_id=build.build_id,
+        status="unverifiable",
+        legality="legal",
+        game_build_id=101,
+        checked_at="2026-07-29T00:00:00Z",
+        missing_fields=(),
+        unknown_components=(),
+        removed_components=(),
+        affected_components=(),
+        warnings=(),
+    )
+
+    analysis = analyze_build(
+        build,
+        audit,
+        index=index,
+        rules=load_rules(_write_rules(tmp_path, value)),
+    )
+
+    for dimension in analysis.dimensions.values():
+        assert dimension.evidence == ()
+        assert dimension.confidence == "low"
+        assert (
+            "zero evidence: no matching evidence rules contributed to "
+            "this dimension"
+            in dimension.confidence_reasons
+        )
+    assert schema_errors(
+        analysis.to_dict(), "build-analysis.schema.json"
+    ) == []
 
 
 def test_rule_evidence_must_identify_a_component_selected_in_the_build(

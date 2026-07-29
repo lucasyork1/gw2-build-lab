@@ -90,12 +90,76 @@ def import_source(
         )
         if differences:
             return candidate.with_conflict("configuration", differences)
-        return candidate.with_build(editor_build)
+        return candidate.with_build(
+            _with_candidate_metadata(editor_build, candidate)
+        )
     if editor_build is not None:
-        return candidate.with_build(editor_build)
+        return candidate.with_build(
+            _with_candidate_metadata(editor_build, candidate)
+        )
     if decoded_build is not None:
-        return candidate.with_build(decoded_build)
+        return candidate.with_build(
+            _with_candidate_metadata(decoded_build, candidate)
+        )
     return candidate
+
+
+def _with_candidate_metadata(
+    build: BuildRecord,
+    candidate: CommunityCandidate,
+) -> BuildRecord:
+    """Derive a canonical record that retains source-page metadata."""
+
+    value = build.to_dict()
+    source_id = candidate.source_name.lower()
+    source = {
+        "source": source_id,
+        "source_name": candidate.source_name,
+        "url": candidate.source_url,
+    }
+    for field, field_value in (
+        ("title", candidate.title),
+        ("mode", candidate.mode),
+        ("profession", candidate.profession),
+        ("published_at", candidate.published_at),
+        ("updated_at", candidate.updated_at),
+        ("publisher_status", candidate.publisher_status),
+        ("publisher_status_label", candidate.publisher_status_label),
+    ):
+        if field_value is not None:
+            source[field] = field_value
+
+    provenance = value["provenance"]
+    provenance["sources"].append(source)
+    fields = provenance["fields"]
+    if candidate.context:
+        if build.context and build.context != candidate.context:
+            provenance["conflicts"].append(
+                {
+                    "field": "context",
+                    "source": source_id,
+                    "values": [
+                        list(build.context),
+                        list(candidate.context),
+                    ],
+                }
+            )
+        else:
+            value["context"] = list(candidate.context)
+            fields["context"] = {"source": source_id}
+    for field in sorted(candidate.conflicts):
+        provenance["conflicts"].append(
+            {
+                "field": field,
+                "source": source_id,
+                "values": list(candidate.conflicts[field]),
+            }
+        )
+
+    if candidate.publisher_status == "publisher_claimed_current":
+        value["version_audit"]["status"] = "publisher_claimed_current"
+        fields["version_audit.status"] = {"source": source_id}
+    return BuildRecord.from_dict(value)
 
 
 def _overlapping_configuration_differences(

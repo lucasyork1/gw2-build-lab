@@ -249,6 +249,10 @@ def audit_build(
         and build.version_audit.get("game_build_id") == index.game_build_id
     )
     publisher_claim = _publisher_claimed_current(build)
+    provenance_conflicts = build.provenance.get("conflicts", ())
+    has_provenance_conflicts = bool(provenance_conflicts)
+    if has_provenance_conflicts:
+        warnings.add("unresolved provenance conflicts require review")
 
     if legality == "illegal":
         status = "invalid"
@@ -257,6 +261,7 @@ def audit_build(
     elif (
         missing
         or unknown
+        or has_provenance_conflicts
         or source_date_unverifiable
         or not index.dataset_build_matches
     ):

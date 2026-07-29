@@ -14,7 +14,12 @@ from gw2_wvw_data.analysis.rules import (
     ImprovementRule,
     RuleSet,
 )
-from gw2_wvw_data.audit import BuildAudit, DatasetIndex, audit_build
+from gw2_wvw_data.audit import (
+    BuildAudit,
+    DatasetIndex,
+    PatchEvent,
+    audit_build,
+)
 from gw2_wvw_data.builds.model import BuildRecord, ComponentRef
 
 
@@ -252,6 +257,17 @@ def analyze_build(
     _apply_equipment_confidence(audit, reasons)
     dimensions: dict[str, DimensionAnalysis] = {}
     for name in rules.dimensions:
+        evidence = tuple(
+            sorted(
+                dimension_evidence[name],
+                key=_evidence_sort_key,
+            )
+        )
+        if not evidence:
+            reasons[name].add(
+                "zero evidence: no matching evidence rules contributed to "
+                "this dimension"
+            )
         dimension_reasons = tuple(sorted(reasons[name]))
         band = max(1, min(5, bands[name]))
         dimensions[name] = DimensionAnalysis(
@@ -259,12 +275,7 @@ def analyze_build(
             label=_BAND_LABELS[band],
             confidence="low" if dimension_reasons else "high",
             confidence_reasons=dimension_reasons,
-            evidence=tuple(
-                sorted(
-                    dimension_evidence[name],
-                    key=_evidence_sort_key,
-                )
-            ),
+            evidence=evidence,
         )
 
     improvements, improvement_reasons = _applicable_improvements(
@@ -402,11 +413,37 @@ def _applicable_improvements(
         value["build_id"] = (
             f"{build.build_id}--{rule.improvement_id}"
         )
-        derived = BuildRecord.from_dict(value)
+        source_name = f"analysis-rules:{rules.ruleset_id}"
+        provenance = value["provenance"]
+        provenance["sources"].append(
+            {
+                "source": source_name,
+                "ruleset_id": rules.ruleset_id,
+                "improvement_id": rule.improvement_id,
+            }
+        )
+        provenance["fields"][field] = {"source": source_name}
+        value["version_audit"] = {
+            "status": "unverifiable",
+            "game_build_id": audit.game_build_id,
+            "checked_at": audit.checked_at,
+            "affected_components": [],
+            "warnings": [],
+        }
+        provisional = BuildRecord.from_dict(value)
         derived_audit = audit_build(
-            derived,
+            provisional,
             index=index,
-            patch_events=(),
+            patch_events=tuple(
+                PatchEvent(
+                    component_kind=item.component_kind,
+                    component_id=item.component_id,
+                    effective_at=item.effective_at,
+                    change=item.change,
+                    impact=item.impact,
+                )
+                for item in audit.affected_components
+            ),
             checked_at=audit.checked_at,
         )
         if derived_audit.legality != "legal":
@@ -420,6 +457,12 @@ def _applicable_improvements(
                 )
             )
             continue
+        value = provisional.to_dict()
+        value["version_audit"] = _canonical_version_audit(
+            derived_audit,
+            index=index,
+        )
+        derived = BuildRecord.from_dict(value)
         results.append(
             ImprovementAnalysis(
                 improvement_id=rule.improvement_id,
@@ -453,6 +496,34 @@ def _applicable_improvements(
             )
         )
     return tuple(results), tuple(reasons)
+
+
+def _canonical_version_audit(
+    audit: BuildAudit,
+    *,
+    index: DatasetIndex,
+) -> dict[str, Any]:
+    affected_components = []
+    for affected in audit.affected_components:
+        entity = index.entity(
+            affected.component_kind,
+            affected.component_id,
+        )
+        affected_components.append(
+            {
+                "id": affected.component_id,
+                "name": _entity_name(entity) if entity is not None else None,
+                "source": "version-audit",
+                "confidence": "mapped" if entity is not None else "unknown",
+            }
+        )
+    return {
+        "status": audit.status,
+        "game_build_id": audit.game_build_id,
+        "checked_at": audit.checked_at,
+        "affected_components": affected_components,
+        "warnings": list(audit.warnings),
+    }
 
 
 def _resolve_evidence(

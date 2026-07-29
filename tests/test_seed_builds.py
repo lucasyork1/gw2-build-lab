@@ -68,3 +68,12 @@ def test_seed_corpus_imports_audits_and_analyzes_all_roaming_architectures():
         assert not schema_errors(
             bundle.analysis.to_dict(), "build-analysis.schema.json"
         )
+        for dimension in bundle.analysis.dimensions.values():
+            if dimension.evidence:
+                continue
+            assert dimension.confidence == "low"
+            assert (
+                "zero evidence: no matching evidence rules contributed to "
+                "this dimension"
+                in dimension.confidence_reasons
+            )

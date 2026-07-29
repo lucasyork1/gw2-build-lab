@@ -239,10 +239,53 @@ def test_dispatcher_uses_editor_configuration_when_dual_sources_agree(dataset):
 
     assert candidate.build is not None
     assert candidate.build.armor["helm"].id == "gw2skills:300"
-    assert [source["source"] for source in candidate.build.provenance["sources"]] == [
+    assert candidate.build.context == ("roaming",)
+    assert candidate.build.version_audit["status"] == (
+        "publisher_claimed_current"
+    )
+    assert [
+        source["source"] for source in candidate.build.provenance["sources"]
+    ] == [
         "build-code",
         "gw2skills",
+        "metabattle",
     ]
+    source = candidate.build.provenance["sources"][-1]
+    assert source["url"] == URL
+    assert source["updated_at"] == "2026-07-18"
+    assert source["publisher_status"] == "publisher_claimed_current"
+    fields = candidate.build.provenance["fields"]
+    assert fields["skills"] == {"source": "build-code"}
+    assert fields["armor"] == {"source": "gw2skills"}
+    assert fields["context"] == {"source": "metabattle"}
+    assert fields["version_audit.status"] == {"source": "metabattle"}
+
+
+def test_dispatcher_preserves_metadata_conflicts_in_canonical_provenance(
+    dataset,
+):
+    html = FIXTURE.read_text("utf-8").replace(
+        "</dl>",
+        "<dt>Context</dt><dd>Zerg</dd></dl>",
+    )
+
+    candidate = import_source(
+        URL,
+        dataset=dataset,
+        client=_source_client(html, GW2SKILLS_FIXTURE.read_text("utf-8")),
+    )
+
+    assert candidate.build is not None
+    assert candidate.build.context == ()
+    assert candidate.build.provenance["conflicts"] == (
+        {
+            "field": "context",
+            "source": "metabattle",
+            "values": ("roaming", "zerg"),
+        },
+    )
+    with pytest.raises(TypeError):
+        candidate.build.provenance["conflicts"][0]["field"] = "mode"
 
 
 def test_dispatcher_records_dual_source_configuration_disagreement(dataset):
