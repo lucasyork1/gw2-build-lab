@@ -1,0 +1,37 @@
+name: Submit an original build
+description: Propose an original, tested WvW Thief build for later analysis support.
+title: "[Build] "
+labels: ["community-build", "needs-verification"]
+body:
+  - type: markdown
+    attributes:
+      value: Submit your own analysis. Do not submit API keys, copied third-party guide text, or third-party images.
+  - type: input
+    id: game_build
+    attributes: {label: Game build ID, description: Current ArenaNet build ID when tested.}
+    validations: {required: true}
+  - type: input
+    id: effective_patch
+    attributes: {label: Effective patch, description: Latest relevant patch date or link.}
+    validations: {required: true}
+  - type: input
+    id: source_url
+    attributes: {label: Source URL, description: Optional original video, build editor, or supporting source URL.}
+  - type: input
+    id: build_code
+    attributes: {label: Build code, description: In-game Build Template code.}
+    validations: {required: true}
+  - type: dropdown
+    id: wvw_context
+    attributes:
+      label: WvW context
+      options: [Solo roaming, Small-scale roaming, Havoc, Zerg, Other]
+    validations: {required: true}
+  - type: textarea
+    id: testing_notes
+    attributes: {label: Testing notes, description: Explain goals, gear, weapons, skills, runes, sigils, matchups, strengths, weaknesses, and test conditions.}
+    validations: {required: true}
+  - type: textarea
+    id: conflict_of_interest
+    attributes: {label: Conflict of interest, description: State any relevant commercial or community relationship; write none if not applicable.}
+    validations: {required: true}

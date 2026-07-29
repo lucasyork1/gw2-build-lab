@@ -1,0 +1,6849 @@
+[
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 50,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": []
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:50"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 112,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": []
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:112"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 115,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": []
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:115"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 137,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Mighty",
+      "zh": "威能"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:137"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 138,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Precise",
+      "zh": "精准"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:138"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 139,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Vital",
+      "zh": "体力"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:139"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 140,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Resilient",
+      "zh": "强韧"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:140"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 141,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Lingering",
+      "zh": "徘徊"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:141"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 142,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Strong",
+      "zh": "强力"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:142"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 144,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Ravaging",
+      "zh": "肆虐"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:144"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 145,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Rejuvenating",
+      "zh": "回春"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:145"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 146,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Vigorous",
+      "zh": "活力"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:146"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 147,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Mending",
+      "zh": "修护"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:147"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 148,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Stout",
+      "zh": "结实"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:148"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 149,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Hearty",
+      "zh": "坚韧"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:149"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 150,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Potent",
+      "zh": "潜能"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:150"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 151,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Penetrating",
+      "zh": "穿刺"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:151"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 152,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Honed",
+      "zh": "抛光"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:152"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 153,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Shaman's",
+      "zh": "萨满"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:153"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 154,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Rabid",
+      "zh": "狂暴"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:154"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 155,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Cleric's",
+      "zh": "传教士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:155"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 156,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Magi's",
+      "zh": "贤者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:156"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 157,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Valkyrie",
+      "zh": "女武神"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:157"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 158,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Knight's",
+      "zh": "骑士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:158"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 159,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Rampager's",
+      "zh": "暴怒者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:159"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 160,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Carrion",
+      "zh": "腐朽"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:160"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 161,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Berserker's",
+      "zh": "狂战士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:161"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 162,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Soldier's",
+      "zh": "士兵"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:162"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 175,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Healing",
+      "zh": "治愈"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:175"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 176,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Malign",
+      "zh": "恶意"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:176"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 520,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.15,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.15,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.15,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.15,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.15,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.15,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.15,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:520"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 559,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Celestial",
+      "zh": "天界"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:559"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 575,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": []
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:575"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 581,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Dire and Rabid",
+      "zh": "恐怖和狂暴"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:581"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 583,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Cavalier's",
+      "zh": "骑兵"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:583"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 584,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Berserker's",
+      "zh": "狂战士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:584"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 585,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Rabid",
+      "zh": "狂暴"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:585"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 586,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Soldier's",
+      "zh": "士兵"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:586"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 588,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Celestial",
+      "zh": "天界"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 13
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:588"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 591,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Berserker's and Valkyrie",
+      "zh": "狂战士和女武神"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:591"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 592,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Rabid and Apothecary's",
+      "zh": "狂暴和药剂师"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0,
+          "value": 32
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:592"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 593,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Celestial",
+      "zh": "天界"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 13
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 13
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:593"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 594,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Rabid",
+      "zh": "狂暴"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:594"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 595,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Rabid and Apothecary's",
+      "zh": "狂暴和药剂师"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0,
+          "value": 32
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:595"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 596,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Dire and Rabid",
+      "zh": "恐怖和狂暴"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:596"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 599,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Berserker's",
+      "zh": "狂战士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:599"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 600,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Berserker's and Valkyrie",
+      "zh": "狂战士和女武神"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:600"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 601,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Soldier's",
+      "zh": "士兵"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:601"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 602,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Cavalier's",
+      "zh": "骑兵"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:602"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 605,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Apothecary's",
+      "zh": "药剂师"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:605"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 616,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Cavalier's",
+      "zh": "骑兵"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:616"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 625,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:625"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 626,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:626"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 627,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Giver's",
+      "zh": "赠予者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:627"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 628,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Giver's",
+      "zh": "赠予者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:628"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 629,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Giver's",
+      "zh": "赠予者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:629"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 630,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Giver's",
+      "zh": "赠予者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:630"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 631,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Giver's",
+      "zh": "赠予者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:631"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 636,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:636"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 656,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Cleric's",
+      "zh": "传教士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:656"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 657,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Knight's",
+      "zh": "骑士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:657"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 658,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Rampager's",
+      "zh": "暴怒者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:658"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 659,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Apothecary's",
+      "zh": "药剂师"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:659"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 660,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Captain's",
+      "zh": "队长"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:660"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 661,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Cleric's",
+      "zh": "传教士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:661"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 662,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Knight's",
+      "zh": "骑士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:662"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 663,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Rampager's",
+      "zh": "暴怒者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:663"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 664,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Apothecary's",
+      "zh": "药剂师"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:664"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 665,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Captain's",
+      "zh": "队长"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:665"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 686,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Sentinel's",
+      "zh": "哨兵"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:686"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 689,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": []
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:689"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 690,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Settler's",
+      "zh": "定居者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:690"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 693,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Settler's",
+      "zh": "定居者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:693"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 700,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Settler's",
+      "zh": "定居者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:700"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 740,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.15,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.15,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.15,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.15,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:740"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 753,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Assassin's",
+      "zh": "刺客"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:753"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 754,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Dire",
+      "zh": "恐怖"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:754"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 755,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Hunter's",
+      "zh": "猎人"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:755"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 756,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Dire",
+      "zh": "恐怖"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:756"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 799,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Zealot's",
+      "zh": "狂热者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:799"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 800,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": []
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:800"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1011,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Forsaken",
+      "zh": "背弃"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1011"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1012,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Apostate's",
+      "zh": "叛变者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1012"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1013,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Survivor's",
+      "zh": "幸存者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1013"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1014,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Deserter's",
+      "zh": "逃兵"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1014"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1015,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Vagabond's",
+      "zh": "流浪者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1015"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1026,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Nomad's",
+      "zh": "游牧"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1026"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1030,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Giver's",
+      "zh": "赠予者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1030"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1031,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Giver's",
+      "zh": "赠予者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1031"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1032,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Bringer's",
+      "zh": "使者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1032"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1035,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Sentinel's",
+      "zh": "哨兵"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1035"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1037,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Magi's",
+      "zh": "贤者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1037"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1038,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Carrion",
+      "zh": "腐朽"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1038"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1040,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Assassin's",
+      "zh": "刺客"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1040"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1041,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Captain's",
+      "zh": "队长"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0,
+          "value": 32
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1041"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1042,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Rabid",
+      "zh": "狂暴"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1042"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1043,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Apothecary's",
+      "zh": "药剂师"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0,
+          "value": 32
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1043"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1044,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Cleric's",
+      "zh": "传教士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1044"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1046,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Berserker's",
+      "zh": "狂战士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0,
+          "value": 32
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1046"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1047,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Rampager's",
+      "zh": "暴怒者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0,
+          "value": 32
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1047"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1048,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Soldier's",
+      "zh": "士兵"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0,
+          "value": 32
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1048"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1050,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Cavalier's",
+      "zh": "骑兵"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0,
+          "value": 32
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1050"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1051,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Knight's",
+      "zh": "骑士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0,
+          "value": 18
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1051"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1052,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Celestial",
+      "zh": "天界"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0,
+          "value": 13
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0,
+          "value": 13
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0,
+          "value": 13
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0,
+          "value": 13
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0,
+          "value": 13
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0,
+          "value": 13
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0,
+          "value": 13
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0,
+          "value": 13
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0,
+          "value": 13
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1052"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1063,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Nomad's",
+      "zh": "游牧"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1063"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1064,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Sinister",
+      "zh": "凶恶"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1064"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1065,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Sinister",
+      "zh": "凶恶"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1065"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1066,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Nomad's",
+      "zh": "游牧"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1066"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1067,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Sinister",
+      "zh": "凶恶"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1067"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1070,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Giver's",
+      "zh": "赠予者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1070"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1071,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Shaman's",
+      "zh": "萨满"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1071"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1073,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Dire",
+      "zh": "恐怖"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1073"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1075,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Carrion",
+      "zh": "腐朽"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1075"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1076,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Cleric's",
+      "zh": "传教士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.35,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1076"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1077,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Berserker's",
+      "zh": "狂战士"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1077"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1078,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Rampager's",
+      "zh": "暴怒者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1078"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1085,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Trailblazer's",
+      "zh": "开拓者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1085"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1097,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Shaman's",
+      "zh": "萨满"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1097"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1098,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Crusader",
+      "zh": "远征军"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1098"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1109,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Crusader",
+      "zh": "远征军"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1109"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1111,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Marauder",
+      "zh": "劫掠者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1111"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1114,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Dire",
+      "zh": "恐怖"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1114"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1115,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Trailblazer's",
+      "zh": "开拓者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1115"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1118,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Vigilant",
+      "zh": "治安员"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1118"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1119,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Valkyrie",
+      "zh": "女武神"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1119"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1123,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Minstrel's",
+      "zh": "吟游诗人"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1123"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1125,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Commander's",
+      "zh": "指挥官"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1125"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1128,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Assassin's",
+      "zh": "刺客"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1128"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1130,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Viper's",
+      "zh": "毒蛇"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1130"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1131,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Commander's",
+      "zh": "指挥官"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1131"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1134,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Minstrel's",
+      "zh": "吟游诗人"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1134"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1139,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Vigilant",
+      "zh": "治安员"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1139"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1140,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Wanderer's",
+      "zh": "游荡者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1140"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1145,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Marauder",
+      "zh": "劫掠者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1145"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1153,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Viper's",
+      "zh": "毒蛇"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1153"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1162,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Wanderer's",
+      "zh": "游荡者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1162"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1163,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Zealot's",
+      "zh": "狂热者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1163"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1220,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Seraph",
+      "zh": "炽天使"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1220"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1222,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Seraph",
+      "zh": "炽天使"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1222"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1224,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Viper's",
+      "zh": "毒蛇"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1224"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1225,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Wanderer's",
+      "zh": "游荡者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1225"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1226,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Minstrel's",
+      "zh": "吟游诗人"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1226"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1227,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Commander's",
+      "zh": "指挥官"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1227"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1228,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Vigilant",
+      "zh": "治安员"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1228"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1229,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Trailblazer's",
+      "zh": "开拓者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1229"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1230,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Seraph",
+      "zh": "炽天使"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1230"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1231,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Marauder",
+      "zh": "劫掠者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1231"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1232,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Crusader",
+      "zh": "远征军"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1232"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1262,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Trailblazer's",
+      "zh": "开拓者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1262"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1263,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Marauder",
+      "zh": "劫掠者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1263"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1264,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Vigilant",
+      "zh": "治安员"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1264"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1265,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Minstrel's",
+      "zh": "吟游诗人"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1265"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1267,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Commander's",
+      "zh": "指挥官"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1267"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1268,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Viper's",
+      "zh": "毒蛇"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1268"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1269,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Seraph",
+      "zh": "炽天使"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1269"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1270,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Wanderer's",
+      "zh": "游荡者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1270"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1271,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Crusader",
+      "zh": "远征军"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1271"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1329,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Grieving",
+      "zh": "悲伤"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 25
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1329"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1337,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Marshal's",
+      "zh": "统帅"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1337"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1344,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Grieving",
+      "zh": "悲伤"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1344"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1345,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Harrier's",
+      "zh": "猎兔犬"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1345"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1363,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Harrier's",
+      "zh": "猎兔犬"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1363"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1364,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Marshal's",
+      "zh": "统帅"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1364"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1366,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Grieving",
+      "zh": "悲伤"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 25
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1366"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1367,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Harrier's",
+      "zh": "猎兔犬"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1367"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1374,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Marshal's",
+      "zh": "统帅"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1374"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1377,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Harrier's",
+      "zh": "猎兔犬"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.35,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.25,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1377"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1378,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Marshal's",
+      "zh": "统帅"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1378"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1379,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Grieving",
+      "zh": "悲伤"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1379"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1419,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": []
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1419"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1430,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Giver's",
+      "zh": "赠予者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.35,
+          "value": 32
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.25,
+          "value": 18
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1430"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1436,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Bringer's",
+      "zh": "使者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Precision",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.25,
+          "value": 18
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.35,
+          "value": 32
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1436"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1484,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Plaguedoctor's",
+      "zh": "瘟疫医生"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1484"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1486,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Plaguedoctor's",
+      "zh": "瘟疫医生"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1486"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1538,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Diviner's",
+      "zh": "神谕者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.3,
+          "value": 25
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1538"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1539,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Diviner's",
+      "zh": "神谕者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.3,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1539"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1548,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "",
+      "zh": ""
+    },
+    "payload": {
+      "attributes": []
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1548"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1549,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Plaguedoctor's",
+      "zh": "瘟疫医生"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1549"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1556,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Diviner's",
+      "zh": "神谕者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.3,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1556"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1559,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Plaguedoctor's",
+      "zh": "瘟疫医生"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Healing",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1559"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1566,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Diviner's",
+      "zh": "神谕者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.3,
+          "value": 25
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1566"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1681,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Dragon's",
+      "zh": "巨龙"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.3,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1681"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1686,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Ritualist's",
+      "zh": "祭祀者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1686"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1687,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Dragon's",
+      "zh": "巨龙"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.3,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1687"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1691,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Dragon's",
+      "zh": "巨龙"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.3,
+          "value": 25
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1691"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1694,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Ritualist's",
+      "zh": "祭祀者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1694"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1697,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Dragon's",
+      "zh": "巨龙"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.3,
+          "value": 25
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1697"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1706,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Ritualist's",
+      "zh": "祭祀者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1706"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1717,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Ritualist's",
+      "zh": "祭祀者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Vitality",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDamage",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "BoonDuration",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "ConditionDuration",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1717"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1826,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Demolisher's",
+      "zh": "破击者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 0
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 0
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 0
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1826"
+    ],
+    "verification_status": "automated"
+  },
+  {
+    "effective_patch": null,
+    "fetched_at": "2026-07-29T02:05:07Z",
+    "game_build_id": 204489,
+    "id": 1827,
+    "kind": "itemstat",
+    "mode": "wvw",
+    "names": {
+      "en": "Demolisher's",
+      "zh": "破击者"
+    },
+    "payload": {
+      "attributes": [
+        {
+          "attribute": "Power",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Precision",
+          "multiplier": 0.3,
+          "value": 25
+        },
+        {
+          "attribute": "Toughness",
+          "multiplier": 0.165,
+          "value": 12
+        },
+        {
+          "attribute": "CritDamage",
+          "multiplier": 0.165,
+          "value": 12
+        }
+      ]
+    },
+    "source_refs": [
+      "arenanet-api:itemstats:1827"
+    ],
+    "verification_status": "automated"
+  }
+]

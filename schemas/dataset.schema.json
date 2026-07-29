@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GW2 WvW Thief dataset manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "game_build_id",
+    "fetched_at",
+    "mode",
+    "files",
+    "unresolved_references"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "game_build_id": {"type": "integer", "minimum": 1},
+    "fetched_at": {"type": "string", "format": "date-time"},
+    "mode": {"const": "wvw"},
+    "files": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "unresolved_references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind", "id", "referenced_by"],
+        "properties": {
+          "kind": {"type": "string"},
+          "id": {"type": ["integer", "string"]},
+          "referenced_by": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

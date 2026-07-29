@@ -1,0 +1,22 @@
+{
+  "sources": [
+    {
+      "source_id": "arenanet-api",
+      "source_type": "official_api",
+      "url": "https://api.guildwars2.com",
+      "authority": 1
+    },
+    {
+      "source_id": "arenanet-update-notes",
+      "source_type": "official_patch_notes",
+      "url": "https://en-forum.guildwars2.com/forum/6-game-update-notes/",
+      "authority": 1
+    },
+    {
+      "source_id": "gw2-wiki",
+      "source_type": "community_wiki",
+      "url": "https://wiki.guildwars2.com/wiki/Main_Page",
+      "authority": 2
+    }
+  ]
+}

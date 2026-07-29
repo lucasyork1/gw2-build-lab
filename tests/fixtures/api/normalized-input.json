@@ -1,0 +1,64 @@
+{
+  "profession": {
+    "en": {
+      "id": "Thief",
+      "name": "Thief",
+      "specializations": [1],
+      "skills": [{"id": 100}]
+    },
+    "zh": {
+      "id": "Thief",
+      "name": "盗贼",
+      "specializations": [1],
+      "skills": [{"id": 100}]
+    }
+  },
+  "specializations": {
+    "en": [
+      {"id": 1, "name": "Shadow Arts", "profession": "Thief", "major_traits": [10], "minor_traits": []},
+      {"id": 2, "name": "Strength", "profession": "Warrior", "major_traits": [20], "minor_traits": []}
+    ],
+    "zh": [
+      {"id": 1, "name": "暗影技巧", "profession": "Thief", "major_traits": [10], "minor_traits": []},
+      {"id": 2, "name": "力量", "profession": "Warrior", "major_traits": [20], "minor_traits": []}
+    ]
+  },
+  "traits": {
+    "en": [
+      {"id": 10, "name": "Hidden Thief", "specialization": 1},
+      {"id": 20, "name": "Warrior Trait", "specialization": 2}
+    ],
+    "zh": [
+      {"id": 10, "name": "隐秘盗贼", "specialization": 1},
+      {"id": 20, "name": "战士特性", "specialization": 2}
+    ]
+  },
+  "skills": {
+    "en": [
+      {"id": 100, "name": "Steal", "professions": ["Thief"]},
+      {"id": 200, "name": "Warrior Skill", "professions": ["Warrior"]}
+    ],
+    "zh": [
+      {"id": 100, "name": "偷窃", "professions": ["Thief"]},
+      {"id": 200, "name": "战士技能", "professions": ["Warrior"]}
+    ]
+  },
+  "itemstats": {
+    "en": [{"id": 584, "name": "Berserker's", "attributes": [{"attribute": "Power", "multiplier": 0.35, "value": 32}]}],
+    "zh": [{"id": 584, "name": "狂战士", "attributes": [{"attribute": "Power", "multiplier": 0.35, "value": 32}]}]
+  },
+  "items": {
+    "en": [
+      {"id": 1000, "name": "Thief Coat", "type": "Armor", "level": 80, "details": {"type": "Coat", "infix_upgrade": {"id": 584}}},
+      {"id": 1001, "name": "Superior Rune", "type": "UpgradeComponent", "level": 60, "details": {"type": "Rune"}},
+      {"id": 1002, "name": "WvW Food", "type": "Consumable", "level": 80, "details": {"type": "Food"}},
+      {"id": 1003, "name": "Low Trophy", "type": "Trophy", "level": 0}
+    ],
+    "zh": [
+      {"id": 1000, "name": "盗贼外套", "type": "Armor", "level": 80, "details": {"type": "Coat", "infix_upgrade": {"id": 584}}},
+      {"id": 1001, "name": "超级符文", "type": "UpgradeComponent", "level": 60, "details": {"type": "Rune"}},
+      {"id": 1002, "name": "世界之战食物", "type": "Consumable", "level": 80, "details": {"type": "Food"}},
+      {"id": 1003, "name": "低级战利品", "type": "Trophy", "level": 0}
+    ]
+  }
+}
