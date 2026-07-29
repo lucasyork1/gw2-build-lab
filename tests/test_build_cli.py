@@ -561,6 +561,59 @@ def test_import_source_allows_unrelated_same_named_directory(tmp_path):
     assert len(list(candidate_dir.glob("candidate-*.json"))) == 1
 
 
+def test_import_source_allows_unrelated_python_project_without_build_data(
+    tmp_path,
+):
+    project = tmp_path / "unrelated-python-project"
+    project.mkdir()
+    (project / "pyproject.toml").write_text(
+        '[project]\nname = "unrelated-tool"\n',
+        encoding="utf-8",
+    )
+    candidate_dir = project / "candidate-output"
+
+    assert service.main(
+        [
+            "import-source",
+            METABATTLE_URL,
+            "--dataset",
+            str(CURRENT),
+            "--candidate-dir",
+            str(candidate_dir),
+        ],
+        client=_client(),
+    ) == 0
+
+    assert len(list(candidate_dir.glob("candidate-*.json"))) == 1
+
+
+def test_import_source_allows_unrelated_project_with_same_directory_shape(
+    tmp_path,
+):
+    project = tmp_path / "unrelated-same-shape-project"
+    project.mkdir()
+    (project / "pyproject.toml").write_text(
+        '[project]\nname = "unrelated-tool"\n',
+        encoding="utf-8",
+    )
+    candidate_dir = project / "data" / "community-builds" / "verified"
+    candidate_dir.mkdir(parents=True)
+
+    assert service.main(
+        [
+            "import-source",
+            METABATTLE_URL,
+            "--dataset",
+            str(CURRENT),
+            "--candidate-dir",
+            str(candidate_dir),
+        ],
+        client=_client(),
+    ) == 0
+
+    assert len(list(candidate_dir.glob("candidate-*.json"))) == 1
+
+
 def test_compare_writes_byte_identical_json_and_markdown(tmp_path):
     left = tmp_path / "left.json"
     right = tmp_path / "right.json"

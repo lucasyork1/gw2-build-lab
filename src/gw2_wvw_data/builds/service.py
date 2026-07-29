@@ -8,6 +8,7 @@ import json
 import os
 import re
 import tempfile
+import tomllib
 from collections.abc import Mapping, Sequence
 from contextlib import nullcontext
 from dataclasses import dataclass
@@ -57,6 +58,7 @@ _RFC3339_DATETIME = re.compile(
     r"\d{2}:\d{2}:\d{2}(?:\.\d+)?"
     r"(?:Z|[+-]\d{2}:\d{2})\Z"
 )
+_PROJECT_NAME = "gw2-wvw-thief-data"
 
 
 @dataclass(frozen=True)
@@ -187,7 +189,8 @@ def main(
         return 0
     if arguments.operation == "import-source":
         candidate_dir = _candidate_import_directory(
-            arguments.candidate_dir
+            arguments.candidate_dir,
+            dataset_path=arguments.dataset,
         )
         dataset = load_dataset(arguments.dataset)
         candidate = import_source(
@@ -295,17 +298,19 @@ def _candidate_dict(candidate: CommunityCandidate) -> dict[str, Any]:
     }
 
 
-def _candidate_import_directory(path: Path) -> Path:
+def _candidate_import_directory(
+    path: Path,
+    *,
+    dataset_path: Path,
+) -> Path:
     """Resolve an import target without crossing the review boundary."""
 
     candidate = path.resolve(strict=False)
     candidate_key = os.path.normcase(os.fspath(candidate))
-    for root in (candidate, *candidate.parents):
+    for root in _gw2_repository_roots(dataset_path):
         protected = root / "data" / "community-builds" / "verified"
-        if not (root / "pyproject.toml").is_file():
-            continue
         protected_key = os.path.normcase(
-            os.fspath(protected.resolve(strict=True))
+            os.fspath(protected.resolve(strict=False))
         )
         try:
             within_verified = (
@@ -320,6 +325,31 @@ def _candidate_import_directory(path: Path) -> Path:
                 "descendants"
             )
     return candidate
+
+
+def _gw2_repository_roots(dataset_path: Path) -> tuple[Path, ...]:
+    roots: dict[str, Path] = {}
+    for start in (
+        Path(__file__).resolve(),
+        dataset_path.resolve(strict=False),
+    ):
+        for root in (start, *start.parents):
+            pyproject = root / "pyproject.toml"
+            if not pyproject.is_file():
+                continue
+            try:
+                value = tomllib.loads(pyproject.read_text(encoding="utf-8"))
+            except (OSError, tomllib.TOMLDecodeError):
+                continue
+            project = value.get("project")
+            if (
+                isinstance(project, Mapping)
+                and project.get("name") == _PROJECT_NAME
+            ):
+                resolved = root.resolve(strict=True)
+                roots[os.path.normcase(os.fspath(resolved))] = resolved
+                break
+    return tuple(roots[key] for key in sorted(roots))
 
 
 def _write_output_pair(
