@@ -194,9 +194,11 @@ def decode_build_code(
             return ComponentRef(palette_id, None, _SOURCE, "unknown")
         return _component(skill_id, skill_names, confidence="mapped")
 
-    land_skills = [skill_from_palette(identifier) for identifier in palette_ids[:5]]
+    land_skills = [
+        skill_from_palette(identifier) for identifier in palette_ids[::2]
+    ]
     aquatic_skills = tuple(
-        skill_from_palette(identifier) for identifier in palette_ids[5:]
+        skill_from_palette(identifier) for identifier in palette_ids[1::2]
     )
     weapons = [
         {

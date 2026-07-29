@@ -52,11 +52,14 @@ def test_decodes_thief_header_specializations_traits_and_land_skills(dataset):
     ]
     assert build.skills["heal"] == ComponentRef(13021, "Withdraw", "build-code", "mapped")
     assert build.skills["utilities"] == (
-        None,
         ComponentRef(13035, "Roll for Initiative", "build-code", "mapped"),
-        None,
+        ComponentRef(13002, "Shadowstep", "build-code", "mapped"),
+        ComponentRef(13062, "Signet of Agility", "build-code", "mapped"),
     )
-    assert build.skills["elite"] == ComponentRef(13002, "Shadowstep", "build-code", "mapped")
+    assert build.skills["elite"] == ComponentRef(
+        13085, "Dagger Storm", "build-code", "mapped"
+    )
+    assert build.assumptions["aquatic_skills"] == (None, None, None, None, None)
     assert build.armor == {}
     assert build.version_audit["status"] == "unverifiable"
     assert {value["source"] for value in build.provenance["fields"].values()} == {
