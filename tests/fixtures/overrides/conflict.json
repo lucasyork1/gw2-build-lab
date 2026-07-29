@@ -1,0 +1,26 @@
+[
+  {
+    "entity_kind": "skill",
+    "entity_id": 123,
+    "json_pointer": "/payload/coefficient",
+    "mode": "wvw",
+    "value": 0.8,
+    "previous_value": 1.25,
+    "effective_patch": "2026-07-14",
+    "source_url": "https://en-forum.guildwars2.com/topic/174766-game-update-notes-july-14-2026/",
+    "verification_status": "human_verified",
+    "notes": "First proposed value"
+  },
+  {
+    "entity_kind": "skill",
+    "entity_id": 123,
+    "json_pointer": "/payload/coefficient",
+    "mode": "wvw",
+    "value": 0.7,
+    "previous_value": 1.25,
+    "effective_patch": "2026-07-14",
+    "source_url": "https://wiki.guildwars2.com/wiki/Game_updates/July_2026",
+    "verification_status": "human_verified",
+    "notes": "Conflicting proposed value"
+  }
+]
