@@ -1,6 +1,8 @@
 import json
 from copy import deepcopy
 
+import pytest
+
 from gw2_wvw_data.analysis import compare_builds
 from gw2_wvw_data.builds.model import BuildRecord
 
@@ -241,8 +243,8 @@ def test_compare_builds_distinguishes_absent_slot_from_literal_missing():
         {
             "category": "weapons",
             "path": "weapons[0].slot",
-            "before": {"missing": True},
-            "after": "<missing>",
+            "before": {"state": "missing"},
+            "after": {"state": "present", "value": "<missing>"},
         }
     ]
     json.dumps(first.to_dict(), sort_keys=True)
@@ -267,8 +269,58 @@ def test_compare_builds_distinguishes_literal_missing_from_absent_slot():
         {
             "category": "weapons",
             "path": "weapons[0].slot",
-            "before": "<missing>",
-            "after": {"missing": True},
+            "before": {"state": "present", "value": "<missing>"},
+            "after": {"state": "missing"},
         }
     ]
     json.dumps(first.to_dict(), sort_keys=True)
+
+
+@pytest.mark.parametrize(
+    "authored_slot",
+    [
+        ["missing_weapon_slot"],
+        {"missing": True},
+        {"state": "missing"},
+        {"state": "present", "value": {"authored": True}},
+    ],
+)
+@pytest.mark.parametrize("missing_first", [True, False])
+def test_compare_builds_unambiguously_tags_missing_and_authored_weapon_slots(
+    authored_slot,
+    missing_first,
+):
+    missing_value = _build_value()
+    missing_value["weapons"][0].pop("slot")
+    authored_value = deepcopy(missing_value)
+    authored_value["build_id"] = "authored"
+    authored_value["weapons"][0]["slot"] = deepcopy(authored_slot)
+    missing = BuildRecord.from_dict(missing_value)
+    authored = BuildRecord.from_dict(authored_value)
+    left, right = (
+        (missing, authored) if missing_first else (authored, missing)
+    )
+
+    comparison = compare_builds(left, right).to_dict()
+    assert comparison == compare_builds(left, right).to_dict()
+
+    missing_state = {"state": "missing"}
+    present_state = {
+        "state": "present",
+        "value": authored_slot,
+    }
+    assert comparison["replacements"] == [
+        {
+            "category": "weapons",
+            "path": "weapons[0].slot",
+            "before": (
+                missing_state if missing_first else present_state
+            ),
+            "after": (
+                present_state if missing_first else missing_state
+            ),
+        }
+    ]
+    replacement = comparison["replacements"][0]
+    assert replacement["before"] != replacement["after"]
+    json.dumps(comparison, sort_keys=True)

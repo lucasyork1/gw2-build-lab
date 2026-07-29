@@ -43,7 +43,7 @@ class StructuralChange:
         return {
             "category": self.category,
             "path": self.path,
-            "value": _public_value(self.value),
+            "value": _public_comparison_value(self.path, self.value),
         }
 
 
@@ -58,8 +58,8 @@ class StructuralReplacement:
         return {
             "category": self.category,
             "path": self.path,
-            "before": _public_value(self.before),
-            "after": _public_value(self.after),
+            "before": _public_comparison_value(self.path, self.before),
+            "after": _public_comparison_value(self.path, self.after),
         }
 
 
@@ -227,7 +227,7 @@ def _presence_is_structural(path: str) -> bool:
 
 def _identity(value: Any) -> Any:
     if value is _MISSING_SLOT:
-        return ("missing_weapon_slot",)
+        return _MISSING_SLOT
     if isinstance(value, ComponentRef):
         return ("component", value.id)
     if isinstance(value, Mapping):
@@ -240,9 +240,15 @@ def _identity(value: Any) -> Any:
     return value
 
 
+def _public_comparison_value(path: str, value: Any) -> Any:
+    if _presence_is_structural(path):
+        if value is _MISSING_SLOT:
+            return {"state": "missing"}
+        return {"state": "present", "value": _public_value(value)}
+    return _public_value(value)
+
+
 def _public_value(value: Any) -> Any:
-    if value is _MISSING_SLOT:
-        return {"missing": True}
     if isinstance(value, ComponentRef):
         return value.to_dict()
     if isinstance(value, Mapping):
