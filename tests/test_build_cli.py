@@ -332,6 +332,105 @@ def test_output_pair_rolls_back_when_second_final_replace_fails(
         )
 
 
+def test_output_pair_cleans_first_backup_when_second_backup_creation_fails(
+    tmp_path, monkeypatch
+):
+    json_output = tmp_path / "analysis.json"
+    markdown_output = tmp_path / "analysis.md"
+    json_output.write_bytes(b"old-json")
+    markdown_output.write_bytes(b"old-markdown")
+    real_backup_destination = service._backup_destination
+    calls = 0
+
+    def fail_second_backup(destination):
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            raise OSError("injected second backup failure")
+        return real_backup_destination(destination)
+
+    monkeypatch.setattr(
+        service,
+        "_backup_destination",
+        fail_second_backup,
+    )
+
+    with pytest.raises(OSError, match="injected second backup failure"):
+        service._write_output_pair(
+            json_output,
+            b"new-json",
+            markdown_output,
+            b"new-markdown",
+        )
+
+    assert json_output.read_bytes() == b"old-json"
+    assert markdown_output.read_bytes() == b"old-markdown"
+    assert sorted(tmp_path.iterdir()) == sorted(
+        (json_output, markdown_output)
+    )
+
+
+def test_output_pair_retains_recovery_backup_when_backup_restore_fails(
+    tmp_path, monkeypatch
+):
+    json_output = tmp_path / "analysis.json"
+    markdown_output = tmp_path / "analysis.md"
+    json_output.write_bytes(b"old-json")
+    markdown_output.write_bytes(b"old-markdown")
+    path_type = type(json_output)
+    original_replace = path_type.replace
+    final_failure_injected = False
+    restore_failure_injected = False
+
+    def fail_final_and_json_restore(path, target):
+        nonlocal final_failure_injected, restore_failure_injected
+        target = Path(target)
+        if (
+            not final_failure_injected
+            and target == markdown_output
+            and ".backup." not in path.name
+        ):
+            final_failure_injected = True
+            raise OSError("injected second final replace failure")
+        if (
+            not restore_failure_injected
+            and target == json_output
+            and ".backup." in path.name
+        ):
+            restore_failure_injected = True
+            raise OSError("injected JSON backup restore failure")
+        return original_replace(path, target)
+
+    monkeypatch.setattr(
+        path_type,
+        "replace",
+        fail_final_and_json_restore,
+    )
+
+    with pytest.raises(
+        RuntimeError,
+        match="rollback was incomplete",
+    ) as caught:
+        service._write_output_pair(
+            json_output,
+            b"new-json",
+            markdown_output,
+            b"new-markdown",
+        )
+
+    recovery_backups = list(
+        tmp_path.glob(".analysis.json.backup.*.tmp")
+    )
+    assert len(recovery_backups) == 1
+    assert recovery_backups[0].read_bytes() == b"old-json"
+    assert str(recovery_backups[0]) in str(caught.value)
+    assert json_output.read_bytes() == b"new-json"
+    assert markdown_output.read_bytes() == b"old-markdown"
+    assert sorted(tmp_path.iterdir()) == sorted(
+        (json_output, markdown_output, recovery_backups[0])
+    )
+
+
 def test_output_pair_preflights_directory_destination_before_replacement(
     tmp_path,
 ):

@@ -301,33 +301,45 @@ def _write_output_pair(
     _preflight_output_pair(json_path, markdown_path)
     staged: list[tuple[Path, Path]] = []
     backups: list[tuple[Path, Path | None]] = []
+    retained_backups: set[Path] = set()
     replacement_started = False
     try:
         staged.append((_stage_bytes(json_path, json_bytes), json_path))
         staged.append(
             (_stage_bytes(markdown_path, markdown_bytes), markdown_path)
         )
-        backups = [
-            (destination, _backup_destination(destination))
-            for _, destination in staged
-        ]
+        for _, destination in staged:
+            backups.append(
+                (destination, _backup_destination(destination))
+            )
         replacement_started = True
         for temporary, destination in staged:
             temporary.replace(destination)
     except BaseException as error:
         if replacement_started:
-            rollback_errors = _restore_destinations(backups)
+            rollback_errors, retained_backups = _restore_destinations(
+                backups
+            )
             if rollback_errors:
+                evidence = (
+                    " Recovery backups retained: "
+                    + ", ".join(
+                        str(path) for path in sorted(retained_backups)
+                    )
+                    if retained_backups
+                    else ""
+                )
                 raise RuntimeError(
                     "output replacement failed and rollback was incomplete: "
                     + "; ".join(rollback_errors)
+                    + evidence
                 ) from error
         raise
     finally:
         for temporary, _ in staged:
             temporary.unlink(missing_ok=True)
         for _, backup in backups:
-            if backup is not None:
+            if backup is not None and backup not in retained_backups:
                 backup.unlink(missing_ok=True)
 
 
@@ -373,8 +385,9 @@ def _backup_destination(destination: Path) -> Path | None:
 
 def _restore_destinations(
     backups: list[tuple[Path, Path | None]],
-) -> list[str]:
+) -> tuple[list[str], set[Path]]:
     errors = []
+    retained_backups: set[Path] = set()
     for destination, backup in backups:
         try:
             if backup is None:
@@ -382,8 +395,14 @@ def _restore_destinations(
             else:
                 backup.replace(destination)
         except OSError as error:
-            errors.append(f"{destination}: {error}")
-    return errors
+            if backup is not None and backup.exists():
+                retained_backups.add(backup)
+                errors.append(
+                    f"{destination}: {error}; old content remains at {backup}"
+                )
+            else:
+                errors.append(f"{destination}: {error}")
+    return errors, retained_backups
 
 
 def _stage_bytes(
