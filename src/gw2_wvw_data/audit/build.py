@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from datetime import date, datetime
 from typing import Any, Mapping, Sequence
@@ -21,6 +22,9 @@ _TRINKET_SLOTS = (
     "ring2",
 )
 _WEAPON_SLOTS = ("w11", "w12", "w21", "w22")
+_ISO_TIMEZONE_SUFFIX = re.compile(
+    r"(?:Z|[+-](?:[01]\d|2[0-3])(?::?[0-5]\d)?)\Z"
+)
 _ARMOR_TYPES = {
     "helm": "Helm",
     "shoulders": "Shoulders",
@@ -925,8 +929,24 @@ def _source_content_dates_by_name(
 def _optional_date(value: Any) -> date | None:
     if not isinstance(value, str):
         return None
+    if (
+        len(value) < 10
+        or value[4] != "-"
+        or value[7] != "-"
+        or not (value[:4] + value[5:7] + value[8:10]).isdigit()
+    ):
+        return None
     try:
-        return date.fromisoformat(value[:10])
+        if len(value) == 10:
+            return date.fromisoformat(value)
+        if len(value) <= 10 or value[10] != "T":
+            return None
+        if _ISO_TIMEZONE_SUFFIX.search(value) is None:
+            return None
+        parsed = datetime.fromisoformat(value)
+        if parsed.tzinfo is None or parsed.utcoffset() is None:
+            return None
+        return parsed.date()
     except ValueError:
         return None
 

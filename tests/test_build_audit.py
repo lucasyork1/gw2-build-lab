@@ -826,6 +826,51 @@ def test_valid_field_cannot_mask_malformed_field_in_same_source_record(
     assert "component source date is ambiguous" in audit.warnings
 
 
+@pytest.mark.parametrize(
+    "content_version",
+    (
+        "2026-07-27garbage",
+        "2026-07-27Tnot-a-time",
+        "2026-07-27T99:99:99Z",
+        "2026-07-27T13:45:59",
+        "2026-07-27T13:45:59+05:99",
+        "2026-07-27T13:45:59+24:00",
+        "2026-W30-1",
+        "2026-W30-1T13:45:59Z",
+    ),
+)
+def test_malformed_source_content_version_is_unverifiable(
+    complete_build, dataset_index, content_version
+):
+    value = complete_build.to_dict()
+    value["provenance"]["sources"] = [
+        {"source": "fixture", "updated_at": content_version}
+    ]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "unverifiable"
+    assert "component source date is ambiguous" in audit.warnings
+
+
+@pytest.mark.parametrize(
+    "content_version",
+    (
+        "2026-07-27",
+        "2026-07-27T13:45:59Z",
+        "2026-07-27T13:45:59-05:00",
+        "2026-07-27T13:45:59+23:59",
+    ),
+)
+def test_valid_complete_source_date_or_datetime_resolves(
+    complete_build, dataset_index, content_version
+):
+    value = complete_build.to_dict()
+    value["provenance"]["sources"] = [
+        {"source": "fixture", "updated_at": content_version}
+    ]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "current_verified"
+
+
 def test_effective_patch_only_source_date_detects_newer_patch(
     complete_build, dataset_index
 ):
