@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WvW Thief build audit",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "build_id",
+    "status",
+    "legality",
+    "game_build_id",
+    "checked_at",
+    "missing_fields",
+    "unknown_components",
+    "removed_components",
+    "affected_components",
+    "warnings"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "build_id": {"type": "string", "minLength": 1},
+    "status": {
+      "enum": [
+        "current_verified",
+        "publisher_claimed_current",
+        "possibly_affected",
+        "stale",
+        "invalid",
+        "unverifiable"
+      ]
+    },
+    "legality": {"enum": ["legal", "illegal"]},
+    "game_build_id": {"type": ["integer", "null"]},
+    "checked_at": {"type": "string", "format": "date-time"},
+    "missing_fields": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "unknown_components": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/component_finding"}
+    },
+    "removed_components": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/component_finding"}
+    },
+    "affected_components": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/affected_component"}
+    },
+    "warnings": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "component_finding": {
+      "type": "object",
+      "required": ["field", "component_kind", "component_id"],
+      "properties": {
+        "field": {"type": "string", "minLength": 1},
+        "component_kind": {"type": "string", "minLength": 1},
+        "component_id": {"type": ["integer", "string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "affected_component": {
+      "type": "object",
+      "required": [
+        "component_kind",
+        "component_id",
+        "effective_at",
+        "change",
+        "impact"
+      ],
+      "properties": {
+        "component_kind": {"type": "string", "minLength": 1},
+        "component_id": {"type": ["integer", "string"]},
+        "effective_at": {"type": "string", "format": "date"},
+        "change": {"type": "string", "minLength": 1},
+        "impact": {"enum": ["possibly_affected", "stale"]}
+      },
+      "additionalProperties": false
+    }
+  }
+}

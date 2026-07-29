@@ -26,4 +26,4 @@ pythonpath = ["src"]
 testpaths = ["tests"]
 
 [tool.setuptools.package-data]
-gw2_wvw_data = ["schemas/*.json"]
+gw2_wvw_data = ["schemas/*.json", "data/analysis-rules/*.json"]

@@ -1,0 +1,41 @@
+name: Submit a build candidate
+description: Submit a WvW Thief Build Code, GW2Skills link, or supported community source for candidate review.
+title: "[Build candidate] "
+labels: ["community-build", "needs-verification"]
+body:
+  - type: markdown
+    attributes:
+      value: A submission creates a review candidate, not a verified build. Do not submit API keys, copied third-party guide text, images, or comments.
+  - type: input
+    id: game_build
+    attributes: {label: Game build ID, description: ArenaNet game build used when this configuration was tested or captured.}
+    validations: {required: true}
+  - type: input
+    id: effective_patch
+    attributes: {label: Effective patch, description: Relevant patch date or official patch-note URL.}
+    validations: {required: true}
+  - type: input
+    id: source_url
+    attributes: {label: Source URL, description: GW2Skills editor URL or supported community page.}
+    validations: {required: true}
+  - type: input
+    id: build_code
+    attributes: {label: Build code, description: In-game Build Template Code, if the source exposes one.}
+  - type: dropdown
+    id: wvw_context
+    attributes:
+      label: WvW context
+      options: [Solo roaming, Small-scale roaming, Havoc, Zerg reference, Other]
+    validations: {required: true}
+  - type: textarea
+    id: explicit_configuration
+    attributes: {label: Explicit configuration, description: List only fields shown by the source, including weapons and equipment; write Unknown for missing facts.}
+    validations: {required: true}
+  - type: textarea
+    id: testing_notes
+    attributes: {label: Testing notes, description: Give your own test conditions and identify any unresolved or conflicting facts.}
+    validations: {required: true}
+  - type: textarea
+    id: conflict_of_interest
+    attributes: {label: Conflict of interest, description: State any relationship to the source, creator, product, or guild; write none if not applicable.}
+    validations: {required: true}

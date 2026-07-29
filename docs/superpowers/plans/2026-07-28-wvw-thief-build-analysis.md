@@ -124,7 +124,7 @@ Every component reference uses:
 
 ```json
 {
-  "id": 13038,
+  "id": 13002,
   "name": "Shadowstep",
   "source": "build-code",
   "confidence": "exact"
@@ -177,6 +177,9 @@ git commit -m "feat: define canonical build contract"
 - Create: `src/gw2_wvw_data/decoders/build_code.py`
 - Create: `tests/test_build_code.py`
 - Create: `tests/fixtures/builds/thief-template-codes.json`
+- Modify: `src/gw2_wvw_data/fetch.py`
+- Modify: `tests/test_fetch.py`
+- Modify: `data/normalized/current/profession.json`
 
 **Interfaces:**
 - Consumes: `BuildRecord`, `ComponentRef`
@@ -237,13 +240,13 @@ byte 1: profession code (5 for Thief)
 bytes 2..7: three (specialization_id, packed_trait_choices) pairs
 bytes 8..27: ten little-endian uint16 skill palette IDs
 bytes 28..43: sixteen profession-specific bytes
-byte 44: terrestrial weapon count
-next count*2 bytes: little-endian uint16 weapon type IDs
+if bytes remain, byte 44: terrestrial weapon count
+next weapon_count*2 bytes: little-endian uint16 weapon type IDs
 next byte: skill override count
-next count*4 bytes: little-endian uint32 skill IDs
+next override_count*4 bytes: little-endian uint32 skill IDs
 ```
 
-Reject truncated arrays and non-zero trailing bytes. Decode each packed trait choice as `(packed >> shift) & 0b11` for shifts `0`, `2`, and `4`, preserving `0` as an explicit unselected trait.
+Accept the legacy exact 44-byte form as empty weapon/override arrays. Reject payloads shorter than 44 bytes, truncated dynamic arrays, and non-zero trailing bytes. Decode each packed trait choice as `(packed >> shift) & 0b11` for shifts `0`, `2`, and `4`, preserving `0` as an explicit unselected trait.
 
 Resolve specialization and trait IDs from `specializations.json`; resolve skill palette IDs from `profession.payload.skills_by_palette`; resolve weapon type IDs through this constant:
 
@@ -257,20 +260,33 @@ WEAPON_TYPE_IDS = {
 
 Unknown non-zero IDs become `ComponentRef(id=value, name=None, source="build-code", confidence="unknown")`; they do not crash decoding. Provenance for every decoded field is `build-code`.
 
-- [ ] **Step 4: Run decoder tests**
+- [ ] **Step 4: Preserve the ArenaNet skill-palette mapping**
+
+Change both localized `/v2/professions/Thief` requests in `fetch.py` to include:
+
+```python
+params={"lang": language, "v": "latest"}
+```
+
+Add a fetch test asserting the version parameter is sent and a normalization test asserting `skills_by_palette` survives under `profession.payload`.
+
+Because the committed dataset already represents ArenaNet Build ID `204489`, fetch `https://api.guildwars2.com/v2/professions/Thief?v=latest&lang=en`, verify `/v2/build` is still `204489`, and update only `data/normalized/current/profession.json`'s `payload.skills_by_palette` with the returned integer pairs. Keep the record's existing `game_build_id`, `fetched_at`, names, sources, and verification status unchanged. Sort pairs by palette ID before writing canonical JSON.
+
+- [ ] **Step 5: Run decoder and data-pipeline tests**
 
 Run:
 
 ```powershell
-pytest tests/test_build_code.py -q
+pytest tests/test_build_code.py tests/test_fetch.py tests/test_normalize.py -q
+gw2-wvw-data validate --dataset data/normalized/current --sources data/provenance/sources.json
 ```
 
-Expected: all pass.
+Expected: all tests pass and validation prints `[]`.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```powershell
-git add src/gw2_wvw_data/decoders tests/test_build_code.py tests/fixtures/builds/thief-template-codes.json
+git add src/gw2_wvw_data/decoders src/gw2_wvw_data/fetch.py data/normalized/current/profession.json tests/test_build_code.py tests/test_fetch.py tests/test_normalize.py tests/fixtures/builds/thief-template-codes.json
 git commit -m "feat: decode thief build template codes"
 ```
 
@@ -542,7 +558,7 @@ def test_patch_after_source_marks_affected_components(
         checked_at="2026-07-28T23:00:00Z",
     )
     assert audit.status == "possibly_affected"
-    assert audit.affected_components[0].component_id == 13038
+    assert audit.affected_components[0].component_id == 13002
 
 
 def test_unknown_component_is_unverifiable(unknown_component_build, dataset_index):
@@ -656,9 +672,9 @@ Rules have this exact shape:
   "rules": [
     {
       "rule_id": "shadowstep-mobility",
-      "when": {"component_id": 13038},
+      "when": {"component_id": 13002},
       "effects": [{"dimension": "mobility_disengage", "delta": 1}],
-      "evidence": [{"component_id": 13038, "field": "payload"}],
+      "evidence": [{"component_id": 13002, "field": "payload"}],
       "claim": "Shadowstep contributes a mobility and disengage option."
     }
   ]

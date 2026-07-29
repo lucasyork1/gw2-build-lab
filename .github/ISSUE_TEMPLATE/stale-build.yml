@@ -19,6 +19,9 @@ body:
     attributes: {label: Source URL, description: Link to the build page or original submission.}
     validations: {required: true}
   - type: input
+    id: architecture_id
+    attributes: {label: Architecture or verified record ID, description: Stable project ID if the build already exists in the candidate or verified corpus.}
+  - type: input
     id: build_code
     attributes: {label: Build code, description: Optional in-game Build Template code.}
   - type: dropdown
@@ -29,7 +32,7 @@ body:
     validations: {required: true}
   - type: textarea
     id: testing_notes
-    attributes: {label: Testing notes, description: Describe what changed or no longer works and how you tested it.}
+    attributes: {label: Testing notes, description: Describe the affected component or patch, what changed or no longer works, and how you tested it. Do not treat a publisher status label as project verification.}
     validations: {required: true}
   - type: textarea
     id: conflict_of_interest

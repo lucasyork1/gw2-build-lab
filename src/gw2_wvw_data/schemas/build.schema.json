@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lucasyork1.github.io/gw2-build-lab/schemas/build.schema.json",
+  "title": "Canonical WvW Thief build",
+  "type": "object",
+  "required": [
+    "schema_version", "build_id", "profession", "mode", "context",
+    "specializations", "traits", "skills", "weapons", "armor", "trinkets",
+    "runes", "relic", "infusions", "consumables", "assumptions", "provenance",
+    "version_audit"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "build_id": {"type": "string", "minLength": 1},
+    "profession": {"const": "Thief"},
+    "mode": {"const": "wvw"},
+    "context": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "specializations": {"type": "array", "items": {"$ref": "#/$defs/component_ref"}},
+    "traits": {"type": "array", "items": {"$ref": "#/$defs/component_ref"}},
+    "skills": {
+      "type": "object", "required": ["heal", "utilities", "elite"], "additionalProperties": false,
+      "properties": {
+        "heal": {"$ref": "#/$defs/component_or_null"},
+        "utilities": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/component_or_null"}},
+        "elite": {"$ref": "#/$defs/component_or_null"}
+      }
+    },
+    "weapons": {"type": "array", "items": {"type": "object"}},
+    "armor": {"type": "object", "additionalProperties": {"$ref": "#/$defs/component_or_null"}},
+    "trinkets": {"type": "object", "additionalProperties": {"$ref": "#/$defs/component_or_null"}},
+    "runes": {"type": "array", "items": {"$ref": "#/$defs/component_or_null"}},
+    "relic": {"$ref": "#/$defs/component_or_null"},
+    "infusions": {"type": "array", "items": {"$ref": "#/$defs/component_or_null"}},
+    "consumables": {
+      "type": "object", "required": ["food", "utility"], "additionalProperties": false,
+      "properties": {"food": {"$ref": "#/$defs/component_or_null"}, "utility": {"$ref": "#/$defs/component_or_null"}}
+    },
+    "assumptions": {"type": "object"},
+    "provenance": {
+      "type": "object", "required": ["sources", "fields", "conflicts"], "additionalProperties": false,
+      "properties": {
+        "sources": {"type": "array", "items": {"type": "object"}},
+        "fields": {"type": "object", "additionalProperties": {"type": "object"}},
+        "conflicts": {"type": "array", "items": {}}
+      }
+    },
+    "version_audit": {
+      "type": "object", "required": ["status", "game_build_id", "checked_at", "affected_components", "warnings"], "additionalProperties": false,
+      "properties": {
+        "status": {"enum": ["current_verified", "publisher_claimed_current", "possibly_affected", "stale", "invalid", "unverifiable"]},
+        "game_build_id": {"type": ["integer", "null"]},
+        "checked_at": {"type": ["string", "null"], "format": "date-time"},
+        "affected_components": {"type": "array", "items": {"$ref": "#/$defs/component_ref"}},
+        "warnings": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "component_ref": {
+      "type": "object", "required": ["id", "name", "source", "confidence"], "additionalProperties": false,
+      "properties": {
+        "id": {"type": ["integer", "string", "null"]},
+        "name": {"type": ["string", "null"]},
+        "source": {"type": "string", "minLength": 1},
+        "confidence": {"enum": ["exact", "mapped", "publisher_claimed", "unknown"]}
+      }
+    },
+    "component_or_null": {"anyOf": [{"$ref": "#/$defs/component_ref"}, {"type": "null"}]}
+  }
+}

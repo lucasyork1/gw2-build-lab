@@ -14,7 +14,11 @@ FIXTURE = Path(__file__).parent / "fixtures" / "api" / "normalized-input.json"
 def _write_snapshot(tmp_path, *, missing_trait=False):
     payload = json.loads(FIXTURE.read_text("utf-8"))
     for language in ("en", "zh"):
-        payload["profession"][language]["weapons"] = {"Dagger": {}}
+        payload["profession"][language]["weapons"] = {
+            "Dagger": {},
+            "Shortbow": {},
+        }
+        payload["profession"][language]["skills_by_palette"] = [[266, 13021]]
         for item in payload["items"][language]:
             item["game_types"] = ["Wvw"]
         by_id = {item["id"]: item for item in payload["items"][language]}
@@ -75,6 +79,25 @@ def _write_snapshot(tmp_path, *, missing_trait=False):
                     "game_types": ["Pvp", "PvpLobby"],
                     "details": {"type": "Coat", "weight_class": "Medium"},
                 },
+                {
+                    "id": 1010,
+                    "name": "WvW Backpiece",
+                    "type": "Back",
+                    "level": 80,
+                    "rarity": "Exotic",
+                    "details": {"infusion_slots": []},
+                },
+                {
+                    "id": 1011,
+                    "name": "Thief Shortbow",
+                    "type": "Weapon",
+                    "level": 80,
+                    "rarity": "Exotic",
+                    "details": {
+                        "type": "ShortBow",
+                        "infusion_slots": [],
+                    },
+                },
             ]
         )
         for item in payload["items"][language]:
@@ -123,9 +146,17 @@ def test_normalize_keeps_thief_closure_and_relevant_equipment(tmp_path):
     assert [record["id"] for record in result["specializations"]] == [1]
     assert [record["id"] for record in result["traits"]] == [10]
     assert [record["id"] for record in result["skills"]] == [100]
-    assert [record["id"] for record in result["equipment"]] == [1000, 1004]
+    assert [record["id"] for record in result["equipment"]] == [
+        1000,
+        1004,
+        1010,
+        1011,
+    ]
+    assert result["equipment"][2]["payload"]["type"] == "Back"
+    assert result["equipment"][3]["payload"]["details"]["type"] == "ShortBow"
     assert [record["id"] for record in result["upgrades"]] == [1001, 1005]
     assert [record["id"] for record in result["consumables"]] == [1002]
+    assert result["profession"]["payload"]["skills_by_palette"] == [[266, 13021]]
     assert result["skills"][0]["names"] == {"en": "Steal", "zh": "偷窃"}
     assert result["manifest"]["unresolved_references"] == []
 
