@@ -1,0 +1,497 @@
+import json
+from copy import deepcopy
+from pathlib import Path
+
+import pytest
+
+from gw2_wvw_data.audit import DatasetIndex, PatchEvent, audit_build
+from gw2_wvw_data.builds.model import BuildRecord
+from gw2_wvw_data.contracts import schema_errors
+
+
+FIXTURE = Path(__file__).parent / "fixtures" / "builds" / "patch-events.json"
+
+ARMOR_SLOTS = ("helm", "shoulders", "coat", "gloves", "leggings", "boots")
+TRINKET_SLOTS = ("back", "amulet", "earring1", "earring2", "ring1", "ring2")
+
+
+def _entity(identifier, kind, payload, *, build=101, removed=False):
+    return {
+        "id": identifier,
+        "kind": kind,
+        "names": {"en": f"{kind}-{identifier}", "zh": f"{kind}-{identifier}"},
+        "mode": "wvw",
+        "game_build_id": build,
+        "effective_patch": "2026-07-01",
+        "fetched_at": "2026-07-28T20:00:00Z",
+        "source_refs": [f"fixture:{kind}:{identifier}"],
+        "verification_status": "automated",
+        "payload": {**payload, **({"removed": True} if removed else {})},
+    }
+
+
+@pytest.fixture
+def dataset():
+    specializations = [
+        _entity(
+            7,
+            "specialization",
+            {
+                "profession": "Thief",
+                "major_traits": list(range(701, 710)),
+                "minor_traits": [],
+            },
+        ),
+        _entity(
+            28,
+            "specialization",
+            {
+                "profession": "Thief",
+                "major_traits": list(range(2801, 2810)),
+                "minor_traits": [],
+            },
+        ),
+        _entity(
+            44,
+            "specialization",
+            {
+                "profession": "Thief",
+                "major_traits": list(range(4401, 4410)),
+                "minor_traits": [],
+            },
+        ),
+    ]
+    traits = []
+    for specialization in specializations:
+        for offset, trait_id in enumerate(
+            specialization["payload"]["major_traits"]
+        ):
+            traits.append(
+                _entity(
+                    trait_id,
+                    "trait",
+                    {
+                        "specialization": specialization["id"],
+                        "tier": offset // 3 + 1,
+                        "slot": "Major",
+                    },
+                )
+            )
+    skills = [
+        _entity(13027, "skill", {"slot": "Heal", "type": "Heal"}),
+        _entity(13038, "skill", {"slot": "Utility", "type": "Utility"}),
+        _entity(13062, "skill", {"slot": "Utility", "type": "Utility"}),
+        _entity(13035, "skill", {"slot": "Utility", "type": "Utility"}),
+        _entity(13082, "skill", {"slot": "Elite", "type": "Elite"}),
+        _entity(
+            13999,
+            "skill",
+            {"slot": "Utility", "type": "Utility"},
+            removed=True,
+        ),
+    ]
+    equipment = [
+        *[
+            _entity(
+                identifier,
+                "equipment",
+                {"type": "Armor", "details": {"type": slot.title()}},
+            )
+            for identifier, slot in enumerate(ARMOR_SLOTS, 2001)
+        ],
+        *[
+            _entity(
+                identifier,
+                "equipment",
+                {
+                    "type": "Trinket",
+                    "details": {
+                        "type": (
+                            "Accessory"
+                            if slot.startswith("earring")
+                            else "Ring"
+                            if slot.startswith("ring")
+                            else slot.title()
+                        )
+                    },
+                },
+            )
+            for identifier, slot in enumerate(TRINKET_SLOTS, 2101)
+        ],
+        *[
+            _entity(
+                identifier,
+                "equipment",
+                {"type": "Weapon", "details": {"type": weapon_type}},
+            )
+            for identifier, weapon_type in enumerate(
+                ("Dagger", "Pistol", "Sword", "Shortbow"), 2201
+            )
+        ],
+    ]
+    return {
+        "manifest": {"game_build_id": 101, "fetched_at": "2026-07-28T20:00:00Z"},
+        "profession": _entity(
+            "Thief",
+            "profession",
+            {
+                "weapons": {
+                    "Dagger": {"flags": ["Mainhand", "Offhand"]},
+                    "Pistol": {"flags": ["Mainhand", "Offhand"]},
+                    "Sword": {"flags": ["Mainhand"]},
+                    "Shortbow": {"flags": ["TwoHand"]},
+                },
+                "skills": [
+                    {"id": 13027, "slot": "Heal"},
+                    {"id": 13038, "slot": "Utility"},
+                    {"id": 13062, "slot": "Utility"},
+                    {"id": 13035, "slot": "Utility"},
+                    {"id": 13082, "slot": "Elite"},
+                    {"id": 13999, "slot": "Utility"},
+                ],
+                "skills_by_palette": [[1, 13027], [2, 13038]],
+            },
+        ),
+        "specializations": specializations,
+        "traits": traits,
+        "skills": skills,
+        "equipment": equipment,
+        "upgrades": [
+            _entity(3001, "upgrade", {"type": "UpgradeComponent", "details": {"type": "Rune"}}),
+            _entity(3002, "upgrade", {"type": "Relic", "details": {}}),
+        ],
+        "consumables": [
+            _entity(4001, "consumable", {"type": "Consumable", "details": {"type": "Food"}}),
+            _entity(4002, "consumable", {"type": "Consumable", "details": {"type": "Utility"}}),
+        ],
+        "itemstats": [],
+    }
+
+
+@pytest.fixture
+def dataset_index(dataset):
+    return DatasetIndex.from_dataset(dataset)
+
+
+def _ref(identifier, name=None, *, source="fixture", confidence="exact"):
+    return {
+        "id": identifier,
+        "name": name or f"component-{identifier}",
+        "source": source,
+        "confidence": confidence,
+    }
+
+
+def _complete_value():
+    specialization_ids = (7, 28, 44)
+    trait_ids = (701, 704, 707, 2801, 2804, 2807, 4401, 4404, 4407)
+    weapon_types = ("Dagger", "Pistol", "Sword", "Dagger")
+    weapon_item_ids = (2201, 2202, 2203, 2201)
+    return {
+        "schema_version": 1,
+        "build_id": "complete",
+        "profession": "Thief",
+        "mode": "wvw",
+        "context": ["roaming"],
+        "specializations": [_ref(value) for value in specialization_ids],
+        "traits": [_ref(value) for value in trait_ids],
+        "skills": {
+            "heal": _ref(13027),
+            "utilities": [_ref(13038), _ref(13062), _ref(13035)],
+            "elite": _ref(13082),
+        },
+        "weapons": [
+            {
+                "slot": slot,
+                "type": _ref(index + 1, weapon_type),
+                "item": _ref(weapon_item_ids[index]),
+                "upgrades": [],
+                "infusions": [],
+            }
+            for index, (slot, weapon_type) in enumerate(
+                zip(("w11", "w12", "w21", "w22"), weapon_types, strict=True)
+            )
+        ],
+        "armor": {
+            slot: _ref(identifier)
+            for identifier, slot in enumerate(ARMOR_SLOTS, 2001)
+        },
+        "trinkets": {
+            slot: _ref(identifier)
+            for identifier, slot in enumerate(TRINKET_SLOTS, 2101)
+        },
+        "runes": [_ref(3001) for _ in range(6)],
+        "relic": _ref(3002),
+        "infusions": [],
+        "consumables": {"food": _ref(4001), "utility": _ref(4002)},
+        "assumptions": {},
+        "provenance": {
+            "sources": [{"source": "fixture", "updated_at": "2026-07-28"}],
+            "fields": {},
+            "conflicts": [],
+        },
+        "version_audit": {
+            "status": "unverifiable",
+            "game_build_id": 101,
+            "checked_at": None,
+            "affected_components": [],
+            "warnings": [],
+        },
+    }
+
+
+@pytest.fixture
+def complete_build():
+    return BuildRecord.from_dict(_complete_value())
+
+
+@pytest.fixture
+def build_code_only(complete_build):
+    return complete_build.with_updates(
+        build_id="build-code-only",
+        weapons=(),
+        armor={},
+        trinkets={},
+        runes=(),
+        relic=None,
+        consumables={"food": None, "utility": None},
+    )
+
+
+@pytest.fixture
+def publisher_claimed_build(complete_build):
+    value = complete_build.to_dict()
+    value["version_audit"]["game_build_id"] = 100
+    value["provenance"]["sources"][0]["publisher_status"] = (
+        "publisher_claimed_current"
+    )
+    return BuildRecord.from_dict(value)
+
+
+@pytest.fixture
+def unknown_component_build(complete_build):
+    value = complete_build.to_dict()
+    value["skills"]["utilities"][0] = _ref(999999)
+    return BuildRecord.from_dict(value)
+
+
+@pytest.fixture
+def removed_component_build(complete_build):
+    value = complete_build.to_dict()
+    value["skills"]["utilities"][0] = _ref(13999)
+    return BuildRecord.from_dict(value)
+
+
+@pytest.fixture
+def patch_events():
+    return [
+        PatchEvent.from_dict(item)
+        for item in json.loads(FIXTURE.read_text(encoding="utf-8"))
+    ]
+
+
+def _audit(build, dataset_index, patch_events=()):
+    return audit_build(
+        build,
+        index=dataset_index,
+        patch_events=patch_events,
+        checked_at="2026-07-28T23:00:00Z",
+    )
+
+
+def test_dataset_index_indexes_legality_and_version_metadata_once(dataset_index):
+    assert dataset_index.entity("skill", 13038)["names"]["en"] == "skill-13038"
+    assert dataset_index.specialization_trait_tiers[7][1] == frozenset(
+        {701, 702, 703}
+    )
+    assert dataset_index.profession_weapons["Dagger"]["flags"] == (
+        "Mainhand",
+        "Offhand",
+    )
+    assert dataset_index.skill_palette[2] == 13038
+    assert dataset_index.entity_metadata[("skill", 13038)].effective_patch == (
+        "2026-07-01"
+    )
+
+
+def test_build_code_only_is_legal_but_equipment_incomplete(
+    build_code_only, dataset_index
+):
+    audit = _audit(build_code_only, dataset_index)
+    assert audit.legality == "legal"
+    assert "armor.helm" in audit.missing_fields
+    assert audit.status == "unverifiable"
+
+
+def test_publisher_current_never_becomes_verified_without_full_resolution(
+    publisher_claimed_build, dataset_index
+):
+    audit = _audit(publisher_claimed_build, dataset_index)
+    assert audit.status == "publisher_claimed_current"
+
+
+def test_patch_after_source_marks_affected_components(
+    complete_build, dataset_index, patch_events
+):
+    audit = _audit(complete_build, dataset_index, patch_events)
+    assert audit.status == "possibly_affected"
+    assert audit.affected_components[0].component_id == 13038
+
+
+def test_unknown_component_is_unverifiable(unknown_component_build, dataset_index):
+    audit = _audit(unknown_component_build, dataset_index)
+    assert audit.status == "unverifiable"
+    assert audit.unknown_components[0].component_id == 999999
+
+
+def test_removed_component_is_invalid(removed_component_build, dataset_index):
+    audit = _audit(removed_component_build, dataset_index)
+    assert audit.status == "invalid"
+    assert audit.legality == "illegal"
+
+
+def test_illegal_specialization_trait_pairing_is_invalid(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["traits"][0] = _ref(2802)
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "invalid"
+    assert audit.legality == "illegal"
+
+
+def test_duplicate_trait_tier_is_invalid(complete_build, dataset_index):
+    value = complete_build.to_dict()
+    value["traits"][1] = _ref(702)
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "invalid"
+    assert audit.legality == "illegal"
+
+
+def test_duplicate_land_utilities_are_invalid(complete_build, dataset_index):
+    value = complete_build.to_dict()
+    value["skills"]["utilities"][1] = value["skills"]["utilities"][0]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "invalid"
+    assert audit.legality == "illegal"
+
+
+def test_unavailable_weapon_type_is_invalid(complete_build, dataset_index):
+    value = complete_build.to_dict()
+    value["weapons"][0]["type"] = _ref(999, "Greatsword")
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "invalid"
+    assert audit.legality == "illegal"
+
+
+def test_unresolved_site_local_weapon_type_is_unverifiable(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["weapons"][0]["type"] = _ref(
+        "gw2skills:47",
+        name=None,
+        source="gw2skills",
+        confidence="publisher_claimed",
+    )
+    value["weapons"][0]["type"]["name"] = None
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "unverifiable"
+    assert audit.legality == "legal"
+    assert audit.unknown_components[0].field == "weapons.w11.type"
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected"),
+    [
+        (lambda value: value["runes"].pop(), "runes[5]"),
+        (lambda value: value["armor"].pop("helm"), "armor.helm"),
+        (lambda value: value["trinkets"].pop("ring2"), "trinkets.ring2"),
+        (lambda value: value["weapons"].pop(), "weapons.w22"),
+        (lambda value: value.__setitem__("relic", None), "relic"),
+        (
+            lambda value: value["consumables"].__setitem__("food", None),
+            "consumables.food",
+        ),
+        (
+            lambda value: value["consumables"].__setitem__("utility", None),
+            "consumables.utility",
+        ),
+    ],
+)
+def test_exact_required_equipment_slots_are_reported(
+    complete_build, dataset_index, mutation, expected
+):
+    value = complete_build.to_dict()
+    mutation(value)
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert expected in audit.missing_fields
+    assert audit.status == "unverifiable"
+
+
+def test_complete_current_build_passes_all_current_verified_gates(
+    complete_build, dataset_index
+):
+    audit = _audit(complete_build, dataset_index)
+    assert audit.status == "current_verified"
+    assert audit.missing_fields == ()
+    assert audit.unknown_components == ()
+    assert audit.removed_components == ()
+
+
+def test_breaking_post_source_patch_is_stale(complete_build, dataset_index):
+    event = PatchEvent(
+        component_kind="skill",
+        component_id=13038,
+        effective_at="2026-07-29",
+        change="Skill was replaced.",
+        impact="stale",
+    )
+    audit = _audit(complete_build, dataset_index, [event])
+    assert audit.status == "stale"
+
+
+def test_status_precedence_keeps_invalid_above_patch_and_unknown(
+    removed_component_build, dataset_index, patch_events
+):
+    value = removed_component_build.to_dict()
+    value["skills"]["utilities"][1] = _ref(999999)
+    audit = _audit(BuildRecord.from_dict(value), dataset_index, patch_events)
+    assert audit.status == "invalid"
+
+
+def test_warnings_and_component_findings_have_deterministic_order(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["armor"].pop("helm")
+    value["trinkets"].pop("amulet")
+    value["skills"]["utilities"][0] = _ref(999999)
+    value["skills"]["utilities"][2] = _ref(999998)
+    build = BuildRecord.from_dict(value)
+
+    first = _audit(build, dataset_index)
+    second = _audit(build, dataset_index)
+
+    assert first.to_dict() == second.to_dict()
+    assert first.missing_fields == tuple(sorted(first.missing_fields))
+    assert first.warnings == tuple(sorted(first.warnings))
+    assert [item.field for item in first.unknown_components] == sorted(
+        item.field for item in first.unknown_components
+    )
+
+
+def test_audit_dict_matches_public_schema(complete_build, dataset_index):
+    assert schema_errors(
+        _audit(complete_build, dataset_index).to_dict(),
+        "build-audit.schema.json",
+    ) == []
+
+
+def test_inconsistent_dataset_build_ids_block_project_verification(dataset):
+    value = deepcopy(dataset)
+    value["skills"][0]["game_build_id"] = 999
+    index = DatasetIndex.from_dataset(value)
+    audit = _audit(BuildRecord.from_dict(_complete_value()), index)
+    assert audit.status == "unverifiable"
+    assert "dataset game build is inconsistent" in audit.warnings

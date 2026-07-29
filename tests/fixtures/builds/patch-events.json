@@ -1,0 +1,9 @@
+[
+  {
+    "component_kind": "skill",
+    "component_id": 13038,
+    "effective_at": "2026-07-29",
+    "change": "Recharge changed after the source was updated.",
+    "impact": "possibly_affected"
+  }
+]

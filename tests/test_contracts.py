@@ -10,6 +10,7 @@ RUNTIME_SCHEMAS = (
     "override.schema.json",
     "release-manifest.schema.json",
     "build.schema.json",
+    "build-audit.schema.json",
 )
 
 
