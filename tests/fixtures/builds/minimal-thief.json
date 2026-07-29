@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "build_id": "fixture-minimal-thief",
+  "profession": "Thief",
+  "mode": "wvw",
+  "context": ["roaming"],
+  "specializations": [],
+  "traits": [],
+  "skills": {"heal": null, "utilities": [null, null, null], "elite": null},
+  "weapons": [],
+  "armor": {},
+  "trinkets": {},
+  "runes": [],
+  "relic": null,
+  "infusions": [],
+  "consumables": {"food": null, "utility": null},
+  "assumptions": {},
+  "provenance": {"sources": [], "fields": {}, "conflicts": []},
+  "version_audit": {
+    "status": "unverifiable",
+    "game_build_id": null,
+    "checked_at": null,
+    "affected_components": [],
+    "warnings": []
+  }
+}
