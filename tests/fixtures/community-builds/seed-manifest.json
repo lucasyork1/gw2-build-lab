@@ -1,0 +1,72 @@
+[
+  {
+    "architecture_id": "daredevil-power-sd",
+    "context": "roaming",
+    "source_type": "build_code",
+    "fixture": "daredevil-power-sd.txt",
+    "expected_specialization": "Daredevil",
+    "expected_specializations": ["Daredevil"],
+    "expected_weapons": ["Sword", "Dagger"],
+    "expected_status": "unverifiable"
+  },
+  {
+    "architecture_id": "daredevil-celestial-sa-axe-pistol",
+    "context": "roaming",
+    "source_type": "build_code",
+    "fixture": "daredevil-celestial-sa-axe-pistol.txt",
+    "expected_specialization": "Daredevil",
+    "expected_specializations": ["Shadow Arts", "Daredevil"],
+    "expected_weapons": ["Axe", "Pistol"],
+    "expected_status": "unverifiable"
+  },
+  {
+    "architecture_id": "daredevil-power-scepter",
+    "context": "roaming",
+    "source_type": "build_code",
+    "fixture": "daredevil-power-scepter.txt",
+    "expected_specialization": "Daredevil",
+    "expected_specializations": ["Daredevil"],
+    "expected_weapons": ["Scepter", "Pistol"],
+    "expected_status": "unverifiable"
+  },
+  {
+    "architecture_id": "daredevil-sa-dagger-pistol",
+    "context": "roaming",
+    "source_type": "build_code",
+    "fixture": "daredevil-sa-dagger-pistol.txt",
+    "expected_specialization": "Daredevil",
+    "expected_specializations": ["Shadow Arts", "Daredevil"],
+    "expected_weapons": ["Dagger", "Pistol"],
+    "expected_status": "unverifiable"
+  },
+  {
+    "architecture_id": "deadeye-sa-rifle",
+    "context": "roaming",
+    "source_type": "build_code",
+    "fixture": "deadeye-sa-rifle.txt",
+    "expected_specialization": "Deadeye",
+    "expected_specializations": ["Shadow Arts", "Deadeye"],
+    "expected_weapons": ["Rifle"],
+    "expected_status": "unverifiable"
+  },
+  {
+    "architecture_id": "specter-celestial-scepter",
+    "context": "roaming",
+    "source_type": "build_code",
+    "fixture": "specter-celestial-scepter.txt",
+    "expected_specialization": "Specter",
+    "expected_specializations": ["Specter"],
+    "expected_weapons": ["Scepter", "Pistol"],
+    "expected_status": "unverifiable"
+  },
+  {
+    "architecture_id": "core-pistol-dagger-condition",
+    "context": "roaming",
+    "source_type": "build_code",
+    "fixture": "core-pistol-dagger-condition.txt",
+    "expected_specialization": "Core",
+    "expected_specializations": [],
+    "expected_weapons": ["Pistol", "Dagger"],
+    "expected_status": "unverifiable"
+  }
+]

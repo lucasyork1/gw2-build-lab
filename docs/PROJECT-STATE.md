@@ -19,6 +19,13 @@
 - GitHub Actions 更新 PR、校验和 Release 工作流；
 - 社区 Issue/PR 模板；
 - `main` 分支保护和必需的 `validate-data` 检查。
+- 游戏内 Build Template Code 的确定性离线解码；
+- GW2Skills 完整编辑器链接导入；
+- MetaBattle 受控最小事实导入；
+- Build 完整性、WvW 合法性和版本状态审计；
+- 八个能力维度的证据规则、结构化对比及 JSON/Markdown 报告；
+- 七种首批 Roaming 架构的离线验收样本；
+- 候选导入、报告、维护者审核和 PR 晋升的社区工作流。
 
 第一阶段设计：
 
@@ -26,15 +33,15 @@
 
 ## 当前里程碑
 
-实现“完整 Build 导入与分析”：
+“完整 Build 导入与分析”里程碑已实现并进入维护状态。统一链路为：
 
-- 游戏内 Build Template Code；
-- GW2Skills 完整链接；
-- MetaBattle 等受控来源；
-- 全部装备、法印、符文、圣物、灌注和消耗品；
-- WvW 合法性与过期审计；
-- 有证据的优缺点和改进建议；
-- 玩家持续提交链接并通过 PR 进入样本库。
+```text
+Build Code / GW2Skills / MetaBattle
+  -> canonical BuildRecord
+  -> completeness, legality and version audit
+  -> evidence-backed analysis
+  -> deterministic JSON and Markdown
+```
 
 已批准设计：
 
@@ -43,6 +50,26 @@
 实施计划：
 
 - `docs/superpowers/plans/2026-07-28-wvw-thief-build-analysis.md`
+
+## 当前数据集
+
+- 发布时捕获的 ArenaNet Build ID：`204489`
+- 数据抓取时间：`2026-07-29T02:05:07Z`
+- 当前数据目录：`data/normalized/current`
+- 分析规则：`data/analysis-rules/thief-wvw-v1.json`
+
+每次新数据发布都必须重新读取 `/v2/build` 和相关官方补丁。这里记录的
+Build ID 是本次数据集快照，不代表未来会自动保持最新。
+
+## 操作命令
+
+```text
+gw2-wvw-data analyze --build-code "[&...]" --dataset data/normalized/current --json out/build.json --markdown out/build.md
+gw2-wvw-data analyze --gw2skills-url "https://en.gw2skills.net/editor/?..." --dataset data/normalized/current --json out/build.json --markdown out/build.md
+gw2-wvw-data import-source "https://metabattle.com/wiki/Build:Example" --dataset data/normalized/current --candidate-dir data/community-builds/candidates
+gw2-wvw-data compare build-a.json build-b.json --json out/comparison.json --markdown out/comparison.md
+gw2-wvw-data validate --dataset data/normalized/current --sources data/provenance/sources.json
+```
 
 ## 约束
 
@@ -65,12 +92,34 @@
 
 处理顺序：
 
-1. 导入候选；
-2. 解析标准模型；
-3. 校验当前 WvW 版本；
-4. 生成分析和冲突报告；
-5. 创建 Pull Request；
-6. 人工审核后进入正式样本库。
+1. 导入到 `data/community-builds/candidates/`；
+2. 生成审计和分析到 `data/community-builds/reports/`；
+3. 维护者检查来源、缺失值、冲突、合法性和补丁影响；
+4. 在 Pull Request 中提出晋升；
+5. 人工审核后移动到 `data/community-builds/verified/`。
+
+自动导入和报告生成不得直接写入 verified 目录。
+`publisher_claimed_current` 只表示发布者声称当前；只有完整 ArenaNet ID、
+装备栏位、WvW 合法性、匹配的数据集 Build ID 和补丁检查全部通过后，才能
+标记 `current_verified`。
+
+## 当前限制
+
+- Build Template Code 不含完整装备和 Roaming/Zerg 场景，单独输入通常是
+  `unverifiable`；
+- GW2Skills 装备 ID 在完成 ArenaNet ID 映射前仍是站点本地 ID；
+- 社区页面自动适配器目前只有 MetaBattle；Snow Crows 和 GW2Mists 仅可作为
+  人工证据链接；
+- 网络导入只允许 `en.gw2skills.net`、`metabattle.com` 和
+  `www.metabattle.com` 的 HTTPS HTML，并执行 URL、重定向、超时和响应体限制；
+- 分析只使用项目规则中的明确证据，不输出无依据的单一总分；
+- 尚不支持 YouTube 导入/自动发现、自然语言 Build 生成、PvE 或 sPvP。
+
+## 下一里程碑边界
+
+下一项已批准的产品边界是“网页完整 Build 编辑器和公开分析页”。开始实现前
+必须单独完成设计和实施计划；本里程碑不扩展到 YouTube、自然语言生成、
+Codex Skill、PvE 或 sPvP。
 
 ## 新 Codex 任务检查清单
 
