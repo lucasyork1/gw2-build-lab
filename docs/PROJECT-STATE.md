@@ -40,6 +40,10 @@
 
 - `docs/superpowers/specs/2026-07-28-wvw-thief-build-analysis-design.md`
 
+实施计划：
+
+- `docs/superpowers/plans/2026-07-28-wvw-thief-build-analysis.md`
+
 ## 约束
 
 - ArenaNet API 和官方补丁优先；
