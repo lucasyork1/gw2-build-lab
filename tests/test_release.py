@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from gw2_wvw_data.io import sha256_file
+import gw2_wvw_data.release as release_module
 from gw2_wvw_data.release import build_release
 
 
@@ -81,6 +82,9 @@ def test_zip_uses_fixed_member_timestamps(tmp_path):
         assert {member.date_time for member in archive.infolist()} == {
             (1980, 1, 1, 0, 0, 0)
         }
+        assert {member.compress_type for member in archive.infolist()} == {
+            zipfile.ZIP_STORED
+        }
 
 
 def test_sqlite_matches_json_entities_and_foreign_keys(tmp_path):
@@ -100,6 +104,30 @@ def test_invalid_dataset_produces_no_release_directory(tmp_path):
     output = tmp_path / "release"
 
     with pytest.raises(ValueError, match="invalid_mode"):
+        build_release(dataset, output)
+
+    assert not output.exists()
+
+
+def test_release_rejects_json_sqlite_parity_failure(tmp_path, monkeypatch):
+    dataset = _write_dataset(tmp_path / "dataset")
+    original_build_sqlite = release_module._build_sqlite
+
+    def corrupt_database(source, destination):
+        original_build_sqlite(source, destination)
+        connection = sqlite3.connect(destination)
+        try:
+            connection.execute(
+                "DELETE FROM entity WHERE rowid = (SELECT MIN(rowid) FROM entity)"
+            )
+            connection.commit()
+        finally:
+            connection.close()
+
+    monkeypatch.setattr(release_module, "_build_sqlite", corrupt_database)
+    output = tmp_path / "release"
+
+    with pytest.raises(ValueError, match="JSON/SQLite parity"):
         build_release(dataset, output)
 
     assert not output.exists()

@@ -5,8 +5,11 @@ def _entity(entity_id, *, kind="skill", build=204132, mode="wvw", sources=None):
     return {
         "id": entity_id,
         "kind": kind,
+        "names": {"en": str(entity_id), "zh": str(entity_id)},
         "mode": mode,
         "game_build_id": build,
+        "effective_patch": None,
+        "fetched_at": "2026-07-28T20:00:00Z",
         "source_refs": sources or [f"arenanet-api:{kind}s:{entity_id}"],
         "verification_status": "automated",
         "payload": {},
@@ -25,8 +28,16 @@ def _valid_dataset():
             }
         ],
         "manifest": {
+            "schema_version": 1,
             "game_build_id": 204132,
+            "fetched_at": "2026-07-28T20:00:00Z",
             "mode": "wvw",
+            "files": [
+                "profession.json",
+                "skills.json",
+                "itemstats.json",
+                "equipment.json",
+            ],
             "unresolved_references": [],
         },
         "applied_overrides": [],
@@ -59,6 +70,7 @@ def test_validation_reports_stable_issue_codes():
         "invalid_mode",
         "missing_itemstat",
         "missing_source",
+        "schema_invalid",
         "unresolved_reference",
         "unreviewed_override",
     ]
@@ -71,5 +83,17 @@ def test_validation_detects_manifest_mode_mismatch():
     issues = validate_dataset(dataset, source_ids={"arenanet-api"})
 
     assert [(issue.code, issue.entity_kind) for issue in issues] == [
-        ("invalid_mode", "manifest")
+        ("invalid_mode", "manifest"),
+        ("schema_invalid", "manifest"),
+    ]
+
+
+def test_validation_rejects_entity_that_breaks_public_schema():
+    dataset = _valid_dataset()
+    dataset["skills"][0]["verification_status"] = "trusted_by_magic"
+
+    issues = validate_dataset(dataset, source_ids={"arenanet-api"})
+
+    assert [(issue.code, issue.entity_kind, issue.entity_id) for issue in issues] == [
+        ("schema_invalid", "skill", "1")
     ]

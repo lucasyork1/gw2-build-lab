@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any, Iterable
 
+from gw2_wvw_data.contracts import verify_raw_snapshot
 from gw2_wvw_data.io import write_json
 
 
@@ -79,6 +80,8 @@ def _normalize_items(
     *,
     game_build_id: int,
     fetched_at: str,
+    allowed_weapon_types: set[str],
+    available_itemstat_ids: set[int],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     localized = _localized_by_id(chinese)
     categories: dict[str, list[dict[str, Any]]] = {
@@ -86,15 +89,55 @@ def _normalize_items(
         "upgrades": [],
         "consumables": [],
     }
-    kind_by_type = {
-        "Armor": "equipment",
-        "Weapon": "equipment",
-        "UpgradeComponent": "upgrades",
-        "Consumable": "consumables",
-    }
+    equipment_rarities = {"Exotic", "Ascended", "Legendary"}
     for record in english:
-        category = kind_by_type.get(record.get("type"))
-        if category is None or int(record.get("level", 0)) < 60:
+        item_type = record.get("type")
+        details = record.get("details", {})
+        level = int(record.get("level", 0))
+        rarity = record.get("rarity")
+        category: str | None = None
+        if (
+            item_type == "Armor"
+            and level == 80
+            and rarity in equipment_rarities
+            and details.get("weight_class") == "Medium"
+        ):
+            category = "equipment"
+        elif (
+            item_type == "Weapon"
+            and level == 80
+            and rarity in equipment_rarities
+            and details.get("type") in allowed_weapon_types
+        ):
+            category = "equipment"
+        elif (
+            item_type == "Trinket"
+            and level == 80
+            and rarity in equipment_rarities
+        ):
+            category = "equipment"
+        elif (
+            item_type == "UpgradeComponent"
+            and level >= 60
+            and details.get("type") in {"Rune", "Sigil"}
+        ):
+            category = "upgrades"
+        elif item_type == "Relic" and level == 80:
+            category = "upgrades"
+        elif (
+            item_type == "Consumable"
+            and level == 80
+            and details.get("type") in {"Food", "Utility"}
+        ):
+            category = "consumables"
+        if category is None:
+            continue
+        itemstat_id = details.get("infix_upgrade", {}).get("id")
+        if (
+            category == "equipment"
+            and itemstat_id is not None
+            and itemstat_id not in available_itemstat_ids
+        ):
             continue
         categories[category].append(
             _entity(
@@ -123,7 +166,7 @@ def normalize_snapshot(
 
     snapshot = Path(snapshot_dir)
     output = Path(output_dir)
-    raw_manifest = _read_json(snapshot / "manifest.json")
+    raw_manifest = verify_raw_snapshot(snapshot)
     game_build_id = int(raw_manifest["game_build_id"])
     fetched_at = str(raw_manifest["fetched_at"])
 
@@ -259,6 +302,11 @@ def normalize_snapshot(
         item_zh,
         game_build_id=game_build_id,
         fetched_at=fetched_at,
+        allowed_weapon_types=set(profession_en.get("weapons", {})),
+        available_itemstat_ids={
+            int(record["id"])
+            for record in itemstat_en
+        },
     )
     result["equipment"] = equipment
     result["upgrades"] = upgrades

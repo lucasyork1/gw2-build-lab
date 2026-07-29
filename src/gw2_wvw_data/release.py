@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
+from gw2_wvw_data.contracts import schema_errors
 from gw2_wvw_data.io import sha256_file, write_json
 from gw2_wvw_data.overrides import load_dataset
 from gw2_wvw_data.validate import validate_dataset
@@ -137,20 +138,49 @@ def _build_sqlite(dataset: dict[str, Any], destination: Path) -> None:
         connection.close()
 
 
+def _verify_sqlite_parity(dataset: dict[str, Any], database: Path) -> None:
+    expected = {
+        (
+            entity["kind"],
+            str(entity["id"]),
+            json.dumps(
+                entity.get("payload", {}),
+                ensure_ascii=False,
+                separators=(",", ":"),
+                sort_keys=True,
+            ),
+        )
+        for entity in _iter_entities(dataset)
+    }
+    connection = sqlite3.connect(database)
+    try:
+        actual = set(
+            connection.execute(
+                "SELECT kind, id, payload_json FROM entity"
+            ).fetchall()
+        )
+        foreign_key_issues = connection.execute(
+            "PRAGMA foreign_key_check"
+        ).fetchall()
+    finally:
+        connection.close()
+    if actual != expected or foreign_key_issues:
+        raise ValueError("JSON/SQLite parity validation failed")
+
+
 def _build_zip(dataset_dir: Path, destination: Path) -> None:
     json_files = sorted(dataset_dir.glob("*.json"), key=lambda path: path.name)
     with zipfile.ZipFile(
         destination,
         mode="w",
-        compression=zipfile.ZIP_DEFLATED,
-        compresslevel=9,
+        compression=zipfile.ZIP_STORED,
     ) as archive:
         for path in json_files:
             info = zipfile.ZipInfo(path.name, date_time=(1980, 1, 1, 0, 0, 0))
-            info.compress_type = zipfile.ZIP_DEFLATED
+            info.compress_type = zipfile.ZIP_STORED
             info.create_system = 3
             info.external_attr = 0o100644 << 16
-            archive.writestr(info, path.read_bytes(), compress_type=zipfile.ZIP_DEFLATED)
+            archive.writestr(info, path.read_bytes(), compress_type=zipfile.ZIP_STORED)
 
 
 def build_release(
@@ -183,6 +213,7 @@ def build_release(
         database_path = staging / database_name
         _build_zip(dataset_path, archive_path)
         _build_sqlite(dataset, database_path)
+        _verify_sqlite_parity(dataset, database_path)
         artifact_records = [
             {"filename": path.name, "sha256": sha256_file(path)}
             for path in sorted((archive_path, database_path), key=lambda path: path.name)
@@ -194,6 +225,14 @@ def build_release(
             "created_from": dataset["manifest"]["fetched_at"],
             "artifacts": artifact_records,
         }
+        manifest_errors = schema_errors(
+            manifest_payload,
+            "release-manifest.schema.json",
+        )
+        if manifest_errors:
+            raise ValueError(
+                f"release manifest schema invalid: {manifest_errors[0]}"
+            )
         manifest_path = staging / "release-manifest.json"
         write_json(manifest_path, manifest_payload)
         sums_paths = [archive_path, database_path, manifest_path]

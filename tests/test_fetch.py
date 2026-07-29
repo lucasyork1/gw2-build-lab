@@ -113,6 +113,60 @@ def test_fetch_runs_item_batches_with_bounded_concurrency(tmp_path):
     assert 2 <= maximum_active <= 4
 
 
+def test_fetch_rejects_item_batch_with_missing_requested_id(tmp_path):
+    client = FakeClient()
+    original_get_json = client.get_json
+
+    def incomplete_items(path, params=None):
+        payload = original_get_json(path, params)
+        if path == "/v2/items" and params and "ids" in params:
+            return payload[:-1]
+        return payload
+
+    client.get_json = incomplete_items
+
+    with pytest.raises(ValueError, match="missing or unexpected IDs"):
+        fetch_snapshot(client, tmp_path, fetched_at="2026-07-28T20:00:00Z")
+
+    assert not (tmp_path / "204132").exists()
+
+
+def test_fetch_rejects_build_change_during_snapshot(tmp_path):
+    client = FakeClient()
+    original_get_json = client.get_json
+    build_calls = 0
+
+    def changing_build(path, params=None):
+        nonlocal build_calls
+        if path == "/v2/build":
+            build_calls += 1
+            return {"id": 204132 if build_calls == 1 else 204133}
+        return original_get_json(path, params)
+
+    client.get_json = changing_build
+
+    with pytest.raises(RuntimeError, match="changed during snapshot"):
+        fetch_snapshot(client, tmp_path, fetched_at="2026-07-28T20:00:00Z")
+
+    assert not (tmp_path / "204132").exists()
+
+
+def test_fetch_rejects_corrupt_existing_snapshot(tmp_path):
+    fetch_snapshot(
+        FakeClient(),
+        tmp_path,
+        fetched_at="2026-07-28T20:00:00Z",
+    )
+    (tmp_path / "204132" / "items.en.json").write_text("[]", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="hash mismatch"):
+        fetch_snapshot(
+            FakeClient(),
+            tmp_path,
+            fetched_at="2026-07-28T20:01:00Z",
+        )
+
+
 def _many_item_ids_client(client):
     def get_json(path, params=None):
         params = params or {}

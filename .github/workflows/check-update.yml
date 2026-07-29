@@ -15,12 +15,12 @@ concurrency:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version: "3.12.11"
           cache: pip
       - name: Install
         run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
@@ -29,6 +29,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          remote_build="$(python -c 'import httpx; print(httpx.get("https://api.guildwars2.com/v2/build", timeout=30).json()["id"])')"
+          if test -f data/normalized/current/dataset-manifest.json; then
+            old_build="$(python -c 'import json; print(json.load(open("data/normalized/current/dataset-manifest.json"))["game_build_id"])')"
+            if test "$old_build" = "$remote_build"; then
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
           snapshot="$(gw2-wvw-data fetch --output data/raw | tail -n 1)"
           rm -rf .generated
           mkdir -p .generated/normalized .generated/current data/history
@@ -40,11 +48,6 @@ jobs:
           gw2-wvw-data validate --dataset .generated/current
           build_id="$(python -c 'import json; print(json.load(open(".generated/current/dataset-manifest.json"))["game_build_id"])')"
           if test -f data/normalized/current/dataset-manifest.json; then
-            old_build="$(python -c 'import json; print(json.load(open("data/normalized/current/dataset-manifest.json"))["game_build_id"])')"
-            if test "$old_build" = "$build_id"; then
-              echo "changed=false" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
             gw2-wvw-data diff \
               --old data/normalized/current \
               --new .generated/current \
@@ -79,5 +82,5 @@ jobs:
               --base main \
               --head "$branch" \
               --title "data: update to game build ${BUILD_ID}" \
-              --body "Automated ArenaNet API refresh. Tests and dataset validation passed in this workflow."
+              --body $'Automated ArenaNet API refresh. Tests and dataset validation passed in this workflow.\n\n**HUMAN REVIEW REQUIRED:** inspect official patch notes, WvW-only splits, and reviewed overrides before merging. Structural validation does not prove WvW combat correctness.'
           fi

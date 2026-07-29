@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from gw2_wvw_data.api import ArenaNetClient
+from gw2_wvw_data.contracts import verify_raw_snapshot
 from gw2_wvw_data.io import sha256_file, write_json
 
 
@@ -32,18 +33,40 @@ COLLECTION_ENDPOINTS = {
 }
 
 
-def _fetch_language_files(client: ArenaNetClient, staging: Path, language: str) -> None:
+def _record_ids(payload: Any, endpoint: str) -> set[int | str]:
+    if not isinstance(payload, list):
+        raise ValueError(f"{endpoint} did not return a list")
+    identifiers: set[int | str] = set()
+    for record in payload:
+        if not isinstance(record, dict) or not isinstance(record.get("id"), (int, str)):
+            raise ValueError(f"{endpoint} returned a record without a valid id")
+        if record["id"] in identifiers:
+            raise ValueError(f"{endpoint} returned duplicate id {record['id']}")
+        identifiers.add(record["id"])
+    return identifiers
+
+
+def _fetch_language_files(
+    client: ArenaNetClient,
+    staging: Path,
+    language: str,
+) -> dict[str, set[int | str]]:
     profession = client.get_json(
         "/v2/professions/Thief",
         params={"lang": language},
     )
+    if not isinstance(profession, dict) or profession.get("id") != "Thief":
+        raise ValueError("/v2/professions/Thief returned an invalid profession")
     write_json(staging / f"profession.{language}.json", profession)
+    identifiers: dict[str, set[int | str]] = {}
     for filename, endpoint in COLLECTION_ENDPOINTS.items():
         payload = client.get_json(
             endpoint,
             params={"ids": "all", "lang": language},
         )
+        identifiers[filename] = _record_ids(payload, endpoint)
         write_json(staging / f"{filename}.{language}.json", payload)
+    return identifiers
 
 
 def _fetch_items(client: ArenaNetClient, staging: Path) -> None:
@@ -65,6 +88,9 @@ def _fetch_items(client: ArenaNetClient, staging: Path) -> None:
         )
         if not isinstance(payload, list):
             raise ValueError("/v2/items detail request did not return a list")
+        returned_ids = _record_ids(payload, "/v2/items")
+        if returned_ids != set(batch):
+            raise ValueError("/v2/items batch returned missing or unexpected IDs")
         return payload
 
     for language in ("en", "zh"):
@@ -94,14 +120,31 @@ def fetch_snapshot(
         raise ValueError("/v2/build did not return an integer id")
     game_build_id = build_payload["id"]
     destination = root / str(game_build_id)
+    if destination.exists():
+        existing_manifest = verify_raw_snapshot(destination)
+        return SnapshotManifest(
+            game_build_id,
+            destination,
+            tuple(existing_manifest["files"]),
+        )
     staging = root / f".staging-{game_build_id}-{uuid.uuid4().hex}"
     staging.mkdir()
 
     try:
         write_json(staging / "build.json", build_payload)
-        for language in ("en", "zh"):
-            _fetch_language_files(client, staging, language)
+        english_ids = _fetch_language_files(client, staging, "en")
+        chinese_ids = _fetch_language_files(client, staging, "zh")
+        if english_ids != chinese_ids:
+            raise ValueError("localized collection ID sets do not match")
         _fetch_items(client, staging)
+        final_build = client.get_json("/v2/build")
+        if (
+            not isinstance(final_build, dict)
+            or final_build.get("id") != game_build_id
+        ):
+            raise RuntimeError(
+                f"game build changed during snapshot from {game_build_id}"
+            )
         files = tuple(
             {
                 "path": path.name,
@@ -117,10 +160,7 @@ def fetch_snapshot(
             "files": list(files),
         }
         write_json(staging / "manifest.json", manifest)
-        if destination.exists():
-            shutil.rmtree(staging)
-        else:
-            staging.replace(destination)
+        staging.replace(destination)
         return SnapshotManifest(game_build_id, destination, files)
     except BaseException:
         shutil.rmtree(staging, ignore_errors=True)

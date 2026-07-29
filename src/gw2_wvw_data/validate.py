@@ -8,6 +8,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
+from gw2_wvw_data.contracts import schema_errors
 from gw2_wvw_data.overrides import load_dataset
 
 
@@ -46,6 +47,8 @@ def validate_dataset(
     sources = source_ids or {"arenanet-api", "wvw-override"}
     issues: list[ValidationIssue] = []
     manifest = dataset.get("manifest", {})
+    for error in schema_errors(manifest, "dataset.schema.json"):
+        issues.append(ValidationIssue("schema_invalid", "manifest", "", error))
     build_id = manifest.get("game_build_id")
     if manifest.get("mode") != "wvw":
         issues.append(
@@ -57,6 +60,15 @@ def validate_dataset(
     for entity in entities:
         kind = str(entity.get("kind", "unknown"))
         entity_id = entity.get("id", "")
+        for error in schema_errors(entity, "entity.schema.json"):
+            issues.append(
+                ValidationIssue(
+                    "schema_invalid",
+                    kind,
+                    str(entity_id),
+                    error,
+                )
+            )
         key = (kind, entity_id)
         if key in seen:
             issues.append(

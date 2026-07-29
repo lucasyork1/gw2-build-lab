@@ -16,23 +16,37 @@ FIXTURE = ROOT / "tests" / "fixtures" / "api" / "normalized-input.json"
 
 def _write_snapshot(root: Path) -> Path:
     payload = json.loads(FIXTURE.read_text(encoding="utf-8"))
+    for language in ("en", "zh"):
+        payload["profession"][language]["weapons"] = {"Dagger": {}}
+        item = next(
+            item for item in payload["items"][language] if item["id"] == 1000
+        )
+        item["rarity"] = "Exotic"
+        item["details"]["weight_class"] = "Medium"
     snapshot = root / "raw" / "204132"
     snapshot.mkdir(parents=True)
-    (snapshot / "manifest.json").write_text(
-        json.dumps(
-            {
-                "game_build_id": 204132,
-                "fetched_at": "2026-07-28T20:00:00Z",
-            }
-        ),
-        encoding="utf-8",
-    )
     for category, localized in payload.items():
         for language, value in localized.items():
             (snapshot / f"{category}.{language}.json").write_text(
                 json.dumps(value),
                 encoding="utf-8",
             )
+    files = [
+        {"path": path.name, "sha256": sha256_file(path)}
+        for path in sorted(snapshot.glob("*.json"))
+    ]
+    (snapshot / "manifest.json").write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "game_build_id": 204132,
+                "fetched_at": "2026-07-28T20:00:00Z",
+                "api_base_url": "https://api.guildwars2.com",
+                "files": files,
+            }
+        ),
+        encoding="utf-8",
+    )
     return snapshot
 
 
