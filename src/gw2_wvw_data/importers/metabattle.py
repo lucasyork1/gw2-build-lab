@@ -12,6 +12,7 @@ from gw2_wvw_data.importers.http import HttpDocument
 
 
 _EDITOR_HOST = "en.gw2skills.net"
+_METADATA_WRAPPER_CLASS = "build-metadata"
 _METADATA_ATTRIBUTE_ELEMENTS = frozenset({"dd", "div", "span", "td"})
 _VOID_ELEMENTS = frozenset(
     {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
@@ -132,7 +133,9 @@ class _MetadataCollector(HTMLParser):
             self.hrefs.append(attributes["href"] or "")
         if tag == "title":
             self._title_parts = []
-        if tag in {"dl", "table"}:
+        if _has_class_token(
+            attributes.get("class"), _METADATA_WRAPPER_CLASS
+        ):
             self._metadata_depths.append(depth)
         if tag == "dt" and self._metadata_depths:
             self._label_parts = []
@@ -227,6 +230,10 @@ def _field_name(label: str) -> str | None:
     if value == "title":
         return "title"
     return None
+
+
+def _has_class_token(value: str | None, expected: str) -> bool:
+    return isinstance(value, str) and expected in value.split()
 
 
 def _single(values, field: str, conflicts: dict[str, tuple[str, ...]]) -> str | None:

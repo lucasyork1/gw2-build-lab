@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
+from types import MappingProxyType
 from typing import Any, Mapping
 from urllib.parse import urlsplit
 
@@ -44,7 +45,10 @@ class CommunityCandidate:
     ) -> CommunityCandidate:
         """Return this candidate with an unresolved source disagreement."""
 
-        return replace(self, conflicts={**self.conflicts, field: values})
+        return replace(
+            self,
+            conflicts=MappingProxyType({**self.conflicts, field: values}),
+        )
 
 
 _METABATTLE_HOSTS = frozenset({"metabattle.com", "www.metabattle.com"})

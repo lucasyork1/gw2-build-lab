@@ -162,6 +162,32 @@ def test_ignores_attribute_labeled_guide_prose_and_keeps_nested_metadata_text():
     assert candidate.context == ("roaming and dueling",)
 
 
+def test_ignores_labeled_elements_inside_ordinary_guide_structures():
+    html = FIXTURE.read_text("utf-8").replace(
+        "</main>",
+        (
+            '<dl><dt>Profession</dt><dd>Mesmer guide prose</dd>'
+            '<div data-field="profession"><span>Mesmer</span></div></dl>'
+            '<table><tr><td data-label="context">zerg guide prose</td></tr></table>'
+            "</main>"
+        ),
+    )
+
+    candidate = MetaBattleAdapter().extract(_document(html))
+
+    assert candidate.profession == "Thief"
+    assert candidate.context == ("roaming",)
+
+
+def test_with_conflict_keeps_conflicts_read_only():
+    candidate = MetaBattleAdapter().extract(_document()).with_conflict(
+        "configuration", ("traits",)
+    )
+
+    with pytest.raises(TypeError):
+        candidate.conflicts["configuration"] = ("skills",)
+
+
 @pytest.mark.parametrize(
     ("old", "new", "field", "attribute"),
     [
