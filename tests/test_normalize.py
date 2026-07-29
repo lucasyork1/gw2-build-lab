@@ -15,6 +15,7 @@ def _write_snapshot(tmp_path, *, missing_trait=False):
     payload = json.loads(FIXTURE.read_text("utf-8"))
     for language in ("en", "zh"):
         payload["profession"][language]["weapons"] = {"Dagger": {}}
+        payload["profession"][language]["skills_by_palette"] = [[266, 13021]]
         for item in payload["items"][language]:
             item["game_types"] = ["Wvw"]
         by_id = {item["id"]: item for item in payload["items"][language]}
@@ -126,6 +127,7 @@ def test_normalize_keeps_thief_closure_and_relevant_equipment(tmp_path):
     assert [record["id"] for record in result["equipment"]] == [1000, 1004]
     assert [record["id"] for record in result["upgrades"]] == [1001, 1005]
     assert [record["id"] for record in result["consumables"]] == [1002]
+    assert result["profession"]["payload"]["skills_by_palette"] == [[266, 13021]]
     assert result["skills"][0]["names"] == {"en": "Steal", "zh": "偷窃"}
     assert result["manifest"]["unresolved_references"] == []
 

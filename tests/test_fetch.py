@@ -60,6 +60,21 @@ def test_fetch_writes_manifest_only_after_every_endpoint_succeeds(tmp_path):
         assert len(entry["sha256"]) == 64
 
 
+def test_fetch_requests_latest_profession_schema_for_each_language(tmp_path):
+    client = FakeClient()
+
+    fetch_snapshot(client, tmp_path, fetched_at="2026-07-28T20:00:00Z")
+
+    assert [
+        params
+        for path, params in client.calls
+        if path == "/v2/professions/Thief"
+    ] == [
+        {"lang": "en", "v": "latest"},
+        {"lang": "zh", "v": "latest"},
+    ]
+
+
 def test_fetch_removes_staging_directory_after_partial_failure(tmp_path):
     with pytest.raises(RuntimeError, match="simulated endpoint failure"):
         fetch_snapshot(

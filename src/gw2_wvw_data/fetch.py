@@ -54,7 +54,7 @@ def _fetch_language_files(
 ) -> dict[str, set[int | str]]:
     profession = client.get_json(
         "/v2/professions/Thief",
-        params={"lang": language},
+        params={"lang": language, "v": "latest"},
     )
     if not isinstance(profession, dict) or profession.get("id") != "Thief":
         raise ValueError("/v2/professions/Thief returned an invalid profession")
