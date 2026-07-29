@@ -1,0 +1,37 @@
+name: Report a data error
+description: Report an incorrect Thief skill, trait, item, stat, rune, sigil, or WvW value.
+title: "[Data error] "
+labels: ["data-error", "needs-verification"]
+body:
+  - type: markdown
+    attributes:
+      value: Never submit an API key. Do not copy third-party guide text or images; link the source and explain the discrepancy in your own words.
+  - type: input
+    id: game_build
+    attributes: {label: Game build ID, description: Build ID in which you observed the value.}
+    validations: {required: true}
+  - type: input
+    id: effective_patch
+    attributes: {label: Effective patch, description: Patch date or official patch-note link.}
+    validations: {required: true}
+  - type: input
+    id: source_url
+    attributes: {label: Source URL, description: Prefer ArenaNet API, official patch notes, or the official wiki.}
+    validations: {required: true}
+  - type: input
+    id: build_code
+    attributes: {label: Build code, description: Optional example that exposes the error.}
+  - type: dropdown
+    id: wvw_context
+    attributes:
+      label: WvW context
+      options: [All WvW, Solo roaming, Small-scale roaming, Havoc, Zerg, Other]
+    validations: {required: true}
+  - type: textarea
+    id: testing_notes
+    attributes: {label: Testing notes, description: Give the current value, expected value, and reproducible verification steps.}
+    validations: {required: true}
+  - type: textarea
+    id: conflict_of_interest
+    attributes: {label: Conflict of interest, description: State any relevant relationship; write none if not applicable.}
+    validations: {required: true}

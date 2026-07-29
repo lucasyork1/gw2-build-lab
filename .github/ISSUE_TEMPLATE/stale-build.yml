@@ -1,0 +1,37 @@
+name: Report a stale build
+description: Flag a community or third-party WvW Thief build that may predate a relevant patch.
+title: "[Stale build] "
+labels: ["stale-build", "needs-verification"]
+body:
+  - type: markdown
+    attributes:
+      value: Do not paste API keys, copied guide text, or third-party images. A link and your own summary are enough.
+  - type: input
+    id: game_build
+    attributes: {label: Game build ID, description: The ArenaNet game build used when this was last known to work.}
+    validations: {required: true}
+  - type: input
+    id: effective_patch
+    attributes: {label: Effective patch, description: Patch date or official patch-note link.}
+    validations: {required: true}
+  - type: input
+    id: source_url
+    attributes: {label: Source URL, description: Link to the build page or original submission.}
+    validations: {required: true}
+  - type: input
+    id: build_code
+    attributes: {label: Build code, description: Optional in-game Build Template code.}
+  - type: dropdown
+    id: wvw_context
+    attributes:
+      label: WvW context
+      options: [Solo roaming, Small-scale roaming, Havoc, Zerg, Other]
+    validations: {required: true}
+  - type: textarea
+    id: testing_notes
+    attributes: {label: Testing notes, description: Describe what changed or no longer works and how you tested it.}
+    validations: {required: true}
+  - type: textarea
+    id: conflict_of_interest
+    attributes: {label: Conflict of interest, description: State any relationship to the linked site, creator, product, or guild; write none if not applicable.}
+    validations: {required: true}
