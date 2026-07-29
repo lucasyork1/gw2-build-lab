@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import shutil
 import uuid
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -49,20 +50,32 @@ def _fetch_items(client: ArenaNetClient, staging: Path) -> None:
     item_ids = client.get_json("/v2/items")
     if not isinstance(item_ids, list) or any(not isinstance(item_id, int) for item_id in item_ids):
         raise ValueError("/v2/items did not return a list of integer IDs")
+    batches = [
+        item_ids[offset : offset + 200]
+        for offset in range(0, len(item_ids), 200)
+    ]
+
+    def fetch_batch(batch: list[int], language: str) -> list[Any]:
+        payload = client.get_json(
+            "/v2/items",
+            params={
+                "ids": ",".join(str(item_id) for item_id in batch),
+                "lang": language,
+            },
+        )
+        if not isinstance(payload, list):
+            raise ValueError("/v2/items detail request did not return a list")
+        return payload
+
     for language in ("en", "zh"):
         items: list[Any] = []
-        for offset in range(0, len(item_ids), 200):
-            batch = item_ids[offset : offset + 200]
-            payload = client.get_json(
-                "/v2/items",
-                params={
-                    "ids": ",".join(str(item_id) for item_id in batch),
-                    "lang": language,
-                },
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            payloads = executor.map(
+                lambda batch: fetch_batch(batch, language),
+                batches,
             )
-            if not isinstance(payload, list):
-                raise ValueError("/v2/items detail request did not return a list")
-            items.extend(payload)
+            for payload in payloads:
+                items.extend(payload)
         write_json(staging / f"items.{language}.json", items)
 
 

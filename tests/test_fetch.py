@@ -1,4 +1,6 @@
 import json
+import threading
+import time
 from pathlib import Path
 
 import pytest
@@ -74,7 +76,41 @@ def test_fetch_batches_item_details_at_two_hundred_ids(tmp_path):
         for path, params in client.calls
         if path == "/v2/items" and "ids" in params
     ]
-    assert [len(call["ids"].split(",")) for call in item_calls] == [200, 200, 1] * 2
+    assert sorted(len(call["ids"].split(",")) for call in item_calls) == [
+        1,
+        1,
+        200,
+        200,
+        200,
+        200,
+    ]
+
+
+def test_fetch_runs_item_batches_with_bounded_concurrency(tmp_path):
+    client = FakeClient()
+    active = 0
+    maximum_active = 0
+    lock = threading.Lock()
+    original_get_json = _many_item_ids_client(client)
+
+    def concurrent_probe(path, params=None):
+        nonlocal active, maximum_active
+        if path != "/v2/items" or not params or "ids" not in params:
+            return original_get_json(path, params)
+        with lock:
+            active += 1
+            maximum_active = max(maximum_active, active)
+        time.sleep(0.02)
+        try:
+            return original_get_json(path, params)
+        finally:
+            with lock:
+                active -= 1
+
+    client.get_json = concurrent_probe
+    fetch_snapshot(client, tmp_path, fetched_at="2026-07-28T20:00:00Z")
+
+    assert 2 <= maximum_active <= 4
 
 
 def _many_item_ids_client(client):
