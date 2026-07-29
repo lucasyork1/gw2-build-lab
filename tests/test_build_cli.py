@@ -1,4 +1,6 @@
 import json
+from dataclasses import replace
+from importlib.resources import files
 from pathlib import Path
 
 import httpx
@@ -66,6 +68,28 @@ def test_dispatcher_exposes_all_build_operations():
     assert COMMAND_MODULES["compare"] == "builds.service"
 
 
+def test_packaged_default_rules_match_the_public_rules():
+    packaged = (
+        files("gw2_wvw_data")
+        .joinpath("data")
+        .joinpath("analysis-rules")
+        .joinpath("thief-wvw-v1.json")
+    )
+
+    assert packaged.read_bytes() == RULES.read_bytes()
+
+
+def test_default_rules_work_outside_the_repository(tmp_path, monkeypatch):
+    arguments = _analyze_arguments(tmp_path)
+    rules_position = arguments.index("--rules")
+    del arguments[rules_position : rules_position + 2]
+    monkeypatch.chdir(tmp_path)
+
+    assert cli_main(arguments) == 0
+    assert (tmp_path / "analysis.json").is_file()
+    assert (tmp_path / "analysis.md").is_file()
+
+
 @pytest.mark.parametrize(
     "selection",
     [[], ["--build-code", "x", "--gw2skills-url", "y"]],
@@ -116,6 +140,92 @@ def test_invalid_analyze_input_does_not_create_either_output(tmp_path):
 
     assert not json_output.exists()
     assert not markdown_output.exists()
+
+
+@pytest.mark.parametrize(
+    "checked_at",
+    [
+        "2026-07-29",
+        "2026-07-29T02:05:07",
+        "2026-07-29T02:05:07Z trailing",
+        "2026-07-29T02:05:07+05",
+    ],
+)
+def test_checked_at_rejects_incomplete_or_naive_datetimes(checked_at):
+    with pytest.raises(ValueError, match="timezone-aware RFC 3339"):
+        service._checked_at({"manifest": {"fetched_at": checked_at}})
+
+
+@pytest.mark.parametrize(
+    "checked_at",
+    [
+        "2026-07-29T02:05:07Z",
+        "2026-07-29T02:05:07.123456-05:00",
+    ],
+)
+def test_checked_at_accepts_complete_timezone_aware_rfc3339(checked_at):
+    assert (
+        service._checked_at({"manifest": {"fetched_at": checked_at}})
+        == checked_at
+    )
+
+
+def test_malformed_manifest_timestamp_leaves_both_outputs_absent(
+    tmp_path, monkeypatch
+):
+    dataset = service.load_dataset(CURRENT)
+    dataset["manifest"] = {
+        **dataset["manifest"],
+        "fetched_at": "2026-07-29",
+    }
+    monkeypatch.setattr(service, "load_dataset", lambda path: dataset)
+    arguments = _analyze_arguments(tmp_path)
+
+    with pytest.raises(ValueError, match="timezone-aware RFC 3339"):
+        service.main(arguments)
+
+    assert not (tmp_path / "analysis.json").exists()
+    assert not (tmp_path / "analysis.md").exists()
+
+
+def test_invalid_audit_contract_leaves_both_outputs_absent(
+    tmp_path, monkeypatch
+):
+    real_audit_build = service.audit_build
+
+    def invalid_audit(*args, **kwargs):
+        return replace(
+            real_audit_build(*args, **kwargs),
+            status="not-a-public-status",
+        )
+
+    monkeypatch.setattr(service, "audit_build", invalid_audit)
+
+    with pytest.raises(ValueError, match="build audit schema invalid"):
+        service.main(_analyze_arguments(tmp_path))
+
+    assert not (tmp_path / "analysis.json").exists()
+    assert not (tmp_path / "analysis.md").exists()
+
+
+def test_invalid_analysis_contract_leaves_both_outputs_absent(
+    tmp_path, monkeypatch
+):
+    real_analyze_build = service.analyze_build
+
+    def invalid_analysis(*args, **kwargs):
+        return replace(
+            real_analyze_build(*args, **kwargs),
+            ruleset_id="",
+        )
+
+    monkeypatch.setattr(service, "analyze_build", invalid_analysis)
+
+    with pytest.raises(ValueError, match="build analysis schema invalid"):
+        service.main(_analyze_arguments(tmp_path))
+
+    assert not (tmp_path / "analysis.json").exists()
+    assert not (tmp_path / "analysis.md").exists()
 
 
 def test_dispatcher_analyze_writes_complete_byte_identical_bundle(tmp_path):
@@ -174,6 +284,82 @@ def test_render_failure_leaves_both_analysis_outputs_absent(tmp_path, monkeypatc
 
     assert not (tmp_path / "analysis.json").exists()
     assert not (tmp_path / "analysis.md").exists()
+
+
+@pytest.mark.parametrize("prior_outputs", [None, (b"old-json", b"old-markdown")])
+def test_output_pair_rolls_back_when_second_final_replace_fails(
+    tmp_path, monkeypatch, prior_outputs
+):
+    json_output = tmp_path / "analysis.json"
+    markdown_output = tmp_path / "analysis.md"
+    if prior_outputs is not None:
+        json_output.write_bytes(prior_outputs[0])
+        markdown_output.write_bytes(prior_outputs[1])
+    path_type = type(json_output)
+    original_replace = path_type.replace
+    injected = False
+
+    def fail_second_final_replace(path, target):
+        nonlocal injected
+        if (
+            not injected
+            and Path(target) == markdown_output
+            and ".backup." not in path.name
+        ):
+            injected = True
+            raise OSError("injected second replace failure")
+        return original_replace(path, target)
+
+    monkeypatch.setattr(path_type, "replace", fail_second_final_replace)
+
+    with pytest.raises(OSError, match="injected second replace failure"):
+        service._write_output_pair(
+            json_output,
+            b"new-json",
+            markdown_output,
+            b"new-markdown",
+        )
+
+    if prior_outputs is None:
+        assert not json_output.exists()
+        assert not markdown_output.exists()
+        assert list(tmp_path.iterdir()) == []
+    else:
+        assert json_output.read_bytes() == prior_outputs[0]
+        assert markdown_output.read_bytes() == prior_outputs[1]
+        assert sorted(tmp_path.iterdir()) == sorted(
+            (json_output, markdown_output)
+        )
+
+
+def test_output_pair_preflights_directory_destination_before_replacement(
+    tmp_path,
+):
+    json_output = tmp_path / "analysis.json"
+    markdown_output = tmp_path / "analysis.md"
+    json_output.write_bytes(b"old-json")
+    markdown_output.mkdir()
+
+    with pytest.raises(ValueError, match="output destination is a directory"):
+        service._write_output_pair(
+            json_output,
+            b"new-json",
+            markdown_output,
+            b"new-markdown",
+        )
+
+    assert json_output.read_bytes() == b"old-json"
+    assert markdown_output.is_dir()
+    assert list(markdown_output.iterdir()) == []
+
+
+def test_output_pair_rejects_colliding_destinations(tmp_path):
+    output = tmp_path / "analysis.out"
+
+    with pytest.raises(ValueError, match="different paths"):
+        service._write_output_pair(output, b"json", output, b"markdown")
+
+    assert not output.exists()
 
 
 def test_import_source_writes_only_to_selected_candidate_directory(

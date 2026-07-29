@@ -1,18 +1,36 @@
 import json
+from dataclasses import replace
 from pathlib import Path
+
+import httpx
 
 from gw2_wvw_data.analysis import (
     AnalysisConclusion,
     BuildAnalysis,
+    BuildComparison,
     DimensionAnalysis,
     EvidenceReference,
+    StructuralChange,
 )
 from gw2_wvw_data.audit import BuildAudit
 from gw2_wvw_data.builds import BuildRecord
-from gw2_wvw_data.builds.report import render_markdown
+from gw2_wvw_data.builds import report as build_report
+from gw2_wvw_data.builds.report import (
+    render_comparison_markdown,
+    render_markdown,
+)
+from gw2_wvw_data.builds.service import analyze_input
+from gw2_wvw_data.importers.http import SafeHttpClient
 
 
 FIXTURE = Path(__file__).parent / "fixtures" / "builds" / "minimal-thief.json"
+ROOT = Path(__file__).parents[1]
+CURRENT = ROOT / "data" / "normalized" / "current"
+RULES = ROOT / "data" / "analysis-rules" / "thief-wvw-v1.json"
+GW2SKILLS_FIXTURE = (
+    ROOT / "tests" / "fixtures" / "importers" / "gw2skills-thief.html"
+)
+GW2SKILLS_URL = "https://en.gw2skills.net/editor/?fixture"
 DIMENSIONS = (
     "burst_damage",
     "sustained_damage",
@@ -92,7 +110,7 @@ def test_markdown_contains_every_required_report_section_and_dimension():
     ):
         assert heading in markdown
     for dimension in DIMENSIONS:
-        assert dimension in markdown
+        assert dimension.replace("_", "\\_") in markdown
 
 
 def test_markdown_renders_missing_equipment_as_unknown_without_guessing():
@@ -100,7 +118,127 @@ def test_markdown_renders_missing_equipment_as_unknown_without_guessing():
 
     assert "| Armor: helm | Unknown |" in markdown
     assert "| Weapon: w11 | Unknown |" in markdown
+    assert "| Weapon: w11 type | Unknown |" in markdown
+    assert "| Weapon: w11 item | Unknown |" in markdown
+    assert "| Weapon: w11 quality | Unknown |" in markdown
+    assert "| Weapon: w11 upgrade/sigil 1 | Unknown |" in markdown
+    assert "| Weapon: w11 infusion 1 | Unknown |" in markdown
     assert "| Relic | Unknown |" in markdown
     assert "Berserker" not in markdown
     assert markdown.endswith("\n")
     assert render_markdown(*_report_inputs()) == markdown
+
+
+def test_markdown_renders_every_gw2skills_weapon_subfield_offline():
+    html = GW2SKILLS_FIXTURE.read_text("utf-8")
+    client = SafeHttpClient(
+        transport=httpx.MockTransport(
+            lambda request: httpx.Response(
+                200,
+                headers={"content-type": "text/html; charset=utf-8"},
+                content=html.encode("utf-8"),
+                request=request,
+            )
+        )
+    )
+    bundle = analyze_input(
+        build_code=None,
+        gw2skills_url=GW2SKILLS_URL,
+        dataset_path=CURRENT,
+        rules_path=RULES,
+        client=client,
+    )
+
+    markdown = render_markdown(
+        bundle.build,
+        bundle.audit,
+        bundle.analysis,
+    )
+
+    expected_rows = (
+        "| Weapon: w11 type | gw2skills:13 |",
+        "| Weapon: w11 item | gw2skills:290 |",
+        "| Weapon: w11 quality | 6 |",
+        "| Weapon: w11 upgrade/sigil 1 | gw2skills:121 |",
+        "| Weapon: w11 upgrade/sigil 2 | gw2skills:122 |",
+        "| Weapon: w11 infusion 1 | gw2skills:901 |",
+        "| Weapon: w12 type | gw2skills:9 |",
+        "| Weapon: w12 item | gw2skills:291 |",
+        "| Weapon: w12 quality | 6 |",
+        "| Weapon: w12 upgrade/sigil 1 | gw2skills:123 |",
+        "| Weapon: w12 infusion 1 | gw2skills:902 |",
+    )
+    for row in expected_rows:
+        assert row in markdown
+    positions = [markdown.index(row) for row in expected_rows]
+    assert positions == sorted(positions)
+
+
+def test_markdown_sanitizes_adversarial_identity_names_and_sources():
+    build, audit, analysis = _report_inputs()
+    value = build.to_dict()
+    adversarial_id = (
+        "build <script>alert(1)</script> | [link](target)\n"
+        "# injected `tick`"
+    )
+    value["build_id"] = adversarial_id
+    value["armor"]["helm"] = {
+        "id": 42,
+        "name": "Helm <img src=x> | [slot]\n# row `escape`",
+        "source": "fixture",
+        "confidence": "exact",
+    }
+    value["provenance"]["sources"] = [
+        {
+            "source": "source <b> | [name]\n# list `tick`",
+            "url": "https://example.test/<tag>|[path]`",
+        }
+    ]
+    build = BuildRecord.from_dict(value)
+    audit = replace(audit, build_id=adversarial_id)
+    analysis = replace(analysis, build_id=adversarial_id)
+
+    markdown = render_markdown(build, audit, analysis)
+
+    assert "<script>" not in markdown
+    assert "<img" not in markdown
+    assert "<b>" not in markdown
+    assert "\n# injected" not in markdown
+    assert "\n# row" not in markdown
+    assert "\n# list" not in markdown
+    assert "&lt;script&gt;" in markdown
+    assert "&lt;img src=x&gt;" in markdown
+    assert "\\| \\[link\\]\\(target\\)" in markdown
+    assert "\\# injected \\`tick\\`" in markdown
+    assert "\\| \\[slot\\] \\# row \\`escape\\`" in markdown
+
+
+def test_code_span_uses_a_longer_fence_and_commonmark_padding():
+    assert build_report._code_span("`edge`") == "`` `edge` ``"
+    assert build_report._code_span("a ``` run") == "````a ``` run````"
+
+
+def test_comparison_markdown_uses_safe_code_spans_for_adversarial_values():
+    comparison = BuildComparison(
+        left_build_id="left",
+        right_build_id="right",
+        additions=(
+            StructuralChange(
+                "armor",
+                "armor.helm",
+                "<script>alert(1)</script> ``` | [x]\n# heading",
+            ),
+        ),
+        removals=(),
+        replacements=(),
+    )
+
+    markdown = render_comparison_markdown(comparison)
+    change_line = next(
+        line for line in markdown.splitlines() if line.startswith("- ````")
+    )
+
+    assert "<script>" not in markdown
+    assert "&lt;script&gt;" in change_line
+    assert "```" in change_line
+    assert change_line.endswith("}````")

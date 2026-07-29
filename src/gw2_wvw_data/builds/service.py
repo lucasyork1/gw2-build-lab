@@ -6,9 +6,13 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import tempfile
 from collections.abc import Mapping, Sequence
+from contextlib import nullcontext
 from dataclasses import dataclass
+from datetime import datetime
+from importlib.resources import as_file, files
 from pathlib import Path
 from typing import Any
 
@@ -30,6 +34,7 @@ from gw2_wvw_data.builds.report import (
     render_markdown,
 )
 from gw2_wvw_data.builds.store import load_build
+from gw2_wvw_data.contracts import schema_errors
 from gw2_wvw_data.decoders import decode_build_code
 from gw2_wvw_data.importers.community import (
     CommunityCandidate,
@@ -41,7 +46,17 @@ from gw2_wvw_data.io import canonical_json_bytes, write_json
 from gw2_wvw_data.overrides import load_dataset
 
 
-_DEFAULT_RULES = Path("data/analysis-rules/thief-wvw-v1.json")
+_DEFAULT_RULES = (
+    files("gw2_wvw_data")
+    .joinpath("data")
+    .joinpath("analysis-rules")
+    .joinpath("thief-wvw-v1.json")
+)
+_RFC3339_DATETIME = re.compile(
+    r"\d{4}-\d{2}-\d{2}T"
+    r"\d{2}:\d{2}:\d{2}(?:\.\d+)?"
+    r"(?:Z|[+-]\d{2}:\d{2})\Z"
+)
 
 
 @dataclass(frozen=True)
@@ -90,11 +105,21 @@ def analyze_input(
         patch_events=_load_patch_events(dataset_path),
         checked_at=_checked_at(dataset),
     )
+    _require_public_schema(
+        audit.to_dict(),
+        "build-audit.schema.json",
+        "build audit",
+    )
     analysis = analyze_build(
         build,
         audit,
         index=index,
         rules=load_rules(rules_path),
+    )
+    _require_public_schema(
+        analysis.to_dict(),
+        "build-analysis.schema.json",
+        "build analysis",
     )
     return AnalysisBundle(build=build, audit=audit, analysis=analysis)
 
@@ -110,7 +135,7 @@ def build_parser() -> argparse.ArgumentParser:
     inputs.add_argument("--build-code")
     inputs.add_argument("--gw2skills-url")
     analyze.add_argument("--dataset", type=Path, required=True)
-    analyze.add_argument("--rules", type=Path, default=_DEFAULT_RULES)
+    analyze.add_argument("--rules", type=Path)
     analyze.add_argument("--json", type=Path, required=True)
     analyze.add_argument("--markdown", type=Path, required=True)
 
@@ -136,13 +161,19 @@ def main(
 
     arguments = build_parser().parse_args(argv)
     if arguments.operation == "analyze":
-        bundle = analyze_input(
-            build_code=arguments.build_code,
-            gw2skills_url=arguments.gw2skills_url,
-            dataset_path=arguments.dataset,
-            rules_path=arguments.rules,
-            client=client,
+        rules_context = (
+            nullcontext(arguments.rules)
+            if arguments.rules is not None
+            else as_file(_DEFAULT_RULES)
         )
+        with rules_context as rules_path:
+            bundle = analyze_input(
+                build_code=arguments.build_code,
+                gw2skills_url=arguments.gw2skills_url,
+                dataset_path=arguments.dataset,
+                rules_path=rules_path,
+                client=client,
+            )
         json_bytes = canonical_json_bytes(bundle.to_dict())
         markdown_bytes = render_markdown(
             bundle.build, bundle.audit, bundle.analysis
@@ -188,9 +219,36 @@ def _checked_at(dataset: Mapping[str, Any]) -> str:
     checked_at = (
         manifest.get("fetched_at") if isinstance(manifest, Mapping) else None
     )
-    if not isinstance(checked_at, str) or not checked_at:
-        raise ValueError("dataset manifest fetched_at is required for analysis")
+    if not isinstance(checked_at, str) or not _RFC3339_DATETIME.fullmatch(
+        checked_at
+    ):
+        raise ValueError(
+            "dataset manifest fetched_at must be a timezone-aware RFC 3339 "
+            "date-time"
+        )
+    try:
+        parsed = datetime.fromisoformat(checked_at.replace("Z", "+00:00"))
+    except ValueError as error:
+        raise ValueError(
+            "dataset manifest fetched_at must be a timezone-aware RFC 3339 "
+            "date-time"
+        ) from error
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise ValueError(
+            "dataset manifest fetched_at must be a timezone-aware RFC 3339 "
+            "date-time"
+        )
     return checked_at
+
+
+def _require_public_schema(
+    value: Mapping[str, Any],
+    schema_name: str,
+    label: str,
+) -> None:
+    errors = schema_errors(value, schema_name)
+    if errors:
+        raise ValueError(f"{label} schema invalid: {errors[0]}")
 
 
 def _load_patch_events(dataset_path: Path) -> tuple[PatchEvent, ...]:
@@ -240,26 +298,105 @@ def _write_output_pair(
     markdown_path: Path,
     markdown_bytes: bytes,
 ) -> None:
-    if json_path.resolve() == markdown_path.resolve():
-        raise ValueError("JSON and Markdown outputs must use different paths")
+    _preflight_output_pair(json_path, markdown_path)
     staged: list[tuple[Path, Path]] = []
+    backups: list[tuple[Path, Path | None]] = []
+    replacement_started = False
     try:
         staged.append((_stage_bytes(json_path, json_bytes), json_path))
         staged.append(
             (_stage_bytes(markdown_path, markdown_bytes), markdown_path)
         )
+        backups = [
+            (destination, _backup_destination(destination))
+            for _, destination in staged
+        ]
+        replacement_started = True
         for temporary, destination in staged:
             temporary.replace(destination)
+    except BaseException as error:
+        if replacement_started:
+            rollback_errors = _restore_destinations(backups)
+            if rollback_errors:
+                raise RuntimeError(
+                    "output replacement failed and rollback was incomplete: "
+                    + "; ".join(rollback_errors)
+                ) from error
+        raise
     finally:
         for temporary, _ in staged:
             temporary.unlink(missing_ok=True)
+        for _, backup in backups:
+            if backup is not None:
+                backup.unlink(missing_ok=True)
 
 
-def _stage_bytes(destination: Path, value: bytes) -> Path:
+def _preflight_output_pair(json_path: Path, markdown_path: Path) -> None:
+    resolved = (json_path.resolve(), markdown_path.resolve())
+    if (
+        resolved[0] == resolved[1]
+        or resolved[0] in resolved[1].parents
+        or resolved[1] in resolved[0].parents
+        or (
+            json_path.exists()
+            and markdown_path.exists()
+            and json_path.samefile(markdown_path)
+        )
+    ):
+        raise ValueError("JSON and Markdown outputs must use different paths")
+    for destination in (json_path, markdown_path):
+        if destination.exists() and not destination.is_file():
+            raise ValueError(
+                f"output destination is a directory: {destination}"
+            )
+        try:
+            destination.parent.mkdir(parents=True, exist_ok=True)
+        except OSError as error:
+            raise ValueError(
+                f"output parent directory is invalid: {destination.parent}"
+            ) from error
+        if not destination.parent.is_dir():
+            raise ValueError(
+                f"output parent directory is invalid: {destination.parent}"
+            )
+
+
+def _backup_destination(destination: Path) -> Path | None:
+    if not destination.exists():
+        return None
+    return _stage_bytes(
+        destination,
+        destination.read_bytes(),
+        purpose="backup",
+    )
+
+
+def _restore_destinations(
+    backups: list[tuple[Path, Path | None]],
+) -> list[str]:
+    errors = []
+    for destination, backup in backups:
+        try:
+            if backup is None:
+                destination.unlink(missing_ok=True)
+            else:
+                backup.replace(destination)
+        except OSError as error:
+            errors.append(f"{destination}: {error}")
+    return errors
+
+
+def _stage_bytes(
+    destination: Path,
+    value: bytes,
+    *,
+    purpose: str | None = None,
+) -> Path:
     destination.parent.mkdir(parents=True, exist_ok=True)
+    marker = f"{purpose}." if purpose else ""
     descriptor, name = tempfile.mkstemp(
         dir=destination.parent,
-        prefix=f".{destination.name}.",
+        prefix=f".{destination.name}.{marker}",
         suffix=".tmp",
     )
     temporary = Path(name)

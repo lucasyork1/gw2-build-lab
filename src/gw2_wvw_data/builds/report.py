@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import html
 import json
+import re
 from collections.abc import Iterable, Mapping
 from typing import Any
 
@@ -191,7 +193,7 @@ def render_comparison_markdown(comparison: BuildComparison) -> str:
             rendered = json.dumps(
                 value, ensure_ascii=False, sort_keys=True, separators=(",", ": ")
             )
-            lines.append(f"- `{_text(rendered)}`")
+            lines.append(f"- {_code_span(rendered)}")
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -204,24 +206,28 @@ def _equipment_rows(build: BuildRecord) -> list[str]:
     }
     for slot in _WEAPON_SLOTS:
         weapon = weapons.get(slot)
+        label = f"Weapon: {slot}"
         rows.append(
             _equipment_row(
-                f"Weapon: {slot}",
+                label,
                 _weapon_value(weapon) if weapon is not None else "Unknown",
             )
         )
+        rows.extend(_weapon_detail_rows(label, weapon))
     unassigned = [
         value
         for value in build.weapons
         if not isinstance(value.get("slot"), str)
     ]
     for position, weapon in enumerate(unassigned, start=1):
+        label = f"Weapon: unassigned {position}"
         rows.append(
             _equipment_row(
-                f"Weapon: unassigned {position}",
+                label,
                 _weapon_value(weapon),
             )
         )
+        rows.extend(_weapon_detail_rows(label, weapon))
     for slot in _ARMOR_SLOTS:
         rows.append(
             _equipment_row(
@@ -275,6 +281,36 @@ def _weapon_value(weapon: Mapping[str, Any]) -> str:
         if value != "Unknown":
             parts.append(f"{label}: {value}")
     return "; ".join(parts) if parts else "Unknown"
+
+
+def _weapon_detail_rows(
+    label: str,
+    weapon: Mapping[str, Any] | None,
+) -> list[str]:
+    value = weapon or {}
+    rows = [
+        _equipment_row(f"{label} type", _component(value.get("type"))),
+        _equipment_row(f"{label} item", _component(value.get("item"))),
+        _equipment_row(f"{label} quality", _display(value.get("quality"))),
+    ]
+    for field, field_label in (
+        ("upgrades", "upgrade/sigil"),
+        ("infusions", "infusion"),
+    ):
+        components = value.get(field, ())
+        if not isinstance(components, tuple) or not components:
+            rows.append(
+                _equipment_row(f"{label} {field_label} 1", "Unknown")
+            )
+            continue
+        rows.extend(
+            _equipment_row(
+                f"{label} {field_label} {position}",
+                _component(component),
+            )
+            for position, component in enumerate(components, start=1)
+        )
+    return rows
 
 
 def _component(value: Any) -> str:
@@ -379,5 +415,38 @@ def _display(value: Any) -> str:
     return "Unknown" if value is None or value == "" else _text(value)
 
 
+def _code_span(value: Any) -> str:
+    content = _safe_html_text(value)
+    longest_run = max(
+        (len(match.group(0)) for match in re.finditer(r"`+", content)),
+        default=0,
+    )
+    fence = "`" * (longest_run + 1)
+    needs_padding = (
+        content.startswith("`")
+        or content.endswith("`")
+        or (
+            not content.isspace()
+            and (content.startswith(" ") or content.endswith(" "))
+        )
+    )
+    padding = " " if needs_padding else ""
+    return f"{fence}{padding}{content}{padding}{fence}"
+
+
 def _text(value: Any) -> str:
-    return str(value).replace("\\", "\\\\").replace("|", "\\|").replace("\n", " ")
+    return re.sub(
+        r"([\\`*_{}\[\]()#+\-.!|])",
+        r"\\\1",
+        _safe_html_text(value),
+    )
+
+
+def _safe_html_text(value: Any) -> str:
+    collapsed = (
+        str(value)
+        .replace("\r\n", " ")
+        .replace("\r", " ")
+        .replace("\n", " ")
+    )
+    return html.escape(collapsed, quote=False)
