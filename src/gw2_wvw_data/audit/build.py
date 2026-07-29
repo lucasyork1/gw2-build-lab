@@ -40,7 +40,9 @@ _WEAPON_TYPE_NORMALIZATION = {
     "LongBow": "Longbow",
     "ShortBow": "Shortbow",
 }
-_TWO_HANDED_WEAPONS = frozenset({"Rifle", "Shortbow", "Staff", "Spear"})
+_TWO_HANDED_WEAPONS = frozenset(
+    {"Rifle", "Shortbow", "Staff", "Spear", "Speargun"}
+)
 
 
 @dataclass(frozen=True)
@@ -154,13 +156,34 @@ def audit_build(
     if not index.dataset_build_matches:
         warnings.add("dataset game build is inconsistent")
 
-    source_dates = _source_dates_by_name(build)
+    content_dates = _source_content_dates_by_name(build)
+    source_dates: dict[str, date] = {}
     source_date_missing = False
+    source_date_ambiguous = False
+    source_date_after_check = False
     for _, _, component in components:
-        if component.source not in source_dates:
+        dates = content_dates.get(component.source)
+        if not dates:
             source_date_missing = True
+        elif len(dates) != 1:
+            source_date_ambiguous = True
+        else:
+            content_date = next(iter(dates))
+            if content_date > checked_datetime.date():
+                source_date_after_check = True
+            else:
+                source_dates[component.source] = content_date
     if source_date_missing:
         warnings.add("component source date is missing")
+    if source_date_ambiguous:
+        warnings.add("component source date is ambiguous")
+    if source_date_after_check:
+        warnings.add("component source date is after checked_at")
+    source_date_unverifiable = (
+        source_date_missing
+        or source_date_ambiguous
+        or source_date_after_check
+    )
 
     affected: list[AffectedComponent] = []
     normalized_events = [
@@ -181,7 +204,9 @@ def audit_build(
         ]
         if any(
             source_dates.get(component.source) is not None
-            and event_date > source_dates[component.source]
+            and source_dates[component.source]
+            < event_date
+            <= checked_datetime.date()
             for component in matching_components
         ):
             affected.append(AffectedComponent.from_event(event))
@@ -216,7 +241,7 @@ def audit_build(
     elif (
         missing
         or unknown
-        or source_date_missing
+        or source_date_unverifiable
         or not index.dataset_build_matches
     ):
         status = "unverifiable"
@@ -741,6 +766,8 @@ def _check_weapons(
             illegal.add(f"weapon type is unavailable to Thief at {slot}: {name}")
             continue
         flags = availability.get("flags", ())
+        if "Aquatic" in flags:
+            illegal.add(f"weapon type {name} is aquatic-only at {slot}")
         is_main = slot in {"w11", "w21"}
         if is_main and not ({"Mainhand", "TwoHand"} & set(flags)):
             illegal.add(f"weapon type {name} cannot occupy {slot}")
@@ -837,27 +864,28 @@ def _is_removed(entity: Mapping[str, Any]) -> bool:
     )
 
 
-def _source_dates_by_name(build: BuildRecord) -> dict[str, date]:
-    found: dict[str, date] = {}
+def _source_content_dates_by_name(
+    build: BuildRecord,
+) -> dict[str, frozenset[date]]:
+    found: dict[str, set[date]] = {}
     sources = build.provenance.get("sources", ())
     if not isinstance(sources, tuple):
-        return found
+        return {}
     for source in sources:
         if not isinstance(source, Mapping):
             continue
         source_name = source.get("source")
         if not isinstance(source_name, str):
             continue
-        dates = []
-        for field in ("updated_at", "published_at", "fetched_at"):
+        dates = found.setdefault(source_name, set())
+        for field in ("effective_patch", "updated_at", "published_at"):
             parsed = _optional_date(source.get(field))
             if parsed is not None:
-                dates.append(parsed)
-        if dates:
-            latest = max(dates)
-            if source_name not in found or latest > found[source_name]:
-                found[source_name] = latest
-    return found
+                dates.add(parsed)
+    return {
+        source_name: frozenset(dates)
+        for source_name, dates in found.items()
+    }
 
 
 def _optional_date(value: Any) -> date | None:

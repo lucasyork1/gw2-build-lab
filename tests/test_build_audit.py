@@ -158,7 +158,15 @@ def dataset():
                 },
             )
             for identifier, weapon_type in enumerate(
-                ("Dagger", "Pistol", "Sword", "ShortBow", "Rifle"), 2201
+                (
+                    "Dagger",
+                    "Pistol",
+                    "Sword",
+                    "ShortBow",
+                    "Rifle",
+                    "Speargun",
+                ),
+                2201,
             )
         ],
     ]
@@ -174,6 +182,7 @@ def dataset():
                     "Sword": {"flags": ["Mainhand"]},
                     "Shortbow": {"flags": ["TwoHand"]},
                     "Rifle": {"flags": ["TwoHand"], "specialization": 7},
+                    "Speargun": {"flags": ["TwoHand", "Aquatic"]},
                 },
                 "skills": [
                     {"id": 13027, "slot": "Heal"},
@@ -722,6 +731,89 @@ def test_patch_uses_matching_component_source_not_unrelated_newer_source(
     assert audit.affected_components[0].component_id == 13038
 
 
+def test_newer_fetched_at_cannot_hide_patch_after_old_published_content(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["provenance"]["sources"] = [
+        {
+            "source": "fixture",
+            "published_at": "2026-07-20",
+            "fetched_at": "2026-07-29T22:00:00Z",
+        }
+    ]
+    event = PatchEvent(
+        component_kind="skill",
+        component_id=13038,
+        effective_at="2026-07-25",
+        change="Changed after the content was published.",
+    )
+    audit = _audit(BuildRecord.from_dict(value), dataset_index, [event])
+    assert audit.status == "possibly_affected"
+    assert audit.affected_components[0].component_id == 13038
+
+
+def test_conflicting_duplicate_source_dates_are_unverifiable(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["provenance"]["sources"] = [
+        {"source": "fixture", "published_at": "2026-07-20"},
+        {"source": "fixture", "updated_at": "2026-07-27"},
+    ]
+    event = PatchEvent(
+        component_kind="skill",
+        component_id=13038,
+        effective_at="2026-07-25",
+        change="Falls between conflicting source dates.",
+    )
+    audit = _audit(BuildRecord.from_dict(value), dataset_index, [event])
+    assert audit.status == "unverifiable"
+    assert "component source date is ambiguous" in audit.warnings
+
+
+def test_duplicate_source_records_with_same_content_date_resolve(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["provenance"]["sources"] = [
+        {"source": "fixture", "published_at": "2026-07-27"},
+        {"source": "fixture", "effective_patch": "2026-07-27"},
+    ]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "current_verified"
+
+
+def test_effective_patch_only_source_date_detects_newer_patch(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["provenance"]["sources"] = [
+        {"source": "fixture", "effective_patch": "2026-07-27"}
+    ]
+    event = PatchEvent(
+        component_kind="skill",
+        component_id=13038,
+        effective_at="2026-07-29",
+        change="Changed after the effective content patch.",
+    )
+    audit = _audit(BuildRecord.from_dict(value), dataset_index, [event])
+    assert audit.status == "possibly_affected"
+    assert audit.affected_components[0].component_id == 13038
+
+
+def test_source_content_date_after_checked_at_is_unverifiable(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["provenance"]["sources"] = [
+        {"source": "fixture", "updated_at": "2026-07-30"}
+    ]
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "unverifiable"
+    assert "component source date is after checked_at" in audit.warnings
+
+
 def test_component_without_explicit_source_date_is_unverifiable(
     complete_build, dataset_index
 ):
@@ -730,6 +822,27 @@ def test_component_without_explicit_source_date_is_unverifiable(
     audit = _audit(BuildRecord.from_dict(value), dataset_index)
     assert audit.status == "unverifiable"
     assert "component source date is missing" in audit.warnings
+
+
+def test_aquatic_only_two_handed_weapon_is_invalid_on_land(
+    complete_build, dataset_index
+):
+    value = complete_build.to_dict()
+    value["weapons"] = [
+        weapon for weapon in value["weapons"] if weapon["slot"] in {"w11", "w12"}
+    ]
+    value["weapons"].append(
+        {
+            "slot": "w21",
+            "type": _ref(6, "Speargun"),
+            "item": _ref(2206),
+            "upgrades": [_ref(3003), _ref(3003)],
+            "infusions": [],
+        }
+    )
+    audit = _audit(BuildRecord.from_dict(value), dataset_index)
+    assert audit.status == "invalid"
+    assert "weapon type Speargun is aquatic-only at w21" in audit.warnings
 
 
 def test_status_precedence_keeps_invalid_above_patch_and_unknown(
