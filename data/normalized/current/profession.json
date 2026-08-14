@@ -1,7 +1,7 @@
 {
   "effective_patch": null,
-  "fetched_at": "2026-07-29T02:05:07Z",
-  "game_build_id": 204489,
+  "fetched_at": "2026-08-14T10:19:09Z",
+  "game_build_id": 205505,
   "id": "Thief",
   "kind": "profession",
   "mode": "wvw",
@@ -10,6 +10,7 @@
     "zh": "潜行者"
   },
   "payload": {
+    "code": 5,
     "flags": [],
     "icon": "https://render.guildwars2.com/file/F9EC00E23F630D6DB20CDA985592EC010E2A5705/156641.png",
     "icon_big": "https://render.guildwars2.com/file/13A2C0EF23F23FF2084875629465279DDA807E3D/103581.png",
@@ -320,11 +321,6 @@
         "type": "Profession"
       },
       {
-        "id": 77192,
-        "slot": "Profession_2",
-        "type": "Profession"
-      },
-      {
         "id": 76900,
         "slot": "Profession_2",
         "type": "Profession"
@@ -335,17 +331,7 @@
         "type": "Profession"
       },
       {
-        "id": 77277,
-        "slot": "Profession_2",
-        "type": "Profession"
-      },
-      {
         "id": 77288,
-        "slot": "Profession_2",
-        "type": "Profession"
-      },
-      {
-        "id": 76909,
         "slot": "Profession_2",
         "type": "Profession"
       },
