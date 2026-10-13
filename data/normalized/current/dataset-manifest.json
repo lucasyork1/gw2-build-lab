@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-29T02:05:07Z",
+  "fetched_at": "2026-10-13T16:58:47Z",
   "files": [
     "profession.json",
     "specializations.json",
@@ -10,7 +10,7 @@
     "upgrades.json",
     "consumables.json"
   ],
-  "game_build_id": 204489,
+  "game_build_id": 208574,
   "mode": "wvw",
   "schema_version": 1,
   "unresolved_references": []
